@@ -83,7 +83,7 @@ class EventScheduleController extends ApiController
         $this->compareChangesAndAssign($request, $eventSchedule);
         
         if(!$eventSchedule->isDirty()){
-            return response()->json(['error' => 'Se debe especificar al menos un valor diferente para actualizar', 'code' => 422], 422);
+            return $this->errorResponse('Se debe especificar al menos un valor diferente para actualizar', 422);
         }
 
         $eventSchedule->save();

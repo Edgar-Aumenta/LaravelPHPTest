@@ -70,7 +70,7 @@ class LodgingController extends ApiController
         if($request->has('url')) $lodging->url = $request->url;
 
         if(!$lodging->isDirty()){
-            return response()->json(['error' => 'Se debe especificar al menos un valor diferente para actualizar', 'code' => 422], 422);
+            return $this->errorResponse('Se debe especificar al menos un valor diferente para actualizar', 422);
         }
 
         $lodging->save();

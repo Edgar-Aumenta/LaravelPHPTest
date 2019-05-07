@@ -12,9 +12,9 @@ trait ApiResponser
         return response()->json($data, $code);
     }
 
-    protected function errorResponse($message, $code)
+    protected function errorResponse($message, $code, $errors = '')
     {
-        return response()->json(['error' => $message, 'code' => $code], $code);
+        return response()->json(['message' => $message, 'errors' => $errors], $code);
     }
 
     protected function showAll(Collection $collection, $code = 200)

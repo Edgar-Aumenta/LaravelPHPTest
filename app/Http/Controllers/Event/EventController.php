@@ -68,7 +68,7 @@ class EventController extends ApiController
         if($request->has('name')) $event->name = $request->name;
         
         if(!$event->isDirty()){
-            return response()->json(['error' => 'Se debe especificar al menos un valor diferente para actualizar', 'code' => 422], 422);
+            return $this->errorResponse('Se debe especificar al menos un valor diferente para actualizar', 422);
         }
         
         $event->save();
