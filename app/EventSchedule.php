@@ -4,6 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static create(array $all)
+ * @method static findOrFail($id)
+ * @property mixed id
+ */
 class EventSchedule extends Model
 {
     /**

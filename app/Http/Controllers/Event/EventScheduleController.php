@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Event;
 use App\EventSchedule;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 
 class EventScheduleController extends ApiController
 {
@@ -20,7 +22,7 @@ class EventScheduleController extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -40,8 +42,9 @@ class EventScheduleController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
@@ -55,8 +58,8 @@ class EventScheduleController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param  \App\EventSchedule  $eventSchedule
-     * @return \Illuminate\Http\Response
+     * @param EventSchedule $eventSchedule
+     * @return Response
      */
     public function show(EventSchedule $eventSchedule)
     {
@@ -70,9 +73,10 @@ class EventScheduleController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\EventSchedule  $eventSchedule
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param EventSchedule $eventSchedule
+     * @return Response
+     * @throws ValidationException
      */
     public function update(Request $request, EventSchedule $eventSchedule)
     {
@@ -95,8 +99,8 @@ class EventScheduleController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\EventSchedule  $eventSchedule
-     * @return \Illuminate\Http\Response
+     * @param EventSchedule $eventSchedule
+     * @return Response
      */
     public function destroy(EventSchedule $eventSchedule)
     {
@@ -108,9 +112,29 @@ class EventScheduleController extends ApiController
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function publicIndex()
+    {
+        $eventSchedules = EventSchedule::all()->where('visible', true);
+
+        $eventSchedulesReadModel = collect();
+
+        foreach($eventSchedules as $eventSchedule)
+        {
+            $eventScheduleReadModel = $this->convertToReadModel($eventSchedule);
+            $eventSchedulesReadModel->push($eventScheduleReadModel);
+        }
+
+        return $this->showAll($eventSchedulesReadModel);
+    }
+
+    /**
      * Compare chances and assign if there are
-     * @param \Illuminate\Http\Request  $request
-     * @param  \App\EventSchedule  $event Reference param
+     * @param Request $request
+     * @param EventSchedule $eventSchedule
      */
     private function compareChangesAndAssign(Request $request, EventSchedule &$eventSchedule)
     {
