@@ -108,6 +108,26 @@ class EventScheduleController extends ApiController
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function publicIndex()
+    {
+        $eventSchedules = EventSchedule::all()->where('visible', true);
+
+        $eventSchedulesReadModel = collect();
+
+        foreach($eventSchedules as $eventSchedule)
+        {
+            $eventScheduleReadModel = $this->convertToReadModel($eventSchedule);
+            $eventSchedulesReadModel->push($eventScheduleReadModel);
+        }
+
+        return $this->showAll($eventSchedulesReadModel);
+    }
+
+    /**
      * Compare chances and assign if there are
      * @param \Illuminate\Http\Request  $request
      * @param  \App\EventSchedule  $event Reference param
