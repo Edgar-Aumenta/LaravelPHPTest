@@ -47,6 +47,8 @@ yarn-error.log
 # auto-import.
 .idea/modules.xml
 .idea/*.iml
+.idea/php.xml
+.idea/vcs.xml
 # .idea/modules
 # *.iml
 # *.ipr
