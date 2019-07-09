@@ -13,6 +13,11 @@ class LodgingController extends ApiController
         'url' => 'required',
     ];
 
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     /**
      * Display a listing of the resource.
      *
