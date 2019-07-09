@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             'users',
         ]);
 
-        factory(User::class, 1)->create();
+        //factory(User::class, 1)->create();
+        $this->call(UserTableSeeder::class);
         $this->call(EventTableSeeder::class);
         $this->call(LocationTableSeeder::class);
         $this->call(LodgingTableSeeder::class);
