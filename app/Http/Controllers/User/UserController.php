@@ -8,6 +8,11 @@ use App\Http\Controllers\ApiController;
 
 class UserController extends ApiController
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -61,5 +66,10 @@ class UserController extends ApiController
     public function destroy(User $user)
     {
         //
+    }
+
+    public function userInfo(Request $request)
+    {
+        return $this->showOne($request->user());
     }
 }

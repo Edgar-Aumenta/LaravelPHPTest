@@ -12,6 +12,11 @@ class LocationController extends ApiController
         'name' => 'required|unique:locations',
     ];
 
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     /**
      * Display a listing of the resource.
      *

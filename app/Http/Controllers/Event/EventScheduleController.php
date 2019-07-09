@@ -19,6 +19,11 @@ class EventScheduleController extends ApiController
         'user_id' => 'required'
     ];
 
+    public function __construct()
+    {
+        $this->middleware('auth:api')->except(['publicIndex']);
+    }
+
     /**
      * Display a listing of the resource.
      *

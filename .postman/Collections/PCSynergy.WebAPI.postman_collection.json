@@ -1,0 +1,2148 @@
+{
+	"info": {
+		"_postman_id": "70940470-50c3-4ecc-a165-52f0c46b9f56",
+		"name": "PCSynergy.WebAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Events",
+			"item": [
+				{
+					"name": "Listing Events",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{UrlApi}}/events",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"events"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{UrlApi}}/events",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"events"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 01:33:42 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 01:33:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"PostalMate Training\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 2,\n            \"name\": \"PostalMate Regional\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 3,\n            \"name\": \"PostalMate Class N' Clinic\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 4,\n            \"name\": \"RS Workshop\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 5,\n            \"name\": \"AMBC Basic Training\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 6,\n            \"name\": \"RSA Expo\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 7,\n            \"name\": \"Print and Ship Symposium\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 8,\n            \"name\": \"AMBC Workshop\",\n            \"created_at\": null,\n            \"updated_at\": null\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Event",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Nuevo evento\"\n}"
+						},
+						"url": {
+							"raw": "{{UrlApi}}/events",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"events"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 201",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Nuevo evento\"\n}"
+								},
+								"url": {
+									"raw": "{{UrlApi}}/events",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"events"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 01:34:51 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 01:34:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"name\": \"Nuevo evento\",\n        \"updated_at\": \"2019-04-22 01:34:51\",\n        \"created_at\": \"2019-04-22 01:34:51\",\n        \"id\": 9\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Event",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{UrlApi}}/events/1",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"events",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{UrlApi}}/events/1",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"events",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 01:35:14 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 01:35:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "57"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"PostalMate Training\",\n        \"created_at\": null,\n        \"updated_at\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update event",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Nuevo evento modificado\"\n}"
+						},
+						"url": {
+							"raw": "{{UrlApi}}/events/9",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"events",
+								"9"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Nuevo evento modificado\"\n}"
+								},
+								"url": {
+									"raw": "{{UrlApi}}/events/9",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"events",
+										"9"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 01:36:30 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 01:36:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 9,\n        \"name\": \"Nuevo evento modificado\",\n        \"created_at\": \"2019-04-22 01:34:51\",\n        \"updated_at\": \"2019-04-22 01:36:30\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Event",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{UrlApi}}/events/9",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"events",
+								"9"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{UrlApi}}/events/5",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"events",
+										"5"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Apr 2019 04:33:23 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Apr 2019 04:33:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 5,\n        \"start_date\": \"2019-01-31 00:00:00\",\n        \"end_date\": \"2019-01-31 00:00:00\",\n        \"name\": \"PostalMate\",\n        \"lodging_name\": \"Courtyard Fort\",\n        \"lodging_url\": \"https://www.marriott.com/hotels/travel/fllcp-courtyard-fort-lauderdale-north-cypress-creek/?app=resvlink\",\n        \"register_name\": null,\n        \"register_url\": null,\n        \"mi_name\": \"Class\",\n        \"mi_url\": \"http://www.pcsynergy.com/pdfs/training/2019ClassDescriptions.pdf\",\n        \"user_id\": 1,\n        \"created_at\": \"2019-04-16 03:58:20\",\n        \"updated_at\": \"2019-04-16 04:30:35\"\n    }\n}"
+						},
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{UrlApi}}/events/9",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"events",
+										"9"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 01:37:13 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 01:37:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 9,\n        \"name\": \"Nuevo evento modificado\",\n        \"created_at\": \"2019-04-22 01:34:51\",\n        \"updated_at\": \"2019-04-22 01:36:30\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Event Schedules",
+			"item": [
+				{
+					"name": "Listing Event Schedules",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{UrlApi}}/event_schedules",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"event_schedules"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{UrlApi}}/event_schedules",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"event_schedules"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 05:18:06 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 05:18:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"start_date\": \"2019-02-09 00:00:00\",\n            \"end_date\": \"2019-02-10 00:00:00\",\n            \"location\": {\n                \"id\": 1,\n                \"name\": \"Ft Lauderdale, FL\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"event\": {\n                \"id\": 1,\n                \"name\": \"PostalMate Training\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"lodging\": {\n                \"id\": 1,\n                \"name\": \"Courtyard Fort Lauderdale\",\n                \"url\": \"https://www.marriott.com/hotels/travel/fllcp-courtyard-fort-lauderdale-north-cypress-creek/?app=resvlink\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"register\": {\n                \"title\": null,\n                \"url\": null\n            },\n            \"more_information\": {\n                \"title\": \"Class Descriptions\",\n                \"url\": \"http://www.pcsynergy.com/pdfs/training/2019ClassDescriptions.pdf\"\n            },\n            \"visible\": 1,\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Soledad Botsford\",\n                \"email\": \"bfeeney@example.com\",\n                \"email_verified_at\": \"2019-04-22 03:59:29\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"created_at\": \"2019-04-22T03:59:30.000000Z\",\n            \"updated_at\": \"2019-04-22T03:59:30.000000Z\"\n        },\n        {\n            \"id\": 2,\n            \"start_date\": \"2019-03-22 00:00:00\",\n            \"end_date\": null,\n            \"location\": {\n                \"id\": 2,\n                \"name\": \"Santa Ana, CA\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"event\": {\n                \"id\": 3,\n                \"name\": \"PostalMate Class N' Clinic\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"lodging\": {\n                \"id\": 2,\n                \"name\": \"Embassy Suites by Hilton Santa Ana Orange County\",\n                \"url\": \"https://embassysuites.hilton.com/en/es/groups/personalized/S/STAESES-XRS-20190321/index.jhtml\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"register\": {\n                \"title\": null,\n                \"url\": null\n            },\n            \"more_information\": {\n                \"title\": null,\n                \"url\": null\n            },\n            \"visible\": 1,\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Soledad Botsford\",\n                \"email\": \"bfeeney@example.com\",\n                \"email_verified_at\": \"2019-04-22 03:59:29\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"created_at\": \"2019-04-22T03:59:30.000000Z\",\n            \"updated_at\": \"2019-04-22T03:59:30.000000Z\"\n        },\n        {\n            \"id\": 3,\n            \"start_date\": \"2019-03-23 00:00:00\",\n            \"end_date\": \"2019-03-24 00:00:00\",\n            \"location\": {\n                \"id\": 2,\n                \"name\": \"Santa Ana, CA\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"event\": {\n                \"id\": 4,\n                \"name\": \"RS Workshop\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"lodging\": {\n                \"id\": 2,\n                \"name\": \"Embassy Suites by Hilton Santa Ana Orange County\",\n                \"url\": \"https://embassysuites.hilton.com/en/es/groups/personalized/S/STAESES-XRS-20190321/index.jhtml\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"register\": {\n                \"title\": null,\n                \"url\": null\n            },\n            \"more_information\": {\n                \"title\": null,\n                \"url\": null\n            },\n            \"visible\": 1,\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Soledad Botsford\",\n                \"email\": \"bfeeney@example.com\",\n                \"email_verified_at\": \"2019-04-22 03:59:29\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"created_at\": \"2019-04-22T03:59:30.000000Z\",\n            \"updated_at\": \"2019-04-22T03:59:30.000000Z\"\n        },\n        {\n            \"id\": 4,\n            \"start_date\": \"2019-04-06 00:00:00\",\n            \"end_date\": \"2019-03-07 00:00:00\",\n            \"location\": {\n                \"id\": 3,\n                \"name\": \"Charlotte, NC\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"event\": {\n                \"id\": 1,\n                \"name\": \"PostalMate Training\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"lodging\": {\n                \"id\": 3,\n                \"name\": \"Courtyard Charlotte Airport/Billy Graham Parkway\",\n                \"url\": \"https://www.marriott.com/meeting-event-hotels/group-corporate-travel/groupCorp.mi?resLinkData=PC%20Synergy%5ECLTSW%60PCSPCSK%6099%60USD%60false%602%604/5/19%604/8/19%603/22/19&app=resvlink&stop_mobi=yes\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"register\": {\n                \"title\": null,\n                \"url\": null\n            },\n            \"more_information\": {\n                \"title\": null,\n                \"url\": null\n            },\n            \"visible\": 1,\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Soledad Botsford\",\n                \"email\": \"bfeeney@example.com\",\n                \"email_verified_at\": \"2019-04-22 03:59:29\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"created_at\": \"2019-04-22T03:59:30.000000Z\",\n            \"updated_at\": \"2019-04-22T03:59:30.000000Z\"\n        },\n        {\n            \"id\": 5,\n            \"start_date\": \"2019-04-26 00:00:00\",\n            \"end_date\": \"2019-04-28 00:00:00\",\n            \"location\": {\n                \"id\": 4,\n                \"name\": \"St Louis, MO\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"event\": {\n                \"id\": 5,\n                \"name\": \"AMBC Basic Training\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"lodging\": {\n                \"id\": 4,\n                \"name\": \"Hilton Garden In St Louis Airport\",\n                \"url\": \"https://secure3.hilton.com/en_US/gi/reservation/book.htm?execution=e1s1\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"register\": {\n                \"title\": \"Sign Up\",\n                \"url\": \"https://ambc.org/event-registration/\"\n            },\n            \"more_information\": {\n                \"title\": \"Weekend Agenda\",\n                \"url\": \"https://ambc.org/ambc-certified-training-weekend-april-26-2019/\"\n            },\n            \"visible\": 1,\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Soledad Botsford\",\n                \"email\": \"bfeeney@example.com\",\n                \"email_verified_at\": \"2019-04-22 03:59:29\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"created_at\": \"2019-04-22T03:59:30.000000Z\",\n            \"updated_at\": \"2019-04-22T03:59:30.000000Z\"\n        },\n        {\n            \"id\": 6,\n            \"start_date\": \"2019-05-04 00:00:00\",\n            \"end_date\": \"2019-05-05 00:00:00\",\n            \"location\": {\n                \"id\": 5,\n                \"name\": \"Denver, CO\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"event\": {\n                \"id\": 1,\n                \"name\": \"PostalMate Training\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"lodging\": {\n                \"id\": 5,\n                \"name\": \"Courtyard Denver Airport\",\n                \"url\": \"https://www.marriott.com/meeting-event-hotels/group-corporate-travel/groupCorp.mi?resLinkData=Postal%20PostalMate/RS%20Associates%5Edenap%60PPMPPMA%60120.00%60USD%60false%602%605/3/19%605/6/19%604/19/19&app=resvlink&stop_mobi=yes\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"register\": {\n                \"title\": \"Sign Up\",\n                \"url\": \"http://www.pcsynergy.com/pdfs/training/2019Denver.pdf\"\n            },\n            \"more_information\": {\n                \"title\": \"Class Descriptions\",\n                \"url\": \"http://www.pcsynergy.com/pdfs/training/2019ClassDescriptions.pdf\"\n            },\n            \"visible\": 1,\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Soledad Botsford\",\n                \"email\": \"bfeeney@example.com\",\n                \"email_verified_at\": \"2019-04-22 03:59:29\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"created_at\": \"2019-04-22T03:59:30.000000Z\",\n            \"updated_at\": \"2019-04-22T03:59:30.000000Z\"\n        },\n        {\n            \"id\": 7,\n            \"start_date\": \"2019-08-21 00:00:00\",\n            \"end_date\": \"2019-08-25 00:00:00\",\n            \"location\": {\n                \"id\": 6,\n                \"name\": \"Dallas, TX\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"event\": {\n                \"id\": 6,\n                \"name\": \"RSA Expo\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"lodging\": {\n                \"id\": 6,\n                \"name\": \"Hyatt Regency Dallas\",\n                \"url\": \"https://www.rscentral.org/Events/RS-Expo#183388-hotel--attractions\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"register\": {\n                \"title\": \"Info\",\n                \"url\": \"https://www.rscentral.org/Events/RS-Expo#183381-overview\"\n            },\n            \"more_information\": {\n                \"title\": null,\n                \"url\": null\n            },\n            \"visible\": 1,\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Soledad Botsford\",\n                \"email\": \"bfeeney@example.com\",\n                \"email_verified_at\": \"2019-04-22 03:59:29\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"created_at\": \"2019-04-22T03:59:30.000000Z\",\n            \"updated_at\": \"2019-04-22T03:59:30.000000Z\"\n        },\n        {\n            \"id\": 8,\n            \"start_date\": \"2019-09-21 00:00:00\",\n            \"end_date\": \"2019-09-22 00:00:00\",\n            \"location\": {\n                \"id\": 7,\n                \"name\": \"New York, NY\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"event\": {\n                \"id\": 2,\n                \"name\": \"PostalMate Regional\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"lodging\": {\n                \"id\": 7,\n                \"name\": \"New York Laguardia Airport Marriott\",\n                \"url\": \"https://www.marriott.com/meeting-event-hotels/group-corporate-travel/groupCorp.mi?resLinkData=PC%20Synergy%20Attendees%5Elgaap%60po1po1a%60209.00%60USD%60false%602%609/21/19%609/24/19%609/6/19&app=resvlink&stop_mobi=yes\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"register\": {\n                \"title\": \"Sign Up\",\n                \"url\": \"http://www.pcsynergy.com/pdfs/training/2019NewYork.pdf\"\n            },\n            \"more_information\": {\n                \"title\": \"Class Descriptions\",\n                \"url\": \"http://www.pcsynergy.com/pdfs/training/2019ClassDescriptions.pdf\"\n            },\n            \"visible\": 1,\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Soledad Botsford\",\n                \"email\": \"bfeeney@example.com\",\n                \"email_verified_at\": \"2019-04-22 03:59:29\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"created_at\": \"2019-04-22T03:59:30.000000Z\",\n            \"updated_at\": \"2019-04-22T03:59:30.000000Z\"\n        },\n        {\n            \"id\": 9,\n            \"start_date\": \"2019-10-18 00:00:00\",\n            \"end_date\": null,\n            \"location\": {\n                \"id\": 10,\n                \"name\": \"Las Vegas, NV\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"event\": {\n                \"id\": 7,\n                \"name\": \"Print and Ship Symposium\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"lodging\": {\n                \"id\": 8,\n                \"name\": \"Baltimore Marriott Inner Harbor at Camden Yards\",\n                \"url\": \"https://aws.passkey.com/event/49566521/owner/289/home\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"register\": {\n                \"title\": \"Sign Up\",\n                \"url\": \"http://www.pcsynergy.com/pdfs/training/2018Baltimore.pdf\"\n            },\n            \"more_information\": {\n                \"title\": \"Print & Ship Symposium\",\n                \"url\": \"https://fzsupplies.com/collections/zoom-u/products/zoom-u\"\n            },\n            \"visible\": 0,\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Soledad Botsford\",\n                \"email\": \"bfeeney@example.com\",\n                \"email_verified_at\": \"2019-04-22 03:59:29\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"created_at\": \"2019-04-22T03:59:30.000000Z\",\n            \"updated_at\": \"2019-04-22T03:59:30.000000Z\"\n        },\n        {\n            \"id\": 10,\n            \"start_date\": \"2019-11-01 00:00:00\",\n            \"end_date\": \"2019-11-03 00:00:00\",\n            \"location\": {\n                \"id\": 8,\n                \"name\": \"Phoenix, AZ\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"event\": {\n                \"id\": 8,\n                \"name\": \"AMBC Workshop\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"lodging\": {\n                \"id\": 9,\n                \"name\": \"Hilton Phoenix Airport\",\n                \"url\": \"https://www.hilton.com/en/hi/groups/personalized/P/PHXAHHF-AMBC-20191030/index.jhtml\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"register\": {\n                \"title\": \"Info\",\n                \"url\": \"https://ambc.org/ambcs-the-event-2019-an-annual-workshop-to-network-train-and-grow-together/\"\n            },\n            \"more_information\": {\n                \"title\": null,\n                \"url\": null\n            },\n            \"visible\": 1,\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Soledad Botsford\",\n                \"email\": \"bfeeney@example.com\",\n                \"email_verified_at\": \"2019-04-22 03:59:29\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"created_at\": \"2019-04-22T03:59:30.000000Z\",\n            \"updated_at\": \"2019-04-22T03:59:30.000000Z\"\n        },\n        {\n            \"id\": 11,\n            \"start_date\": \"2019-11-16 00:00:00\",\n            \"end_date\": \"2019-11-17 00:00:00\",\n            \"location\": {\n                \"id\": 9,\n                \"name\": \"Anaheim, CA\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"event\": {\n                \"id\": 2,\n                \"name\": \"PostalMate Regional\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"lodging\": {\n                \"id\": 10,\n                \"name\": \"Anaheim Marriott Suites\",\n                \"url\": \"https://www.marriott.com/meeting-event-hotels/group-corporate-travel/groupCorp.mi?resLinkData=Postal%20Mate%20/%20RS%20Associates%20Training%5Esnaas%60PSMPSMA%60130%60USD%60false%604%6011/15/19%6011/18/19%6010/25/19&app=resvlink&stop_mobi=yes\",\n                \"created_at\": \"2019-04-22 03:59:30\",\n                \"updated_at\": \"2019-04-22 03:59:30\"\n            },\n            \"register\": {\n                \"title\": \"Sign Up\",\n                \"url\": \"http://www.pcsynergy.com/pdfs/training/2019Anaheim.pdf\"\n            },\n            \"more_information\": {\n                \"title\": \"Class Descriptions\",\n                \"url\": \"http://www.pcsynergy.com/pdfs/training/2019ClassDescriptions.pdf\"\n            },\n            \"visible\": 1,\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Soledad Botsford\",\n                \"email\": \"bfeeney@example.com\",\n                \"email_verified_at\": \"2019-04-22 03:59:29\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"created_at\": \"2019-04-22T03:59:30.000000Z\",\n            \"updated_at\": \"2019-04-22T03:59:30.000000Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Public Listing Event Schedules",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{UrlApi}}/public/event_schedules",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"public",
+								"event_schedules"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{UrlApi}}/event_schedules",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"event_schedules"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 05:18:06 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 05:18:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"start_date\": \"2019-02-09 00:00:00\",\n            \"end_date\": \"2019-02-10 00:00:00\",\n            \"location\": {\n                \"id\": 1,\n                \"name\": \"Ft Lauderdale, FL\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"event\": {\n                \"id\": 1,\n                \"name\": \"PostalMate Training\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"lodging\": {\n                \"id\": 1,\n                \"name\": \"Courtyard Fort Lauderdale\",\n                \"url\": \"https://www.marriott.com/hotels/travel/fllcp-courtyard-fort-lauderdale-north-cypress-creek/?app=resvlink\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"register\": {\n                \"title\": null,\n                \"url\": null\n            },\n            \"more_information\": {\n                \"title\": \"Class Descriptions\",\n                \"url\": \"http://www.pcsynergy.com/pdfs/training/2019ClassDescriptions.pdf\"\n            },\n            \"visible\": 1,\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Soledad Botsford\",\n                \"email\": \"bfeeney@example.com\",\n                \"email_verified_at\": \"2019-04-22 03:59:29\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"created_at\": \"2019-04-22T03:59:30.000000Z\",\n            \"updated_at\": \"2019-04-22T03:59:30.000000Z\"\n        },\n        {\n            \"id\": 2,\n            \"start_date\": \"2019-03-22 00:00:00\",\n            \"end_date\": null,\n            \"location\": {\n                \"id\": 2,\n                \"name\": \"Santa Ana, CA\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"event\": {\n                \"id\": 3,\n                \"name\": \"PostalMate Class N' Clinic\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"lodging\": {\n                \"id\": 2,\n                \"name\": \"Embassy Suites by Hilton Santa Ana Orange County\",\n                \"url\": \"https://embassysuites.hilton.com/en/es/groups/personalized/S/STAESES-XRS-20190321/index.jhtml\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"register\": {\n                \"title\": null,\n                \"url\": null\n            },\n            \"more_information\": {\n                \"title\": null,\n                \"url\": null\n            },\n            \"visible\": 1,\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Soledad Botsford\",\n                \"email\": \"bfeeney@example.com\",\n                \"email_verified_at\": \"2019-04-22 03:59:29\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"created_at\": \"2019-04-22T03:59:30.000000Z\",\n            \"updated_at\": \"2019-04-22T03:59:30.000000Z\"\n        },\n        {\n            \"id\": 3,\n            \"start_date\": \"2019-03-23 00:00:00\",\n            \"end_date\": \"2019-03-24 00:00:00\",\n            \"location\": {\n                \"id\": 2,\n                \"name\": \"Santa Ana, CA\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"event\": {\n                \"id\": 4,\n                \"name\": \"RS Workshop\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"lodging\": {\n                \"id\": 2,\n                \"name\": \"Embassy Suites by Hilton Santa Ana Orange County\",\n                \"url\": \"https://embassysuites.hilton.com/en/es/groups/personalized/S/STAESES-XRS-20190321/index.jhtml\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"register\": {\n                \"title\": null,\n                \"url\": null\n            },\n            \"more_information\": {\n                \"title\": null,\n                \"url\": null\n            },\n            \"visible\": 1,\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Soledad Botsford\",\n                \"email\": \"bfeeney@example.com\",\n                \"email_verified_at\": \"2019-04-22 03:59:29\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"created_at\": \"2019-04-22T03:59:30.000000Z\",\n            \"updated_at\": \"2019-04-22T03:59:30.000000Z\"\n        },\n        {\n            \"id\": 4,\n            \"start_date\": \"2019-04-06 00:00:00\",\n            \"end_date\": \"2019-03-07 00:00:00\",\n            \"location\": {\n                \"id\": 3,\n                \"name\": \"Charlotte, NC\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"event\": {\n                \"id\": 1,\n                \"name\": \"PostalMate Training\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"lodging\": {\n                \"id\": 3,\n                \"name\": \"Courtyard Charlotte Airport/Billy Graham Parkway\",\n                \"url\": \"https://www.marriott.com/meeting-event-hotels/group-corporate-travel/groupCorp.mi?resLinkData=PC%20Synergy%5ECLTSW%60PCSPCSK%6099%60USD%60false%602%604/5/19%604/8/19%603/22/19&app=resvlink&stop_mobi=yes\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"register\": {\n                \"title\": null,\n                \"url\": null\n            },\n            \"more_information\": {\n                \"title\": null,\n                \"url\": null\n            },\n            \"visible\": 1,\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Soledad Botsford\",\n                \"email\": \"bfeeney@example.com\",\n                \"email_verified_at\": \"2019-04-22 03:59:29\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"created_at\": \"2019-04-22T03:59:30.000000Z\",\n            \"updated_at\": \"2019-04-22T03:59:30.000000Z\"\n        },\n        {\n            \"id\": 5,\n            \"start_date\": \"2019-04-26 00:00:00\",\n            \"end_date\": \"2019-04-28 00:00:00\",\n            \"location\": {\n                \"id\": 4,\n                \"name\": \"St Louis, MO\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"event\": {\n                \"id\": 5,\n                \"name\": \"AMBC Basic Training\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"lodging\": {\n                \"id\": 4,\n                \"name\": \"Hilton Garden In St Louis Airport\",\n                \"url\": \"https://secure3.hilton.com/en_US/gi/reservation/book.htm?execution=e1s1\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"register\": {\n                \"title\": \"Sign Up\",\n                \"url\": \"https://ambc.org/event-registration/\"\n            },\n            \"more_information\": {\n                \"title\": \"Weekend Agenda\",\n                \"url\": \"https://ambc.org/ambc-certified-training-weekend-april-26-2019/\"\n            },\n            \"visible\": 1,\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Soledad Botsford\",\n                \"email\": \"bfeeney@example.com\",\n                \"email_verified_at\": \"2019-04-22 03:59:29\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"created_at\": \"2019-04-22T03:59:30.000000Z\",\n            \"updated_at\": \"2019-04-22T03:59:30.000000Z\"\n        },\n        {\n            \"id\": 6,\n            \"start_date\": \"2019-05-04 00:00:00\",\n            \"end_date\": \"2019-05-05 00:00:00\",\n            \"location\": {\n                \"id\": 5,\n                \"name\": \"Denver, CO\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"event\": {\n                \"id\": 1,\n                \"name\": \"PostalMate Training\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"lodging\": {\n                \"id\": 5,\n                \"name\": \"Courtyard Denver Airport\",\n                \"url\": \"https://www.marriott.com/meeting-event-hotels/group-corporate-travel/groupCorp.mi?resLinkData=Postal%20PostalMate/RS%20Associates%5Edenap%60PPMPPMA%60120.00%60USD%60false%602%605/3/19%605/6/19%604/19/19&app=resvlink&stop_mobi=yes\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"register\": {\n                \"title\": \"Sign Up\",\n                \"url\": \"http://www.pcsynergy.com/pdfs/training/2019Denver.pdf\"\n            },\n            \"more_information\": {\n                \"title\": \"Class Descriptions\",\n                \"url\": \"http://www.pcsynergy.com/pdfs/training/2019ClassDescriptions.pdf\"\n            },\n            \"visible\": 1,\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Soledad Botsford\",\n                \"email\": \"bfeeney@example.com\",\n                \"email_verified_at\": \"2019-04-22 03:59:29\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"created_at\": \"2019-04-22T03:59:30.000000Z\",\n            \"updated_at\": \"2019-04-22T03:59:30.000000Z\"\n        },\n        {\n            \"id\": 7,\n            \"start_date\": \"2019-08-21 00:00:00\",\n            \"end_date\": \"2019-08-25 00:00:00\",\n            \"location\": {\n                \"id\": 6,\n                \"name\": \"Dallas, TX\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"event\": {\n                \"id\": 6,\n                \"name\": \"RSA Expo\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"lodging\": {\n                \"id\": 6,\n                \"name\": \"Hyatt Regency Dallas\",\n                \"url\": \"https://www.rscentral.org/Events/RS-Expo#183388-hotel--attractions\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"register\": {\n                \"title\": \"Info\",\n                \"url\": \"https://www.rscentral.org/Events/RS-Expo#183381-overview\"\n            },\n            \"more_information\": {\n                \"title\": null,\n                \"url\": null\n            },\n            \"visible\": 1,\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Soledad Botsford\",\n                \"email\": \"bfeeney@example.com\",\n                \"email_verified_at\": \"2019-04-22 03:59:29\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"created_at\": \"2019-04-22T03:59:30.000000Z\",\n            \"updated_at\": \"2019-04-22T03:59:30.000000Z\"\n        },\n        {\n            \"id\": 8,\n            \"start_date\": \"2019-09-21 00:00:00\",\n            \"end_date\": \"2019-09-22 00:00:00\",\n            \"location\": {\n                \"id\": 7,\n                \"name\": \"New York, NY\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"event\": {\n                \"id\": 2,\n                \"name\": \"PostalMate Regional\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"lodging\": {\n                \"id\": 7,\n                \"name\": \"New York Laguardia Airport Marriott\",\n                \"url\": \"https://www.marriott.com/meeting-event-hotels/group-corporate-travel/groupCorp.mi?resLinkData=PC%20Synergy%20Attendees%5Elgaap%60po1po1a%60209.00%60USD%60false%602%609/21/19%609/24/19%609/6/19&app=resvlink&stop_mobi=yes\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"register\": {\n                \"title\": \"Sign Up\",\n                \"url\": \"http://www.pcsynergy.com/pdfs/training/2019NewYork.pdf\"\n            },\n            \"more_information\": {\n                \"title\": \"Class Descriptions\",\n                \"url\": \"http://www.pcsynergy.com/pdfs/training/2019ClassDescriptions.pdf\"\n            },\n            \"visible\": 1,\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Soledad Botsford\",\n                \"email\": \"bfeeney@example.com\",\n                \"email_verified_at\": \"2019-04-22 03:59:29\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"created_at\": \"2019-04-22T03:59:30.000000Z\",\n            \"updated_at\": \"2019-04-22T03:59:30.000000Z\"\n        },\n        {\n            \"id\": 9,\n            \"start_date\": \"2019-10-18 00:00:00\",\n            \"end_date\": null,\n            \"location\": {\n                \"id\": 10,\n                \"name\": \"Las Vegas, NV\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"event\": {\n                \"id\": 7,\n                \"name\": \"Print and Ship Symposium\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"lodging\": {\n                \"id\": 8,\n                \"name\": \"Baltimore Marriott Inner Harbor at Camden Yards\",\n                \"url\": \"https://aws.passkey.com/event/49566521/owner/289/home\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"register\": {\n                \"title\": \"Sign Up\",\n                \"url\": \"http://www.pcsynergy.com/pdfs/training/2018Baltimore.pdf\"\n            },\n            \"more_information\": {\n                \"title\": \"Print & Ship Symposium\",\n                \"url\": \"https://fzsupplies.com/collections/zoom-u/products/zoom-u\"\n            },\n            \"visible\": 0,\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Soledad Botsford\",\n                \"email\": \"bfeeney@example.com\",\n                \"email_verified_at\": \"2019-04-22 03:59:29\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"created_at\": \"2019-04-22T03:59:30.000000Z\",\n            \"updated_at\": \"2019-04-22T03:59:30.000000Z\"\n        },\n        {\n            \"id\": 10,\n            \"start_date\": \"2019-11-01 00:00:00\",\n            \"end_date\": \"2019-11-03 00:00:00\",\n            \"location\": {\n                \"id\": 8,\n                \"name\": \"Phoenix, AZ\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"event\": {\n                \"id\": 8,\n                \"name\": \"AMBC Workshop\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"lodging\": {\n                \"id\": 9,\n                \"name\": \"Hilton Phoenix Airport\",\n                \"url\": \"https://www.hilton.com/en/hi/groups/personalized/P/PHXAHHF-AMBC-20191030/index.jhtml\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"register\": {\n                \"title\": \"Info\",\n                \"url\": \"https://ambc.org/ambcs-the-event-2019-an-annual-workshop-to-network-train-and-grow-together/\"\n            },\n            \"more_information\": {\n                \"title\": null,\n                \"url\": null\n            },\n            \"visible\": 1,\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Soledad Botsford\",\n                \"email\": \"bfeeney@example.com\",\n                \"email_verified_at\": \"2019-04-22 03:59:29\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"created_at\": \"2019-04-22T03:59:30.000000Z\",\n            \"updated_at\": \"2019-04-22T03:59:30.000000Z\"\n        },\n        {\n            \"id\": 11,\n            \"start_date\": \"2019-11-16 00:00:00\",\n            \"end_date\": \"2019-11-17 00:00:00\",\n            \"location\": {\n                \"id\": 9,\n                \"name\": \"Anaheim, CA\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"event\": {\n                \"id\": 2,\n                \"name\": \"PostalMate Regional\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"lodging\": {\n                \"id\": 10,\n                \"name\": \"Anaheim Marriott Suites\",\n                \"url\": \"https://www.marriott.com/meeting-event-hotels/group-corporate-travel/groupCorp.mi?resLinkData=Postal%20Mate%20/%20RS%20Associates%20Training%5Esnaas%60PSMPSMA%60130%60USD%60false%604%6011/15/19%6011/18/19%6010/25/19&app=resvlink&stop_mobi=yes\",\n                \"created_at\": \"2019-04-22 03:59:30\",\n                \"updated_at\": \"2019-04-22 03:59:30\"\n            },\n            \"register\": {\n                \"title\": \"Sign Up\",\n                \"url\": \"http://www.pcsynergy.com/pdfs/training/2019Anaheim.pdf\"\n            },\n            \"more_information\": {\n                \"title\": \"Class Descriptions\",\n                \"url\": \"http://www.pcsynergy.com/pdfs/training/2019ClassDescriptions.pdf\"\n            },\n            \"visible\": 1,\n            \"user\": {\n                \"id\": 1,\n                \"name\": \"Soledad Botsford\",\n                \"email\": \"bfeeney@example.com\",\n                \"email_verified_at\": \"2019-04-22 03:59:29\",\n                \"created_at\": \"2019-04-22 03:59:29\",\n                \"updated_at\": \"2019-04-22 03:59:29\"\n            },\n            \"created_at\": \"2019-04-22T03:59:30.000000Z\",\n            \"updated_at\": \"2019-04-22T03:59:30.000000Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Event Schedule",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{UrlApi}}/event_schedules/1",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"event_schedules",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{UrlApi}}/event_schedules/1",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"event_schedules",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 05:17:02 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 05:17:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"start_date\": \"2019-02-09 00:00:00\",\n        \"end_date\": \"2019-02-10 00:00:00\",\n        \"location\": {\n            \"id\": 1,\n            \"name\": \"Ft Lauderdale, FL\",\n            \"created_at\": \"2019-04-22 03:59:29\",\n            \"updated_at\": \"2019-04-22 03:59:29\"\n        },\n        \"event\": {\n            \"id\": 1,\n            \"name\": \"PostalMate Training\",\n            \"created_at\": \"2019-04-22 03:59:29\",\n            \"updated_at\": \"2019-04-22 03:59:29\"\n        },\n        \"lodging\": {\n            \"id\": 1,\n            \"name\": \"Courtyard Fort Lauderdale\",\n            \"url\": \"https://www.marriott.com/hotels/travel/fllcp-courtyard-fort-lauderdale-north-cypress-creek/?app=resvlink\",\n            \"created_at\": \"2019-04-22 03:59:29\",\n            \"updated_at\": \"2019-04-22 03:59:29\"\n        },\n        \"register\": {\n            \"title\": null,\n            \"url\": null\n        },\n        \"more_information\": {\n            \"title\": \"Class Descriptions\",\n            \"url\": \"http://www.pcsynergy.com/pdfs/training/2019ClassDescriptions.pdf\"\n        },\n        \"visible\": 1,\n        \"user\": {\n            \"id\": 1,\n            \"name\": \"Soledad Botsford\",\n            \"email\": \"bfeeney@example.com\",\n            \"email_verified_at\": \"2019-04-22 03:59:29\",\n            \"created_at\": \"2019-04-22 03:59:29\",\n            \"updated_at\": \"2019-04-22 03:59:29\"\n        },\n        \"created_at\": \"2019-04-22T03:59:30.000000Z\",\n        \"updated_at\": \"2019-04-22T03:59:30.000000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Event Schedule",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"start_date\": \"2019-02-09 00:00:00\",\n    \"end_date\": \"2019-02-10 00:00:00\",\n    \"location_id\": 1,\n    \"event_id\": 1,\n    \"lodging_id\": 1,\n    \"register_title\": \"Nuevo titulo de registro\",\n    \"register_url\": \"Nueva url de registro\",\n    \"mi_title\": \"Nuevo titulo de mas informacion\",\n    \"mi_url\": \"Nueva url de una inforacion\",\n    \"visible\": 1,\n    \"user_id\": 1\n}"
+						},
+						"url": {
+							"raw": "{{UrlApi}}/event_schedules",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"event_schedules"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 201",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"start_date\": \"2019-02-09 00:00:00\",\n    \"end_date\": \"2019-02-10 00:00:00\",\n    \"location_id\": 1,\n    \"event_id\": 1,\n    \"lodging_id\": 1,\n    \"register_title\": \"Nuevo titulo de registro\",\n    \"register_url\": \"Nueva url de registro\",\n    \"mi_title\": \"Nuevo titulo de mas informacion\",\n    \"mi_url\": \"Nueva url de una inforacion\",\n    \"visible\": 1,\n    \"user_id\": 1\n}"
+								},
+								"url": {
+									"raw": "{{UrlApi}}/event_schedules",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"event_schedules"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 03:39:09 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 03:39:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"start_date\": \"2019-02-09 00:00:00\",\n        \"end_date\": \"2019-02-10 00:00:00\",\n        \"location_id\": 1,\n        \"event_id\": 1,\n        \"lodging_id\": 1,\n        \"register_title\": \"Nuevo titulo de registro\",\n        \"register_url\": \"Nueva url de registro\",\n        \"mi_title\": \"Nuevo titulo de mas informacion\",\n        \"mi_url\": \"Nueva url de una inforacion\",\n        \"visible\": 1,\n        \"user_id\": 1,\n        \"updated_at\": \"2019-04-22 03:39:09\",\n        \"created_at\": \"2019-04-22 03:39:09\",\n        \"id\": 12\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Event Schedule",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"start_date\": \"2019-02-09 00:00:00\",\n    \"end_date\": \"2019-02-10 00:00:00\",\n    \"location_id\": 1,\n    \"event_id\": 1,\n    \"lodging_id\": 1,\n    \"register_title\": \"Nuevo titulo de registro modificado\",\n    \"register_url\": \"Nueva url de registro modificada\",\n    \"mi_title\": \"Nuevo titulo de mas informacion modificado\",\n    \"mi_url\": \"Nueva url de una inforacion modificada\",\n    \"visible\": 1,\n    \"user_id\": 1\n}"
+						},
+						"url": {
+							"raw": "{{UrlApi}}/event_schedules/12",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"event_schedules",
+								"12"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"start_date\": \"2019-02-09 00:00:00\",\n    \"end_date\": \"2019-02-10 00:00:00\",\n    \"location_id\": 1,\n    \"event_id\": 1,\n    \"lodging_id\": 1,\n    \"register_title\": \"Nuevo titulo de registro modificado\",\n    \"register_url\": \"Nueva url de registro modificada\",\n    \"mi_title\": \"Nuevo titulo de mas informacion modificado\",\n    \"mi_url\": \"Nueva url de una inforacion modificada\",\n    \"visible\": 1,\n    \"user_id\": 1\n}"
+								},
+								"url": {
+									"raw": "{{UrlApi}}/event_schedules/12",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"event_schedules",
+										"12"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 03:42:18 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 03:42:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 12,\n        \"start_date\": \"2019-02-09 00:00:00\",\n        \"end_date\": \"2019-02-10 00:00:00\",\n        \"location_id\": 1,\n        \"event_id\": 1,\n        \"lodging_id\": 1,\n        \"register_title\": \"Nuevo titulo de registro modificado\",\n        \"register_url\": \"Nueva url de registro modificada\",\n        \"mi_title\": \"Nuevo titulo de mas informacion modificado\",\n        \"mi_url\": \"Nueva url de una inforacion modificada\",\n        \"visible\": 1,\n        \"user_id\": 1,\n        \"created_at\": \"2019-04-22 03:39:09\",\n        \"updated_at\": \"2019-04-22 03:42:18\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Event Schedule",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{UrlApi}}/event_schedules/12",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"event_schedules",
+								"12"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{UrlApi}}/event_schedules/12",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"event_schedules",
+										"12"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 03:43:11 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 03:43:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 12,\n        \"start_date\": \"2019-02-09 00:00:00\",\n        \"end_date\": \"2019-02-10 00:00:00\",\n        \"location_id\": 1,\n        \"event_id\": 1,\n        \"lodging_id\": 1,\n        \"register_title\": \"Nuevo titulo de registro modificado\",\n        \"register_url\": \"Nueva url de registro modificada\",\n        \"mi_title\": \"Nuevo titulo de mas informacion modificado\",\n        \"mi_url\": \"Nueva url de una inforacion modificada\",\n        \"visible\": 1,\n        \"user_id\": 1,\n        \"created_at\": \"2019-04-22 03:39:09\",\n        \"updated_at\": \"2019-04-22 03:42:18\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Locations",
+			"item": [
+				{
+					"name": "Listing Locations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{UrlApi}}/locations",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"locations"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{UrlApi}}/locations",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"locations"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 02:15:36 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 02:15:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Ft Lauderdale, FL\",\n            \"created_at\": null\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Santa Ana, CA\",\n            \"created_at\": null\n        },\n        {\n            \"id\": 3,\n            \"name\": \"\\tCharlotte, NC\",\n            \"created_at\": null\n        },\n        {\n            \"id\": 4,\n            \"name\": \"\\tSt Louis, MO\",\n            \"created_at\": null\n        },\n        {\n            \"id\": 5,\n            \"name\": \"Denver, CO\",\n            \"created_at\": null\n        },\n        {\n            \"id\": 6,\n            \"name\": \"Dallas, TX\",\n            \"created_at\": null\n        },\n        {\n            \"id\": 7,\n            \"name\": \"New York, NY\",\n            \"created_at\": null\n        },\n        {\n            \"id\": 8,\n            \"name\": \"Phoenix, AZ\",\n            \"created_at\": null\n        },\n        {\n            \"id\": 9,\n            \"name\": \"Anaheim, CA\",\n            \"created_at\": null\n        },\n        {\n            \"id\": 10,\n            \"name\": \"Las Vegas, NV\",\n            \"created_at\": null\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Location",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Nueva localidad\"\n}"
+						},
+						"url": {
+							"raw": "{{UrlApi}}/locations",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"locations"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 201",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Nueva localidad\"\n}"
+								},
+								"url": {
+									"raw": "{{UrlApi}}/locations",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"locations"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 02:37:40 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 02:37:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"name\": \"Nueva localidad\",\n        \"updated_at\": \"2019-04-22 02:37:40\",\n        \"created_at\": \"2019-04-22 02:37:40\",\n        \"id\": 11\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Location",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{UrlApi}}/locations/1",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"locations",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{UrlApi}}/locations/1",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"locations",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 02:38:26 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 02:38:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Ft Lauderdale, FL\",\n        \"created_at\": null,\n        \"updated_at\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Location",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Nueva localidad modificada\"\n}"
+						},
+						"url": {
+							"raw": "{{UrlApi}}/locations/11",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"locations",
+								"11"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Nueva localidad modificada\"\n}"
+								},
+								"url": {
+									"raw": "{{UrlApi}}/locations/11",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"locations",
+										"11"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 02:40:35 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 02:40:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 11,\n        \"name\": \"Nueva localidad modificada\",\n        \"created_at\": \"2019-04-22 02:37:40\",\n        \"updated_at\": \"2019-04-22 02:40:35\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Location",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{UrlApi}}/locations/11",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"locations",
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lodgings",
+			"item": [
+				{
+					"name": "Listing Lodgings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{UrlApi}}/lodgings",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"lodgings"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{UrlApi}}/lodgings",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"lodgings"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 03:07:29 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 03:07:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Courtyard Fort Lauderdale\",\n            \"url\": \"https://www.marriott.com/hotels/travel/fllcp-courtyard-fort-lauderdale-north-cypress-creek/?app=resvlink\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Embassy Suites by Hilton Santa Ana Orange County\",\n            \"url\": \"https://embassysuites.hilton.com/en/es/groups/personalized/S/STAESES-XRS-20190321/index.jhtml\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Courtyard Charlotte Airport/Billy Graham Parkway\",\n            \"url\": \"https://www.marriott.com/meeting-event-hotels/group-corporate-travel/groupCorp.mi?resLinkData=PC%20Synergy%5ECLTSW%60PCSPCSK%6099%60USD%60false%602%604/5/19%604/8/19%603/22/19&app=resvlink&stop_mobi=yes\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Hilton Garden In St Louis Airport\",\n            \"url\": \"https://secure3.hilton.com/en_US/gi/reservation/book.htm?execution=e1s1\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 5,\n            \"name\": \"Courtyard Denver Airport\",\n            \"url\": \"https://www.marriott.com/meeting-event-hotels/group-corporate-travel/groupCorp.mi?resLinkData=Postal%20PostalMate/RS%20Associates%5Edenap%60PPMPPMA%60120.00%60USD%60false%602%605/3/19%605/6/19%604/19/19&app=resvlink&stop_mobi=yes\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 6,\n            \"name\": \"Hyatt Regency Dallas\",\n            \"url\": \"https://www.rscentral.org/Events/RS-Expo#183388-hotel--attractions\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 7,\n            \"name\": \"New York Laguardia Airport Marriott\",\n            \"url\": \"https://www.marriott.com/meeting-event-hotels/group-corporate-travel/groupCorp.mi?resLinkData=PC%20Synergy%20Attendees%5Elgaap%60po1po1a%60209.00%60USD%60false%602%609/21/19%609/24/19%609/6/19&app=resvlink&stop_mobi=yes\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 8,\n            \"name\": \"Baltimore Marriott Inner Harbor at Camden Yards\",\n            \"url\": \"https://aws.passkey.com/event/49566521/owner/289/home\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 9,\n            \"name\": \"Hilton Phoenix Airport\",\n            \"url\": \"https://www.hilton.com/en/hi/groups/personalized/P/PHXAHHF-AMBC-20191030/index.jhtml\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 10,\n            \"name\": \"Anaheim Marriott Suites\",\n            \"url\": \"https://www.marriott.com/meeting-event-hotels/group-corporate-travel/groupCorp.mi?resLinkData=Postal%20Mate%20/%20RS%20Associates%20Training%5Esnaas%60PSMPSMA%60130%60USD%60false%604%6011/15/19%6011/18/19%6010/25/19&app=resvlink&stop_mobi=yes\",\n            \"created_at\": null,\n            \"updated_at\": null\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Lodging",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{UrlApi}}/lodgings/1",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"lodgings",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{UrlApi}}/lodgings/1",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"lodgings",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 03:08:42 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 03:08:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Courtyard Fort Lauderdale\",\n        \"url\": \"https://www.marriott.com/hotels/travel/fllcp-courtyard-fort-lauderdale-north-cypress-creek/?app=resvlink\",\n        \"created_at\": null,\n        \"updated_at\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Lodging",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Nuevo alojamiento (Sede)\",\n    \"url\" : \"Url del alojamiento\"\n}"
+						},
+						"url": {
+							"raw": "{{UrlApi}}/lodgings",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"lodgings"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 201",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Nuevo alojamiento (Sede)\",\n    \"url\" : \"Url del alojamiento\"\n}"
+								},
+								"url": {
+									"raw": "{{UrlApi}}/lodgings",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"lodgings"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 03:10:48 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 03:10:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"name\": \"Nuevo alojamiento (Sede)\",\n        \"url\": \"Url del alojamiento\",\n        \"updated_at\": \"2019-04-22 03:10:48\",\n        \"created_at\": \"2019-04-22 03:10:48\",\n        \"id\": 11\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Lodging",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Nuevo alojamiento (Sede) modificado\",\n    \"url\" : \"Url del alojamiento\"\n}"
+						},
+						"url": {
+							"raw": "{{UrlApi}}/lodgings/11",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"lodgings",
+								"11"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Nuevo alojamiento (Sede) modificado\",\n    \"url\" : \"Url del alojamiento\"\n}"
+								},
+								"url": {
+									"raw": "{{UrlApi}}/lodgings/11",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"lodgings",
+										"11"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 03:12:16 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 03:12:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 11,\n        \"name\": \"Nuevo alojamiento (Sede) modificado\",\n        \"url\": \"Url del alojamiento\",\n        \"created_at\": \"2019-04-22 03:10:48\",\n        \"updated_at\": \"2019-04-22 03:12:16\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Lodging",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{UrlApi}}/lodgings/11",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"lodgings",
+								"11"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{UrlApi}}/lodgings/11",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"lodgings",
+										"11"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 03:13:41 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Apr 2019 03:13:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 11,\n        \"name\": \"Nuevo alojamiento (Sede) modificado\",\n        \"url\": \"Url del alojamiento\",\n        \"created_at\": \"2019-04-22 03:10:48\",\n        \"updated_at\": \"2019-04-22 03:12:16\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Obtener Token Grant Type Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "Z7u8Tpw1PwQfijuLHljq0sLpqWuOBt6K4aVg4B8h\n",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "jdon@aumenta.mx",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "secret",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{UrlApi}}/oauth/token",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "grant_type",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "client_id",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "wTu27ttaBzWjOQNiNA95NeGDO2VDWIIe8m61VZxM\n",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "jdon@aumenta.mx",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "secret",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{UrlApi}}/oauth/token",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"oauth",
+										"token"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 09 Jul 2019 05:31:24 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 09 Jul 2019 05:31:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.23"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, private"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=UTF-8"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "*"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token_type\": \"Bearer\",\n    \"expires_in\": 86400,\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImNhZWU2YmUwZWMxNjU3YjZlZDEwZDRjZGM5NTA3NTgzNTU3NGIyOTU0NGE2ZDE1ZDY2YTRkZGEzODY4YzJkNTczM2ZjYTA0YTQ0OTMyZWJkIn0.eyJhdWQiOiIyIiwianRpIjoiY2FlZTZiZTBlYzE2NTdiNmVkMTBkNGNkYzk1MDc1ODM1NTc0YjI5NTQ0YTZkMTVkNjZhNGRkYTM4NjhjMmQ1NzMzZmNhMDRhNDQ5MzJlYmQiLCJpYXQiOjE1NjI2NTAyODQsIm5iZiI6MTU2MjY1MDI4NCwiZXhwIjoxNTYyNzM2Njg0LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.oihkzAd_LxPKHTd8bN6ixvdfsI570tfQOOxLHyCaLjF8ZtYK-Tm3QoQ6sMEetDDtDQiVmBmeif3MkuTgcvvqS5L0fbakNCFVd_792XVm_X9pM7a9eG_fq1z619nfqZT9N7h1UP-9rCMI_prpHawZYkVEzvSA4N00-7-pIQ-OmYkDJHHAuTYvjTYgEmV3F_TgAbFQX8qcfOFzsiK9xA76OMe1XhFMixGdBuITdKBxZegXH_cOlgeczVbLQJgjfcKYQwbz0IPDXn87VMqiqCdM5qmw-gaiA7BJ3U_XKZAUANqeSHyPBIpy-K27mwNYUfTizSYy2tOhH5T4-4DMzB8mBK-CGdLJFkxM3fMUlOAFWFzLV0ODQIvtmA7sd3HtWBV2kOWomli5eqNR5DImiPo6-mfF9o_qSerEE1ZDL_DvAXKNm-D3SC4EFR_NOVU2qOd_Ij4Fmyzectx6jPFPZc_LwmIZ4mevAqKDTaB4f4eoQ5HQWrNOVNhF98OsvIkakgfE5tyZPhuh34L-OM8s0IxeVvrEDCgXiNsi-BudUFlvSVA2IJtmVUqbTTet-tbJP6QPGte3GiYmQjUmXqhcqmXO5abYzZ1swSeLUQf1uu1t4E7iZ6qHFAP929J2soOQ0Z5I1Et_C-ncxrJwRgwsHh7b2rPVFL8bMASpjRugrWETQRQ\",\n    \"refresh_token\": \"def50200576938189a477b04ca807da43f0a2ffeb09d911e5ff7b3c2dbd24b1692b8a084e6ec01163951fbd9988862a2ebbdc33a9bf3dafb818b678d34a9009e1e8c3673e6ababc67a201bd8ec7c13b657e72e026cd1f99d75e566b7fcc4b10b0e276809732eb4391eaa2e3eae39d6aef5c51a7d152a2bfb81a340f916e5266158d679c0d04df90bd340ebe888c98b970f6e580f190220431a406c09d632157580df8f909d67276b936e60ac6a3934d87e17deb27ad863ac2c6752efa2a98be8c21b4df187b65180aae5d9895b19a76e29e7449e869ee77d101a0cb362a4108f9e8cb1c9f5eb98a8d6791fbb8ba662dd5fb6ab00f4bef26374962fb0c81d6448e0d7a4bb2a1c84db28294649e988a2b158f02a90f45d2ad42ef8cb81dde5b219f7ab7ccb1567501f3fd8f5511befb0d456cd8ba68e104183b78511cea1b9833801bbf790261de9f13193690904e187ce02c1353103c3203e3bec6d91c2306c965f\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get User logged In",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{UrlApi}}/user",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{UrlApi}}/user",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 09 Jul 2019 05:32:23 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 09 Jul 2019 05:32:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "*"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 2,\n        \"name\": \"Josue Don\",\n        \"email\": \"jdon@aumenta.mx\",\n        \"email_verified_at\": \"2019-07-09 04:42:09\",\n        \"verified\": \"1\",\n        \"admin\": \"false\",\n        \"created_at\": \"2019-07-09 04:42:09\",\n        \"updated_at\": \"2019-07-09 04:42:09\"\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

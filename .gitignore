@@ -9,6 +9,7 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+.rnd
 
 # Created by https://www.gitignore.io/api/phpstorm
 # Edit at https://www.gitignore.io/?templates=phpstorm
@@ -44,8 +45,11 @@ yarn-error.log
 # When using Gradle or Maven with auto-import, you should exclude module files,
 # since they will be recreated, and may cause churn.  Uncomment if using
 # auto-import.
-# .idea/modules.xml
-# .idea/*.iml
+.idea/modules.xml
+.idea/*.iml
+.idea/php.xml
+.idea/vcs.xml
+.idea/symfony2.xml
 # .idea/modules
 # *.iml
 # *.ipr
@@ -88,7 +92,7 @@ fabric.properties
 
 # *.iml
 # modules.xml
-# .idea/misc.xml
+.idea/misc.xml
 # *.ipr
 
 # Sonarlint plugin
