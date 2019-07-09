@@ -62,4 +62,9 @@ class UserController extends ApiController
     {
         //
     }
+
+    public function userInfo(Request $request)
+    {
+        return $this->showOne($request->user());
+    }
 }
