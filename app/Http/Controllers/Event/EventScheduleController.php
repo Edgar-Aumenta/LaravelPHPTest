@@ -151,6 +151,10 @@ class EventScheduleController extends ApiController
         if($request->has('user_id')) $eventSchedule->user_id = $request->user_id;
     }
 
+    /**
+     * @param EventSchedule $eventSchedule
+     * @return EventSchedule
+     */
     private function convertToReadModel(EventSchedule $eventSchedule){
 
         $eventScheduleNew = new EventSchedule();
