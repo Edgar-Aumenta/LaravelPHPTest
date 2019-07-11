@@ -59,22 +59,22 @@ class EventController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Event  $event
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Event $event
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, Event $event)
     {
-        $event->fill($request->only([
-            'name'
-        ]));
-        
-        if($event->isClean()){
+        $this->validate($request, $this->rules);
+
+        if($request->has('name')) $event->name = $request->name;
+
+        if(!$event->isDirty()){
             return $this->errorResponse('Se debe especificar al menos un valor diferente para actualizar', 422);
         }
-        
-        $event->save();
 
+        $event->save();
         return $this->showOne($event);
     }
 
