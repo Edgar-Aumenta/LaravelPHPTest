@@ -15,7 +15,7 @@ class LodgingController extends ApiController
 
     public function __construct()
     {
-        $this->middleware('auth:api');
+        parent::__construct();
     }
 
     /**
@@ -33,8 +33,9 @@ class LodgingController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -53,22 +54,19 @@ class LodgingController extends ApiController
      */
     public function show(Lodging $lodging)
     {
-        $lodging = Lodging::findOrFail($lodging->id);
-
         return $this->showOne($lodging);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Lodging  $lodging
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Lodging $lodging
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, Lodging $lodging)
     {
-        $lodging = Lodging::findOrFail($lodging->id);
-
         $this->validate($request, $this->rules);
 
         if($request->has('name')) $lodging->name = $request->name;
@@ -86,13 +84,12 @@ class LodgingController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Lodging  $lodging
+     * @param \App\Lodging $lodging
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Lodging $lodging)
     {
-        $lodging = Lodging::findOrFail($lodging->id);
-
         $lodging->delete();
 
         return $this->showOne($lodging);
