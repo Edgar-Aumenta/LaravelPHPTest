@@ -14,7 +14,7 @@ class EventController extends ApiController
 
     public function __construct()
     {
-        $this->middleware('auth:api');
+        parent::__construct();
     }
 
     /**
@@ -32,8 +32,9 @@ class EventController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -52,8 +53,6 @@ class EventController extends ApiController
      */
     public function show(Event $event)
     {
-        $event = Event::findOrFail($event->id);
-
         return $this->showOne($event);
     }
 
@@ -66,13 +65,11 @@ class EventController extends ApiController
      */
     public function update(Request $request, Event $event)
     {
-        $event = Event::findOrFail($event->id);
-
-        $this->validate($request, $this->rules);
-
-        if($request->has('name')) $event->name = $request->name;
+        $event->fill($request->only([
+            'name'
+        ]));
         
-        if(!$event->isDirty()){
+        if($event->isClean()){
             return $this->errorResponse('Se debe especificar al menos un valor diferente para actualizar', 422);
         }
         
@@ -84,13 +81,12 @@ class EventController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Event  $event
+     * @param \App\Event $event
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Event $event)
     {
-        $event = Event::findOrFail($event->id);
-
         $event->delete();
 
         return $this->showOne($event);
