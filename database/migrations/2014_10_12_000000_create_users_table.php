@@ -24,8 +24,9 @@ class CreateUsersTable extends Migration
             $table->string('website')->nullable();
             $table->string('password');
             $table->boolean('send_notifications')->default(true);
-            $table->integer('role_id');
+            //$table->integer('role_id'); TODO Implementar roles en la aplicacion
             $table->string('url_image')->nullable();
+            $table->string('url_image_thumbnail')->nullable();
             $table->string('address_1');
             $table->string('address_2')->nullable();
             $table->string('city');
