@@ -16,7 +16,7 @@ class AlterUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->renameColumn('name', 'first_name');
             $table->string('last_name')->nullable();
-            $table->string('username');
+            $table->string('username')->unique();
             $table->string('website')->nullable();
             $table->boolean('send_notifications')->default(true);
             $table->string('url_image')->nullable();
