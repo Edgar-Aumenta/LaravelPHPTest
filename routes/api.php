@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 /**
  * Events
  */
+Route::apiResource('users', 'User\UserController');
 Route::apiResource('events', 'Event\EventController');
 Route::apiResource('event_schedules', 'Event\EventScheduleController');
 Route::get('public/event_schedules', 'Event\EventScheduleController@publicIndex');

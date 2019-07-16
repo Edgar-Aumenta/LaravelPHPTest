@@ -10,7 +10,7 @@ class UserController extends ApiController
 {
     public function __construct()
     {
-        parent::__construct();
+        $this->middleware('auth:api');
     }
 
     /**
@@ -20,7 +20,9 @@ class UserController extends ApiController
      */
     public function index()
     {
-        //
+        $users = User::all();
+
+        return $this->showAll($users);
     }
 
     /**
@@ -31,7 +33,29 @@ class UserController extends ApiController
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'username' => 'required|unique:users',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6|confirmed',
+            'address_1' => 'required',
+            'city' => 'required',
+            'zip' => 'required',
+            'country' => 'required',
+            'day_phone' => 'required',
+            'company' => 'required',
+        ];
+
+        $this->validate($request, $rules);
+
+        $campos = $request->all();
+        $campos['password'] = bcrypt($request->password);
+        $campos['verified'] = User::USUARIO_NO_VERIFICADO;
+        $campos['verification_token'] = User::generateTokenVerification();
+        $campos['admin'] = user::USUARIO_REGULAR;
+
+        $user = User::create($campos);
+
+        return $this->showOne($user, 201);
     }
 
     /**
@@ -42,7 +66,7 @@ class UserController extends ApiController
      */
     public function show(User $user)
     {
-        //
+        return $this->showOne($user);
     }
 
     /**
@@ -65,7 +89,9 @@ class UserController extends ApiController
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return $this->showOne($user);
     }
 
     public function userInfo(Request $request)
