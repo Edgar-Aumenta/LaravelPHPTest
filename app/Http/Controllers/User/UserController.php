@@ -80,9 +80,9 @@ class UserController extends ApiController
     public function update(Request $request, User $user)
     {
         $rules = [
-            'username' => 'required|unique:users',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'username' => 'required|unique:users,username,' . $user->id,
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'password' => 'min:6|confirmed',
             'address_1' => 'required',
             'city' => 'required',
             'zip' => 'required',
