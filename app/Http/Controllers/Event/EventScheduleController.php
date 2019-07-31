@@ -68,8 +68,6 @@ class EventScheduleController extends ApiController
      */
     public function show(EventSchedule $eventSchedule)
     {
-        $eventSchedule = EventSchedule::findOrFail($eventSchedule->id);
-
         $eventScheduleReadModel = $this->convertToReadModel($eventSchedule);
 
         return $this->showOne($eventScheduleReadModel);
@@ -85,8 +83,6 @@ class EventScheduleController extends ApiController
      */
     public function update(Request $request, EventSchedule $eventSchedule)
     {
-        $eventSchedule = EventSchedule::findOrFail($eventSchedule->id);
-
         $this->validate($request, $this->rules);
 
         $this->compareChangesAndAssign($request, $eventSchedule);
@@ -106,11 +102,10 @@ class EventScheduleController extends ApiController
      *
      * @param EventSchedule $eventSchedule
      * @return Response
+     * @throws \Exception
      */
     public function destroy(EventSchedule $eventSchedule)
     {
-        $eventSchedule = EventSchedule::findOrFail($eventSchedule->id);
-
         $eventSchedule->delete();
 
         return $this->showOne($eventSchedule);
@@ -156,6 +151,10 @@ class EventScheduleController extends ApiController
         if($request->has('user_id')) $eventSchedule->user_id = $request->user_id;
     }
 
+    /**
+     * @param EventSchedule $eventSchedule
+     * @return EventSchedule
+     */
     private function convertToReadModel(EventSchedule $eventSchedule){
 
         $eventScheduleNew = new EventSchedule();

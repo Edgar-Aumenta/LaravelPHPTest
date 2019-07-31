@@ -44,3 +44,9 @@ In the project, write in console:
 ```bash
 php artisan serve
 ```
+
+###Heroku
+Login heroku app
+```bash
+heroku ps:exec -a pcs-webapi
+```

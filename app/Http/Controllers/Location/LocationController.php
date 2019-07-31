@@ -14,7 +14,7 @@ class LocationController extends ApiController
 
     public function __construct()
     {
-        $this->middleware('auth:api');
+        parent::__construct();
     }
 
     /**
@@ -32,8 +32,9 @@ class LocationController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -52,22 +53,19 @@ class LocationController extends ApiController
      */
     public function show(Location $location)
     {
-        $location = Location::findOrFail($location->id);
-
         return $this->showOne($location);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Location  $location
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Location $location
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, Location $location)
     {
-        $location = Location::findOrFail($location->id);
-
         $this->validate($request, $this->rules);
 
         if($request->has('name')) $location->name = $request->name;
@@ -84,13 +82,12 @@ class LocationController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Location  $location
+     * @param \App\Location $location
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Location $location)
     {
-        $location = Location::findOrFail($location->id);
-
         $location->delete();
 
         return $this->showOne($location);
