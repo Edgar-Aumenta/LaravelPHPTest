@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePackageUpdateVersionTable extends Migration
+class CreateUpdateVersionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePackageUpdateVersionTable extends Migration
      */
     public function up()
     {
-        Schema::create('package_update_version', function (Blueprint $table) {
+        Schema::create('update_versions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('version_code')->unique();
             $table->string('version_name');
@@ -34,6 +34,6 @@ class CreatePackageUpdateVersionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('package_update_version');
+        Schema::dropIfExists('update_versions');
     }
 }
