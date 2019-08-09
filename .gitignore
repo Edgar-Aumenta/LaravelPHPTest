@@ -99,3 +99,13 @@ fabric.properties
 .idea/sonarlint
 
 # End of https://www.gitignore.io/api/phpstorm
+
+# Created by https://github.com/github/gitignore/blob/master/Global/VisualStudioCode.gitignore
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# End of https://github.com/github/gitignore/blob/master/Global/VisualStudioCode.gitignore
