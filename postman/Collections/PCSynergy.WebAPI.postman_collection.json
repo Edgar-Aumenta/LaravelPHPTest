@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "70940470-50c3-4ecc-a165-52f0c46b9f56",
+		"_postman_id": "0f7ae659-5794-43fe-967d-15ada5041d49",
 		"name": "PCSynergy.WebAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -945,13 +945,13 @@
 							"raw": "{\n    \"start_date\": \"2019-02-09 00:00:00\",\n    \"end_date\": \"2019-02-10 00:00:00\",\n    \"location_id\": 1,\n    \"event_id\": 1,\n    \"lodging_id\": 1,\n    \"register_title\": \"Nuevo titulo de registro modificado\",\n    \"register_url\": \"Nueva url de registro modificada\",\n    \"mi_title\": \"Nuevo titulo de mas informacion modificado\",\n    \"mi_url\": \"Nueva url de una inforacion modificada\",\n    \"visible\": 1,\n    \"user_id\": 1\n}"
 						},
 						"url": {
-							"raw": "{{UrlApi}}/event_schedules/12",
+							"raw": "{{UrlApi}}/event_schedules/1",
 							"host": [
 								"{{UrlApi}}"
 							],
 							"path": [
 								"event_schedules",
-								"12"
+								"1"
 							]
 						}
 					},
@@ -2095,6 +2095,112 @@
 										},
 										{
 											"key": "client_id",
+											"value": "{{client_id}}",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "{{client_secret}}\n",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "jdon@aumenta.mx",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "secret",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{UrlApi}}/oauth/token",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"oauth",
+										"token"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Jul 2019 00:32:31 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Jul 2019 00:32:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.23"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, private"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=UTF-8"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "*"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token_type\": \"Bearer\",\n    \"expires_in\": 86400,\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjE1NTVjMzZkNjkxN2E4NjQ0ZmEyYmU3MzVkY2VmNTRmOWRhYTZmNTgxMDBkZmFiZGQwYzk2MjhjNWNhYTNhODc4MjEyODk5Y2VjZjcxYjA0In0.eyJhdWQiOiIyIiwianRpIjoiMTU1NWMzNmQ2OTE3YTg2NDRmYTJiZTczNWRjZWY1NGY5ZGFhNmY1ODEwMGRmYWJkZDBjOTYyOGM1Y2FhM2E4NzgyMTI4OTljZWNmNzFiMDQiLCJpYXQiOjE1NjMxNTA3NTAsIm5iZiI6MTU2MzE1MDc1MCwiZXhwIjoxNTYzMjM3MTUwLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.zuM6NnmSHAAK8oCRD6inCC_WEnvq5N-0d4PTRXnMGZUPRacjE1yof7JRY5IJkUBQuAoP5CXNRQhRf6-FLq5vEh6NWFok5ceCjQNLq0hNPQLV2NeUBQR_dAnVeo-5S9K31JxY7c2UDKjOClMrPZsX7A2BEr2XrQMYJ4d986V5C4R_-7V3EWczWG2JvmW7KTMu1NkRI5-vqzAJuwzRJ9qr4wYJyUpl7LyDRC5WiOB5dBtjIoisx18YCOP4yowVFABIC0TO_m95NWhpP8GBzbwQwJl2nuTBQMEAz-C1GjcnYCfIRU402_PhstCTQRBhKSJswWNCx5tCb_jNNQ-0xQj74WR-tJ6x5fNDGGDhnXFW8PH5mnZ-hfIvQqIC3Fjr7_ySCLKeYgPJ1sMRecu52OiYofW5hcJT02KELgCFWz4U686apOi_3GPRfwTl0JifKG5G0-sw_xHZrZ6JwoP3y6LZm-BURuzBDo6y_t2epkdhcUpUX5XQb4vwzG6EJlasPg3DBQnx3KpD1AVfQig7AOrskuZKDwzkpSiXd2BBDZNWIu_ogqgAyADbZVjgJOYdu2PpeNWostDx6OmNAiAdcHANl9UYoGQzRB9ll9r938Hh_PSFSvpeqbVxVtZUi_sNk_rIKba4tTgD8AwHmKQufxmN4-4cP2K3-ANBKcyVLJdRZiE\",\n    \"refresh_token\": \"def50200e5bc565f9a630f0498dd4b3465119c0835ea65679129455442554c09e0bbb4a0b7ab6b7bf51671cc000d6c95c6b271a551c81898a38ae81dca853ddcd0d168ae9fc98417ef10b6a14a0d2e32a044d9a8f7766198fff9cdcda47bf5aa96af119a7c206ae38602cfcbc9cc54ccebb823e23b387a3dd1b013aae035c6fb912d3e0d9166cff9a61d876790600d269152b44bd1c7a4326b33c6c459c93ec1ff40c70282d6bc5202f31579bc488926eccf924114638f0123886d2b94c8805ded92c6dea1041fa27b74430d3f86bff6f9c89bee51c2d0c0fb9cb035890911afee830bcda1418bef60e0a16cad719c214f0c5b4613b94997a353c240ec7dd9cfbc38d7f54322be1cdeabb6b0a60ff0c75f0fe4e90feb6402ccaa3d35ec54b08fc0a6374672aef507e49638b9dfb36d0061ee38a038c2e6c5ddda893c9ff9135c05e316f99b89a535db4367ea4d9c2faa7f65b5abaa4e219dc389af0ec7165e38b7\"\n}"
+						},
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "grant_type",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "client_id",
 											"value": "2",
 											"type": "text"
 										},
@@ -2220,6 +2326,77 @@
 					},
 					"response": [
 						{
+							"name": "Reponse 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{UrlApi}}/user",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Jul 2019 00:32:56 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Jul 2019 00:32:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "*"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "57"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 2,\n        \"first_name\": \"Josue\",\n        \"last_name\": \"Don\",\n        \"username\": \"xozue\",\n        \"email\": \"jdon@aumenta.mx\",\n        \"email_verified_at\": \"2019-07-15 00:21:01\",\n        \"website\": \"www.xozue.com\",\n        \"send_notifications\": 1,\n        \"url_image\": \"www.image.com\",\n        \"url_image_thumbnail\": \"www.image-thumbnail.com\",\n        \"address_1\": \"Mi direccion\",\n        \"address_2\": null,\n        \"city\": \"San Luis Potosí\",\n        \"state\": \"San Luis Potosí\",\n        \"zip\": \"78000\",\n        \"country\": \"Mexico\",\n        \"day_phone\": \"day phone\",\n        \"tos\": 0,\n        \"company\": \"Mi compañia\",\n        \"enable\": 1,\n        \"verified\": \"1\",\n        \"admin\": \"false\",\n        \"created_at\": \"2019-07-15 00:21:01\",\n        \"updated_at\": \"2019-07-15 00:21:01\"\n    }\n}"
+						},
+						{
 							"name": "Response 200",
 							"originalRequest": {
 								"method": "GET",
@@ -2291,6 +2468,973 @@
 							"body": "{\n    \"data\": {\n        \"id\": 2,\n        \"name\": \"Josue Don\",\n        \"email\": \"jdon@aumenta.mx\",\n        \"email_verified_at\": \"2019-07-09 04:42:09\",\n        \"verified\": \"1\",\n        \"admin\": \"false\",\n        \"created_at\": \"2019-07-09 04:42:09\",\n        \"updated_at\": \"2019-07-09 04:42:09\"\n    }\n}"
 						}
 					]
+				},
+				{
+					"name": "Listing users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{UrlApi}}/users",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{UrlApi}}/users",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jul 2019 05:01:42 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jul 2019 05:01:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "*"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"first_name\": \"Omar Alejandro\",\n            \"email\": \"omar@aumenta.mx\",\n            \"email_verified_at\": \"2019-07-16 04:56:26\",\n            \"verified\": \"1\",\n            \"admin\": \"true\",\n            \"created_at\": \"2019-07-16 04:56:26\",\n            \"updated_at\": \"2019-07-16 04:56:26\",\n            \"last_name\": \"Cervantes Yepez\",\n            \"username\": \"omaracy\",\n            \"website\": \"www.omaracy.com\",\n            \"send_notifications\": 1,\n            \"url_image\": \"www.image.com\",\n            \"url_image_thumbnail\": \"www.image-thumbnail.com\",\n            \"address_1\": \"Mi direccion\",\n            \"address_2\": null,\n            \"city\": \"San Luis Potosí\",\n            \"state\": \"San Luis Potosí\",\n            \"zip\": \"78000\",\n            \"country\": \"Mexico\",\n            \"day_phone\": \"day phone\",\n            \"tos\": 0,\n            \"company\": \"Mi compañia\",\n            \"enable\": 1\n        },\n        {\n            \"id\": 2,\n            \"first_name\": \"Josue\",\n            \"email\": \"jdon@aumenta.mx\",\n            \"email_verified_at\": \"2019-07-16 04:56:26\",\n            \"verified\": \"1\",\n            \"admin\": \"false\",\n            \"created_at\": \"2019-07-16 04:56:26\",\n            \"updated_at\": \"2019-07-16 04:56:26\",\n            \"last_name\": \"Don\",\n            \"username\": \"xozue\",\n            \"website\": \"www.xozue.com\",\n            \"send_notifications\": 1,\n            \"url_image\": \"www.image.com\",\n            \"url_image_thumbnail\": \"www.image-thumbnail.com\",\n            \"address_1\": \"Mi direccion\",\n            \"address_2\": null,\n            \"city\": \"San Luis Potosí\",\n            \"state\": \"San Luis Potosí\",\n            \"zip\": \"78000\",\n            \"country\": \"Mexico\",\n            \"day_phone\": \"day phone\",\n            \"tos\": 0,\n            \"company\": \"Mi compañia\",\n            \"enable\": 1\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{UrlApi}}/users/1",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{UrlApi}}/users/1",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"users",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jul 2019 05:03:42 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jul 2019 05:03:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "*"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"first_name\": \"Omar Alejandro\",\n        \"email\": \"omar@aumenta.mx\",\n        \"email_verified_at\": \"2019-07-16 04:56:26\",\n        \"verified\": \"1\",\n        \"admin\": \"true\",\n        \"created_at\": \"2019-07-16 04:56:26\",\n        \"updated_at\": \"2019-07-16 04:56:26\",\n        \"last_name\": \"Cervantes Yepez\",\n        \"username\": \"omaracy\",\n        \"website\": \"www.omaracy.com\",\n        \"send_notifications\": 1,\n        \"url_image\": \"www.image.com\",\n        \"url_image_thumbnail\": \"www.image-thumbnail.com\",\n        \"address_1\": \"Mi direccion\",\n        \"address_2\": null,\n        \"city\": \"San Luis Potosí\",\n        \"state\": \"San Luis Potosí\",\n        \"zip\": \"78000\",\n        \"country\": \"Mexico\",\n        \"day_phone\": \"day phone\",\n        \"tos\": 0,\n        \"company\": \"Mi compañia\",\n        \"enable\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"id\": 1,\n        \"first_name\": \"Omar Alejandro\",\n        \"email\": \"omars@aumenta.mx\",\n        \"email_verified_at\": \"2019-07-16 04:56:26\",\n        \"verified\": \"1\",\n        \"admin\": \"true\",\n        \"last_name\": \"Cervantes Yepez\",\n        \"username\": \"omaracys\",\n        \"website\": \"www.omaracy.com\",\n        \"send_notifications\": 1,\n        \"url_image\": \"www.image.com\",\n        \"url_image_thumbnail\": \"www.image-thumbnail.com\",\n        \"address_1\": \"Mi direccion\",\n        \"address_2\": null,\n        \"city\": \"San Luis Potosí\",\n        \"state\": \"San Luis Potosí\",\n        \"zip\": \"78000\",\n        \"country\": \"Mexico\",\n        \"day_phone\": \"day phone\",\n        \"tos\": 0,\n        \"company\": \"Mi compañia\",\n        \"enable\": 1,\n        \"password\":\"secret\",\n        \"password_confirmation\":\"secret\"\n    }"
+						},
+						"url": {
+							"raw": "{{UrlApi}}/users",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n        \"id\": 1,\n        \"first_name\": \"Omar Alejandro\",\n        \"email\": \"omars@aumenta.mx\",\n        \"email_verified_at\": \"2019-07-16 04:56:26\",\n        \"verified\": \"1\",\n        \"admin\": \"true\",\n        \"last_name\": \"Cervantes Yepez\",\n        \"username\": \"omaracys\",\n        \"website\": \"www.omaracy.com\",\n        \"send_notifications\": 1,\n        \"url_image\": \"www.image.com\",\n        \"url_image_thumbnail\": \"www.image-thumbnail.com\",\n        \"address_1\": \"Mi direccion\",\n        \"address_2\": null,\n        \"city\": \"San Luis Potosí\",\n        \"state\": \"San Luis Potosí\",\n        \"zip\": \"78000\",\n        \"country\": \"Mexico\",\n        \"day_phone\": \"day phone\",\n        \"tos\": 0,\n        \"company\": \"Mi compañia\",\n        \"enable\": 1,\n        \"password\":\"secret\",\n        \"password_confirmation\":\"secret\"\n    }"
+								},
+								"url": {
+									"raw": "{{UrlApi}}/users",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jul 2019 05:13:04 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jul 2019 05:13:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "*"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"first_name\": \"Omar Alejandro\",\n        \"email\": \"omars@aumenta.mx\",\n        \"verified\": \"0\",\n        \"admin\": \"false\",\n        \"last_name\": \"Cervantes Yepez\",\n        \"username\": \"omaracys\",\n        \"website\": \"www.omaracy.com\",\n        \"send_notifications\": 1,\n        \"url_image\": \"www.image.com\",\n        \"url_image_thumbnail\": \"www.image-thumbnail.com\",\n        \"address_1\": \"Mi direccion\",\n        \"address_2\": null,\n        \"city\": \"San Luis Potosí\",\n        \"state\": \"San Luis Potosí\",\n        \"zip\": \"78000\",\n        \"country\": \"Mexico\",\n        \"day_phone\": \"day phone\",\n        \"tos\": 0,\n        \"company\": \"Mi compañia\",\n        \"enable\": 1,\n        \"updated_at\": \"2019-07-16 05:13:04\",\n        \"created_at\": \"2019-07-16 05:13:04\",\n        \"id\": 3\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\t\"first_name\": \"Josue Don\",\n        \"last_name\": \"Cervantes Yepez\",\n        \"email\": \"jdon@aumenta.mx\",\n        \"admin\": \"true\",\n        \"username\": \"jdon\",\n        \"website\": \"www.jdon.com\",\n        \"send_notifications\": 0,\n        \"url_image\": \"www.image.com\",\n        \"url_image_thumbnail\": \"www.image-thumbnail.com\",\n        \"address_1\": \"Mi direccion\",\n        \"address_2\": \"Mi nueva dirección\",\n        \"city\": \"San Luis Potosí\",\n        \"state\": \"San Luis Potosí\",\n        \"zip\": \"78230\",\n        \"country\": \"Mexico\",\n        \"day_phone\": \"day phone\",\n        \"tos\": 0,\n        \"company\": \"Mi compañia\",\n        \"enable\": 1\n    }"
+						},
+						"url": {
+							"raw": "{{UrlApi}}/users/2",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n        \"id\": 1,\n        \"first_name\": \"Omar Alejandro\",\n        \"email\": \"omars@aumenta.mx\",\n        \"email_verified_at\": \"2019-07-16 04:56:26\",\n        \"verified\": \"1\",\n        \"admin\": \"true\",\n        \"last_name\": \"Cervantes Yepez\",\n        \"username\": \"omaracys\",\n        \"website\": \"www.omaracy.com\",\n        \"send_notifications\": 1,\n        \"url_image\": \"www.image.com\",\n        \"url_image_thumbnail\": \"www.image-thumbnail.com\",\n        \"address_1\": \"Mi direccion\",\n        \"address_2\": null,\n        \"city\": \"San Luis Potosí\",\n        \"state\": \"San Luis Potosí\",\n        \"zip\": \"78000\",\n        \"country\": \"Mexico\",\n        \"day_phone\": \"day phone\",\n        \"tos\": 0,\n        \"company\": \"Mi compañia\",\n        \"enable\": 1,\n        \"password\":\"secret\",\n        \"password_confirmation\":\"secret\"\n    }"
+								},
+								"url": {
+									"raw": "{{UrlApi}}/users",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jul 2019 05:13:04 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jul 2019 05:13:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "*"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"first_name\": \"Omar Alejandro\",\n        \"email\": \"omars@aumenta.mx\",\n        \"verified\": \"0\",\n        \"admin\": \"false\",\n        \"last_name\": \"Cervantes Yepez\",\n        \"username\": \"omaracys\",\n        \"website\": \"www.omaracy.com\",\n        \"send_notifications\": 1,\n        \"url_image\": \"www.image.com\",\n        \"url_image_thumbnail\": \"www.image-thumbnail.com\",\n        \"address_1\": \"Mi direccion\",\n        \"address_2\": null,\n        \"city\": \"San Luis Potosí\",\n        \"state\": \"San Luis Potosí\",\n        \"zip\": \"78000\",\n        \"country\": \"Mexico\",\n        \"day_phone\": \"day phone\",\n        \"tos\": 0,\n        \"company\": \"Mi compañia\",\n        \"enable\": 1,\n        \"updated_at\": \"2019-07-16 05:13:04\",\n        \"created_at\": \"2019-07-16 05:13:04\",\n        \"id\": 3\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{UrlApi}}/users/3",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"users",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response 200",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{UrlApi}}/users/3",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"users",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jul 2019 05:15:29 +0000"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jul 2019 05:15:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "*"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 3,\n        \"first_name\": \"Omar Alejandro\",\n        \"email\": \"omars@aumenta.mx\",\n        \"email_verified_at\": null,\n        \"verified\": \"0\",\n        \"admin\": \"false\",\n        \"created_at\": \"2019-07-16 05:13:04\",\n        \"updated_at\": \"2019-07-16 05:13:04\",\n        \"last_name\": \"Cervantes Yepez\",\n        \"username\": \"omaracys\",\n        \"website\": \"www.omaracy.com\",\n        \"send_notifications\": 1,\n        \"url_image\": \"www.image.com\",\n        \"url_image_thumbnail\": \"www.image-thumbnail.com\",\n        \"address_1\": \"Mi direccion\",\n        \"address_2\": null,\n        \"city\": \"San Luis Potosí\",\n        \"state\": \"San Luis Potosí\",\n        \"zip\": \"78000\",\n        \"country\": \"Mexico\",\n        \"day_phone\": \"day phone\",\n        \"tos\": 0,\n        \"company\": \"Mi compañia\",\n        \"enable\": 1\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Downloads",
+			"item": [
+				{
+					"name": "New versions",
+					"item": [
+						{
+							"name": "Listing new versions",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_password}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{UrlApi}}/new_versions",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"new_versions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Public Listing new versions",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{UrlApi}}/public/new_versions",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"public",
+										"new_versions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get new current version",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{UrlApi}}/public/new_versions/current_version",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"public",
+										"new_versions",
+										"current_version"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create new version",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_password}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"version_code\": 3,\n\t\"version_name\": \"1.0.0\",\n\t\"version_url\": \"http://s3-us-west-1.amazonaws.com/pcsca/Version+11.7.6/11.7.6_InstallSetup.exe\",\n\t\"current_version\": false,\n\t\"release_date\": \"2019-07-16 04:56:26\",\n\t\"estimate_size\": 280,\n\t\"user_id\": 1\n}"
+								},
+								"url": {
+									"raw": "{{UrlApi}}/new_versions",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"new_versions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update new version",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_password}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"version_code\": 4,\n\t\"version_name\": \"3.0.0\",\n\t\"version_url\": \"http://s3-us-west-1.amazonaws.com/pcsca/Version+11.7.6/11.7.6_InstallSetup.exe\",\n\t\"current_version\": false,\n\t\"release_date\": \"2019-07-16 04:56:26\",\n\t\"estimate_size\": 270,\n\t\"user_id\": 1\n}"
+								},
+								"url": {
+									"raw": "{{UrlApi}}/new_versions/3",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"new_versions",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get new version",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_password}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{UrlApi}}/new_versions/1",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"new_versions",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete new version",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_password}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{UrlApi}}/new_versions/3",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"new_versions",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Update versions",
+					"item": [
+						{
+							"name": "Listing update versions",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_password}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{UrlApi}}/update_versions",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"update_versions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Public Listing update versions",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{UrlApi}}/public/update_versions",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"public",
+										"update_versions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get update current version",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{UrlApi}}/public/update_versions/current_version",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"public",
+										"update_versions",
+										"current_version"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create update version",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_password}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"version_code\": 3,\n\t\"version_name\": \"1.0.0\",\n\t\"version_url\": \"http://s3-us-west-1.amazonaws.com/pcsca/Version+11.7.6/11.7.6_InstallSetup.exe\",\n\t\"current_version\": false,\n\t\"release_date\": \"2019-07-16 04:56:26\",\n\t\"estimate_size\": 280,\n\t\"user_id\": 1\n}"
+								},
+								"url": {
+									"raw": "{{UrlApi}}/update_versions",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"update_versions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update update version",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_password}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"version_code\": 4,\n\t\"version_name\": \"3.0.0\",\n\t\"version_url\": \"http://s3-us-west-1.amazonaws.com/pcsca/Version+11.7.6/11.7.6_InstallSetup.exe\",\n\t\"current_version\": false,\n\t\"release_date\": \"2019-07-16 04:56:26\",\n\t\"estimate_size\": 270,\n\t\"user_id\": 1\n}"
+								},
+								"url": {
+									"raw": "{{UrlApi}}/update_versions/3",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"update_versions",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get update version",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_password}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{UrlApi}}/update_versions/1",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"update_versions",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete update version",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_password}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{UrlApi}}/update_versions/3",
+									"host": [
+										"{{UrlApi}}"
+									],
+									"path": [
+										"update_versions",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
 				}
 			]
 		}
