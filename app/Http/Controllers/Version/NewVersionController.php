@@ -38,6 +38,7 @@ class NewVersionController extends ApiController
         $rules = [
             'version_code' => 'required|unique:new_versions',
             'version_name' => 'required',
+            'version_url' => 'required',
             'current_version' => 'required',
             'release_date' => 'required',
             'estimate_size' => 'required',
@@ -75,6 +76,7 @@ class NewVersionController extends ApiController
         $rules = [
             'version_code' => 'required|unique:new_versions,version_code,' . $newVersion->id,
             'version_name' => 'required',
+            'version_url' => 'required',
             'current_version' => 'required',
             'release_date' => 'required',
             'estimate_size' => 'required',
@@ -116,6 +118,7 @@ class NewVersionController extends ApiController
     {
         if ($request->has('version_code')) $newVersion->version_code = $request->version_code;
         if ($request->has('version_name')) $newVersion->version_name = $request->version_name;
+        if ($request->has('version_url')) $newVersion->version_url = $request->version_url;
         if ($request->has('current_version')) $newVersion->current_version = $request->current_version;
         if ($request->has('release_date')) $newVersion->release_date = $request->release_date;
         if ($request->has('estimate_size')) $newVersion->estimate_size = $request->estimate_size;
@@ -159,6 +162,7 @@ class NewVersionController extends ApiController
         $newVersion->id = $nv->id;
         $newVersion->version_code = $nv->version_code;
         $newVersion->version_name = $nv->version_name;
+        $newVersion->version_url = $nv->version_url;
         $newVersion->current_version = $nv->current_version;
         $newVersion->release_date = $nv->release_date;
         $newVersion->estimate_size = $nv->estimate_size;

@@ -17,6 +17,7 @@ class CreateUpdateVersionsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('version_code')->unique();
             $table->string('version_name');
+            $table->string('version_url', 255)->nullable();
             $table->boolean('current_version')->default(false);
             $table->timestamp('release_date');
             $table->integer('estimate_size');

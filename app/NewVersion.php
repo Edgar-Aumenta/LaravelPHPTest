@@ -14,6 +14,7 @@ class NewVersion extends Model
     protected $fillable = [
       'version_code',
       'version_name',
+      'version_url',
       'current_version',
       'release_date',
       'estimate_size',
