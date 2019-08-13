@@ -11,7 +11,7 @@ class NewVersionController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['publicIndex', 'getCurrentVersion']);
+        $this->middleware('auth:api')->except(['publicIndex', 'showCurrentVersion']);
     }
 
     /**
@@ -46,6 +46,12 @@ class NewVersionController extends ApiController
         ];
 
         $this->validate($request, $rules);
+
+        if($request->current_version == true){
+            $currentNewVersion = $this->getCurrentVersion();
+            $currentNewVersion->current_version = false;
+            $currentNewVersion->save();
+        }
 
         $newVersion = NewVersion::create($request->all());
 
@@ -88,6 +94,12 @@ class NewVersionController extends ApiController
 
         if(!$newVersion->isDirty()){
             return $this->errorResponse('Se debe especificar al menos un valor diferente para actualizar', 422);
+        }
+
+        if($newVersion->current_version == true){
+            $currentNewVersion = $this->getCurrentVersion();
+            $currentNewVersion->current_version = false;
+            $currentNewVersion->save();
         }
 
         $newVersion->save();
@@ -147,9 +159,14 @@ class NewVersionController extends ApiController
      * Get current version
      * @return Response
      * */
-    public function getCurrentVersion(){
-        $currentNewVersion = NewVersion::all()->where('current_version', true)->first();
+    public function showCurrentVersion(){
+        $currentNewVersion = $this->getCurrentVersion();
         return $this->showOne($currentNewVersion);
+    }
+
+    private function getCurrentVersion(){
+        $currentNewVersion = NewVersion::all()->where('current_version', true)->first();
+        return $currentNewVersion;
     }
 
     /**

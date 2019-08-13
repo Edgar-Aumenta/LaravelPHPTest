@@ -31,10 +31,10 @@ Route::get('user', 'User\UserController@userInfo');
 
 Route::apiResource('new_versions', 'Version\NewVersionController');
 Route::get('public/new_versions', 'Version\NewVersionController@publicIndex');
-Route::get('public/new_versions/current_version', 'Version\NewVersionController@getCurrentVersion');
+Route::get('public/new_versions/current_version', 'Version\NewVersionController@showCurrentVersion');
 
 Route::apiResource('update_versions', 'Version\UpdateVersionController');
 Route::get('public/update_versions', 'Version\UpdateVersionController@publicIndex');
-Route::get('public/update_versions/current_version', 'Version\UpdateVersionController@getCurrentVersion');
+Route::get('public/update_versions/current_version', 'Version\UpdateVersionController@showCurrentVersion');
 
 Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
