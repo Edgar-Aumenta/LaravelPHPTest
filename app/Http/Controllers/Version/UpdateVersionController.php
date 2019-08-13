@@ -11,7 +11,7 @@ class UpdateVersionController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['publicIndex', 'getCurrentVersion']);
+        $this->middleware('auth:api')->except(['publicIndex', 'showCurrentVersion']);
     }
 
     /**
@@ -36,7 +36,7 @@ class UpdateVersionController extends ApiController
     public function store(Request $request)
     {
         $rules = [
-            'version_code' => 'required|unique:new_versions',
+            'version_code' => 'required|unique:update_versions',
             'version_name' => 'required',
             'version_url' => 'required',
             'current_version' => 'required',
@@ -46,6 +46,12 @@ class UpdateVersionController extends ApiController
         ];
 
         $this->validate($request, $rules);
+
+        if($request->current_version == true){
+            $currentNewVersion = $this->getCurrentVersion();
+            $currentNewVersion->current_version = false;
+            $currentNewVersion->save();
+        }
 
         $updateVersion = UpdateVersion::create($request->all());
 
@@ -74,7 +80,7 @@ class UpdateVersionController extends ApiController
     public function update(Request $request, UpdateVersion $updateVersion)
     {
         $rules = [
-            'version_code' => 'required|unique:new_versions,version_code,' . $updateVersion->id,
+            'version_code' => 'required|unique:update_versions,version_code,' . $updateVersion->id,
             'version_name' => 'required',
             'version_url' => 'required',
             'current_version' => 'required',
@@ -88,6 +94,12 @@ class UpdateVersionController extends ApiController
 
         if(!$updateVersion->isDirty()){
             return $this->errorResponse('Se debe especificar al menos un valor diferente para actualizar', 422);
+        }
+
+        if($updateVersion->current_version == true){
+            $currentNewVersion = $this->getCurrentVersion();
+            $currentNewVersion->current_version = false;
+            $currentNewVersion->save();
         }
 
         $updateVersion->save();
@@ -147,9 +159,14 @@ class UpdateVersionController extends ApiController
      * Get current version
      * @return Response
      * */
-    public function getCurrentVersion(){
+    public function showCurrentVersion(){
         $currentUpdateVersion = UpdateVersion::all()->where('current_version', true)->first();
         return $this->showOne($currentUpdateVersion);
+    }
+
+    private function getCurrentVersion(){
+        $currentNewVersion = UpdateVersion::all()->where('current_version', true)->first();
+        return $currentNewVersion;
     }
 
     /**

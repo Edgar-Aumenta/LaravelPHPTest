@@ -35,6 +35,6 @@ Route::get('public/new_versions/current_version', 'Version\NewVersionController@
 
 Route::apiResource('update_versions', 'Version\UpdateVersionController');
 Route::get('public/update_versions', 'Version\UpdateVersionController@publicIndex');
-Route::get('public/update_versions/current_version', 'Version\UpdateVersionController@getCurrentVersion');
+Route::get('public/update_versions/current_version', 'Version\UpdateVersionController@showCurrentVersion');
 
 Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');

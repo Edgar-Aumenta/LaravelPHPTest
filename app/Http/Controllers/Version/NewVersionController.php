@@ -11,7 +11,7 @@ class NewVersionController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['publicIndex', 'getCurrentVersion']);
+        $this->middleware('auth:api')->except(['publicIndex', 'showCurrentVersion']);
     }
 
     /**
