@@ -1,0 +1,13 @@
+/* Dashboard Css */
+@import './dashboard.css';
+/* Custom scroll bar css */
+@import '../plugins/scroll-bar/jquery.mCustomScrollbar.css';
+/* <!-- Sidemenu Css --> */
+@import '../plugins/toggle-sidebar/css/sidemenu.css';
+/* c3.js Charts Plugin */
+@import '../plugins/charts-c3/c3-chart.css';
+@import '../plugins/morris/morris.css';
+/* Date picker */
+@import '../plugins/date-picker/spectrum.css';
+/* Font icons */
+@import '../plugins/iconfonts/plugin.css';
