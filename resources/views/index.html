@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>PC Synergy | Your Retail Shipping Technology Solution</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Date Picker Plugin -->
+  <!-- <link type="text/css" href="assets/admin-menu/plugins/date-picker/spectrum.css" rel="stylesheet" /> -->
+
+  <!---Font icons-->
+  <link type="text/css" href="assets/admin-menu/plugins/iconfonts/plugin.css" rel="stylesheet" />
+  <link type="text/css" href="assets/admin-menu/plugins/iconfonts/icons.css" rel="stylesheet" />
+
+  <!-- select2 Plugin -->
+  <!-- <link href="assets/admin-menu/plugins/select2/select2.min.css" rel="stylesheet" /> -->
+
+<link rel="stylesheet" href="styles.a077c217896ca436ae37.css"></head>
+
+<body>
+  <app-root></app-root>
+<script type="text/javascript" src="runtime.26209474bfa8dc87a77c.js"></script><script type="text/javascript" src="es2015-polyfills.bda95d5896422d031328.js" nomodule></script><script type="text/javascript" src="polyfills.8bbb231b43165d65d357.js"></script><script type="text/javascript" src="scripts.ea9a7b51b5073e2a08c5.js"></script><script type="text/javascript" src="main.f17532839ad56820a3bb.js"></script></body>
+
+</html>
+
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
+<!-- <script src="assets/js/bootstrap.min.js"></script> -->
+
+<!-- Dashboard Core -->
+<!-- <script src="assets/admin-menu/js/vendors/jquery-3.2.1.min.js"></script> -->
+<!-- <script src="assets/admin-menu/js/vendors/bootstrap.bundle.min.js"></script> -->
+<script src="assets/admin-menu/js/vendors/jquery.sparkline.min.js"></script>
+<script src="assets/admin-menu/js/vendors/selectize.min.js"></script>
+<script src="assets/admin-menu/js/vendors/jquery.tablesorter.min.js"></script>
+<script src="assets/admin-menu/js/vendors/circle-progress.min.js"></script>
+<script src="assets/admin-menu/plugins/rating/jquery.rating-stars.js"></script>
+
+<!-- Side menu js -->
+<script src="assets/admin-menu/plugins/toggle-sidebar/js/sidemenu.js"></script>
+
+<!-- Custom scroll bar Js-->
+<script src="assets/admin-menu/plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
+
+<!-- c3.js Charts Plugin -->
+<script src="assets/admin-menu/plugins/charts-c3/d3.v5.min.js"></script>
+<script src="assets/admin-menu/plugins/charts-c3/c3-chart.js"></script>
+
+<!-- Datepicker js -->
+<script src="assets/admin-menu/plugins/date-picker/spectrum.js"></script>
+<script src="assets/admin-menu/plugins/date-picker/jquery-ui.js"></script>
+<script src="assets/admin-menu/plugins/input-mask/jquery.maskedinput.js"></script>
+
+<!--Select2 js -->
+<script src="assets/admin-menu/plugins/select2/select2.full.min.js"></script>
+
+<!-- Input Mask Plugin -->
+<script src="assets/admin-menu/plugins/input-mask/jquery.mask.min.js"></script>
+
+<!-- Index Scripts -->
+<script src="assets/admin-menu/js/index.js"></script>
+<script src="assets/admin-menu/js/charts.js"></script>
+
+<!-- custom js -->
+<script src="assets/admin-menu/js/custom.js"></script>
+
+<!-- Inline js -->
+<!-- <script src="assets/admin-menu/js/select2.js"></script> -->
+
+<script type="text/javascript">
+  (function() {
+    $('.js-toggle').on('click', function() {
+      console.log('event')
+      $('.js-toggle').toggleClass('is-active');
+    });
+
+    var menuButtons = Array.from(document.getElementsByClassName('side-menu__item'))
+  
+    for (var index in menuButtons){
+      menuButtons[index].addEventListener('click', function(x) {
+        for(var i in menuButtons){
+          menuButtons[i].classList.remove('active');
+        }
+        this.classList.toggle('active');
+      });
+    }
+
+  })();
+  function rotateRow(element) {
+      var chev = element.getElementsByClassName('fa-chevron-right');
+      chev[0].classList.toggle('rotate');
+    }   
+
+    
+
+</script>
