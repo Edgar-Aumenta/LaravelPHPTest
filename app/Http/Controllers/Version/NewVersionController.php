@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Version;
 
 use App\Http\Controllers\ApiController;
 use App\NewVersion;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 
 class NewVersionController extends ApiController
 {
@@ -29,9 +31,9 @@ class NewVersionController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @return Response
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
@@ -49,8 +51,7 @@ class NewVersionController extends ApiController
 
         if($request->current_version == true){
             $currentNewVersion = $this->getCurrentVersion();
-            $currentNewVersion->current_version = false;
-            $currentNewVersion->save();
+            $this->setCurrentVersion($currentNewVersion, false);
         }
 
         $newVersion = NewVersion::create($request->all());
@@ -72,10 +73,10 @@ class NewVersionController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param NewVersion $newVersion
      * @return Response
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function update(Request $request, NewVersion $newVersion)
     {
@@ -98,8 +99,9 @@ class NewVersionController extends ApiController
 
         if($newVersion->current_version == true){
             $currentNewVersion = $this->getCurrentVersion();
-            $currentNewVersion->current_version = false;
-            $currentNewVersion->save();
+            if($currentNewVersion != null && $currentNewVersion->id != $newVersion->id){
+                $this->setCurrentVersion($currentNewVersion, false);
+            }
         }
 
         $newVersion->save();
@@ -112,11 +114,16 @@ class NewVersionController extends ApiController
      *
      * @param NewVersion $newVersion
      * @return Response
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(NewVersion $newVersion)
     {
         $newVersion->delete();
+
+        if($newVersion->current_version == true){
+            $lastReleaseVersion = $this->getLastReleaseVersion();
+            $this->setCurrentVersion($lastReleaseVersion, true);
+        }
 
         return $this->showOne($newVersion);
     }
@@ -146,8 +153,7 @@ class NewVersionController extends ApiController
         $newVersions = NewVersion::all();
         $newVersionsReadModel = collect();
 
-        foreach ($newVersions as $newVersion)
-        {
+        foreach ($newVersions as $newVersion){
             $newVersionReadModel = $this->convertToReadModel($newVersion);
             $newVersionsReadModel->push($newVersionReadModel);
         }
@@ -159,14 +165,29 @@ class NewVersionController extends ApiController
      * Get current version
      * @return Response
      * */
-    public function showCurrentVersion(){
+    public function showCurrentVersion()
+    {
         $currentNewVersion = $this->getCurrentVersion();
         return $this->showOne($currentNewVersion);
     }
 
-    private function getCurrentVersion(){
+    private function getCurrentVersion()
+    {
         $currentNewVersion = NewVersion::all()->where('current_version', true)->first();
         return $currentNewVersion;
+    }
+
+    private function getLastReleaseVersion()
+    {
+        $lastReleaseVersion = NewVersion::all()->sortByDesc('release_date')->first();
+        return $lastReleaseVersion;
+    }
+
+    private function setCurrentVersion(NewVersion $newVersion, bool $isCurrent){
+        if($newVersion != null) {
+            $newVersion->current_version = $isCurrent;
+            $newVersion->save();
+        }
     }
 
     /**
