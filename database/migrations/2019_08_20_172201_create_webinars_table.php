@@ -15,6 +15,8 @@ class CreateWebinarsTable extends Migration
     {
         Schema::create('webinars', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->date('start_date');
+            $table->time('start_time');
             $table->timestamps();
         });
     }
