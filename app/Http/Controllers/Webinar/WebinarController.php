@@ -6,9 +6,24 @@ use App\Http\Controllers\ApiController;
 use App\Webinar;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 
 class WebinarController extends ApiController
 {
+
+    private $rules = [
+        'start_date' => 'nullable|date',
+        'start_time' => 'nullable|time',
+        'location_id' => 'required',
+        'name' => 'required',
+        'user_id' => 'required'
+    ];
+
+    public function __construct()
+    {
+        $this->middleware('auth:api')->except(['publicIndex']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +31,9 @@ class WebinarController extends ApiController
      */
     public function index()
     {
-        //
+        $webinars = Webinar::all();
+
+        return $this->showAll($webinars);
     }
 
     /**
@@ -24,10 +41,15 @@ class WebinarController extends ApiController
      *
      * @param Request $request
      * @return Response
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, $this->rules);
+
+        $webinar = Webinar::create($request->all());
+
+        return $this->showOne($webinar, 201);
     }
 
     /**
@@ -62,5 +84,17 @@ class WebinarController extends ApiController
     public function destroy(Webinar $webinar)
     {
         //
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function publicIndex()
+    {
+        $eventSchedules = Webinar::all()->where('visible', true);
+
+        return $this->showAll($eventSchedules);
     }
 }
