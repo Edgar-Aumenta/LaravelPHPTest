@@ -10,12 +10,12 @@ use Illuminate\Validation\ValidationException;
 
 class WebinarController extends ApiController
 {
-
     private $rules = [
-        'start_date' => 'nullable|date',
-        'start_time' => 'nullable|time',
-        'location_id' => 'required',
+        'start_date' => 'required|date',
+        'start_time' => 'required',
+        'time_zone_desc' => 'required',
         'name' => 'required',
+        'visible' => 'required',
         'user_id' => 'required'
     ];
 
@@ -120,8 +120,8 @@ class WebinarController extends ApiController
     {
         if($request->has('start_date')) $webinar->start_date = $request->start_date;
         if($request->has('start_time')) $webinar->start_time = $request->start_time;
+        if($request->has('time_zone_desc')) $webinar->time_zone_desc = $request->time_zone_desc;
         if($request->has('name')) $webinar->name = $request->name;
-        if($request->has('description')) $webinar->description = $request->description;
         if($request->has('register_url')) $webinar->register_url = $request->register_url;
         if($request->has('recoded_url')) $webinar->recoded_url = $request->recoded_url;
         if($request->has('visible')) $webinar->visible = $request->visible;

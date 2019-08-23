@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed id
  * @property mixed start_date
  * @property mixed start_time
+ * @property mixed time_zone_desc
  * @property mixed name
- * @property mixed description
  * @property mixed register_url
  * @property mixed recoded_url
  * @property mixed $visible
@@ -27,10 +27,10 @@ class Webinar extends Model
     protected $fillable = [
         'start_date',
         'start_time',
+        'time_zone_desc',
         'name',
-        'description',
         'register_url',
-        'recoded_url',
+        'recorded_url',
         'visible',
         'user_id',
     ];
