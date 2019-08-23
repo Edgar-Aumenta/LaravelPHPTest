@@ -17,8 +17,8 @@ class CreateWebinarsTable extends Migration
             $table->bigIncrements('id');
             $table->date('start_date');
             $table->time('start_time');
+            $table->string('time_zone_desc');
             $table->string('name');
-            $table->string('description')->nullable();
             $table->string('register_url', 255)->nullable();
             $table->string('recorded_url', 255)->nullable();
             $table->boolean('visible');
