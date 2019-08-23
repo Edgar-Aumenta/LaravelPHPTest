@@ -60,7 +60,7 @@ class WebinarController extends ApiController
      */
     public function show(Webinar $webinar)
     {
-        //
+        return $this->showOne($webinar);
     }
 
     /**
@@ -69,10 +69,21 @@ class WebinarController extends ApiController
      * @param Request $request
      * @param Webinar $webinar
      * @return Response
+     * @throws ValidationException
      */
     public function update(Request $request, Webinar $webinar)
     {
-        //
+        $this->validate($request, $this->rules);
+
+        $this->compareChangesAndAssign($request, $webinar);
+
+        if(!$webinar->isDirty()){
+            return $this->errorResponse('Se debe especificar al menos un valor diferente para actualizar', 422);
+        }
+
+        $webinar->save();
+
+        return $this->showOne($webinar);
     }
 
     /**
@@ -80,10 +91,12 @@ class WebinarController extends ApiController
      *
      * @param Webinar $webinar
      * @return Response
+     * @throws \Exception
      */
     public function destroy(Webinar $webinar)
     {
-        //
+        $webinar->delete();
+        return $this->showOne($webinar);
     }
 
     /**
@@ -96,5 +109,22 @@ class WebinarController extends ApiController
         $eventSchedules = Webinar::all()->where('visible', true);
 
         return $this->showAll($eventSchedules);
+    }
+
+    /**
+     * Compare chances and assign if there are
+     * @param Request $request
+     * @param Webinar $webinar
+     */
+    private function compareChangesAndAssign(Request $request, Webinar &$webinar)
+    {
+        if($request->has('start_date')) $webinar->start_date = $request->start_date;
+        if($request->has('start_time')) $webinar->start_time = $request->start_time;
+        if($request->has('name')) $webinar->name = $request->name;
+        if($request->has('description')) $webinar->description = $request->description;
+        if($request->has('register_url')) $webinar->register_url = $request->register_url;
+        if($request->has('recoded_url')) $webinar->recoded_url = $request->recoded_url;
+        if($request->has('visible')) $webinar->visible = $request->visible;
+        if($request->has('user_id')) $webinar->user_id = $request->user_id;
     }
 }
