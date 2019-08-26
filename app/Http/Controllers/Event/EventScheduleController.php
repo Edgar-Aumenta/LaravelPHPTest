@@ -94,7 +94,6 @@ class EventScheduleController extends ApiController
         $eventSchedule->save();
 
         return $this->showOne($eventSchedule);
-
     }
 
     /**
@@ -107,7 +106,6 @@ class EventScheduleController extends ApiController
     public function destroy(EventSchedule $eventSchedule)
     {
         $eventSchedule->delete();
-
         return $this->showOne($eventSchedule);
     }
 

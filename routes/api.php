@@ -37,4 +37,7 @@ Route::apiResource('update_versions', 'Version\UpdateVersionController');
 Route::get('public/update_versions', 'Version\UpdateVersionController@publicIndex');
 Route::get('public/update_versions/current_version', 'Version\UpdateVersionController@showCurrentVersion');
 
+Route::apiResource('webinars', 'Webinar\WebinarController');
+Route::get('public/webinars', 'Webinar\WebinarController@publicIndex');
+
 Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');

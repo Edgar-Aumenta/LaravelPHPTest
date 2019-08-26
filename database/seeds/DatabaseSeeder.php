@@ -26,6 +26,9 @@ class DatabaseSeeder extends Seeder
         $this->call(LocationTableSeeder::class);
         $this->call(LodgingTableSeeder::class);
         $this->call(EventScheduleTableSeeder::class);
+        $this->call(NewVersionSeeder::class);
+        $this->call(UpdateVersionSeeder::class);
+        $this->call(WebinarTableSeeder::class);
     }
 
     public function truncateTables(array $tables)
