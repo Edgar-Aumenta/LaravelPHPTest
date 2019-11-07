@@ -1,6 +1,8 @@
 // ----- Fonts ----- //
 @import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i');
 
+// Nexa //
+
 @font-face {
   font-family: "Nexa";
   src: url("../../assets/fonts/Nexa-Light.otf") format("opentype");
@@ -13,6 +15,9 @@
   font-weight: normal;
   font-style: normal;
 }
+
+// Segoe //
+
 @font-face {
   font-family: "Segoe";
   src: url("../../assets/fonts/Segoe.ttf") format("opentype");
@@ -32,18 +37,34 @@
   font-style: bold;
 }
 
+// Lexend //
+
+@font-face {
+  font-family: "Lexend";
+  src: url("../../assets/fonts/LexendDeca-Regular.ttf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+// Fonts //
+
 $segoe-semibold-italic: 'Segoe-Semibold-Italic';
 $segoe-semibold: 'Segoe-semibold';
 $segoe: 'Segoe';
 $montserrat: 'Montserrat', sans-serif;
 $nexa: "Nexa";
 $nexa-bold: "Nexa-Bold";
+$lexend : "Lexend";
+
+// Weights //
+
 $totop: +100;
 $thin: 100;
 $extra-light: 200;
 $light: 300;
 $regular: 400;
 $medium: 500;
+$lexabold: 551;
 $semibold: 600;
 $semiboldi: 600i;
 $bold: 700;
@@ -216,6 +237,13 @@ $transition:                  .4s ease !default;
   &.long{
     height: 1200px;
     background-image: url("../../assets/img/flex/foot-long.png");
+  }
+  &.new{
+    padding-top: 0px;
+    background: rgb(0,92,168);
+    background: gradient(90deg, rgba(0,92,168,1) 0%, rgba(8,118,193,1) 100%);
+    background-image: none;
+    height: 300px;
   }
 }
 
