@@ -27,7 +27,7 @@ Route::get('public/event_schedules', 'Event\EventScheduleController@publicIndex'
 Route::apiResource('locations', 'Location\LocationController');
 
 Route::apiResource('lodgings', 'Lodging\LodgingController');
-Route::get('user', 'User\UserController@userInfo');
+Route::get('me', 'User\UserController@userInfo');
 
 Route::apiResource('new_versions', 'Version\NewVersionController');
 Route::get('public/new_versions', 'Version\NewVersionController@publicIndex');
