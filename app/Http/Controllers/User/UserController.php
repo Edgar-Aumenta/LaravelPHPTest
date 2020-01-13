@@ -79,7 +79,7 @@ class UserController extends ApiController
      */
     public function update(Request $request, User $user)
     {
-        $rules = [
+        /*$rules = [
             'username' => 'required|unique:users,username,' . $user->id,
             'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => 'min:6|confirmed',
@@ -89,6 +89,12 @@ class UserController extends ApiController
             'country' => 'required',
             'day_phone' => 'required',
             'company' => 'required',
+        ];*/
+
+        $rules = [
+            'username' => 'unique:users,username,' . $user->id,
+            'email' => 'email|unique:users,email,' . $user->id,
+            'password' => 'min:6|confirmed',
         ];
 
         $this->validate($request, $rules);
