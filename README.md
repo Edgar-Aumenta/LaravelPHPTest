@@ -2,6 +2,10 @@
 ### Requirements
 - Download and Install XAMPP https://www.apachefriends.org/download.html
 - Download and Install Composer https://getcomposer.org/download/
+- If device is Mac generate alias with
+```bash
+   alias composer="php /usr/local/bin/composer.phar"
+```
 - Install Laravel https://laravel.com/docs/5.8#installing-laravel
 Write in console:
 ```php
