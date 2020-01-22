@@ -18,6 +18,9 @@ class User extends Authenticatable
     const USUARIO_ADMMINISTRADOR = 'true';
     const USUARIO_REGULAR = 'false';
 
+    const ENABLE_USER = '1';
+    const DISABLE_USER = '0';
+
     protected $table = 'users';
 
     /**
@@ -78,6 +81,11 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->admin == User::USUARIO_ADMMINISTRADOR;
+    }
+
+    public function isEnable()
+    {
+        return $this->enable == User::ENABLE_USER;
     }
 
     public static function generateTokenVerification()

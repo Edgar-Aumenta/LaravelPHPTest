@@ -21,14 +21,12 @@ use Illuminate\Http\Request;
  * Events
  */
 Route::apiResource('users', 'User\UserController');
+Route::get('me', 'User\UserController@userInfo');
 Route::apiResource('events', 'Event\EventController');
 Route::apiResource('event_schedules', 'Event\EventScheduleController');
 Route::get('public/event_schedules', 'Event\EventScheduleController@publicIndex');
 Route::apiResource('locations', 'Location\LocationController');
-
 Route::apiResource('lodgings', 'Lodging\LodgingController');
-Route::get('user', 'User\UserController@userInfo');
-
 Route::apiResource('new_versions', 'Version\NewVersionController');
 Route::get('public/new_versions', 'Version\NewVersionController@publicIndex');
 Route::get('public/new_versions/current_version', 'Version\NewVersionController@showCurrentVersion');
