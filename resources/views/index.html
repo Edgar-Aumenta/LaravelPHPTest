@@ -11,21 +11,15 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <!-- Date Picker Plugin -->
-  <!-- <link type="text/css" href="assets/admin-menu/plugins/date-picker/spectrum.css" rel="stylesheet" /> -->
-
   <!---Font icons-->
   <link type="text/css" href="assets/admin-menu/plugins/iconfonts/plugin.css" rel="stylesheet" />
   <link type="text/css" href="assets/admin-menu/plugins/iconfonts/icons.css" rel="stylesheet" />
 
-  <!-- select2 Plugin -->
-  <!-- <link href="assets/admin-menu/plugins/select2/select2.min.css" rel="stylesheet" /> -->
-
-<link rel="stylesheet" href="styles.a077c217896ca436ae37.css"></head>
+<link rel="stylesheet" href="styles.93ca09b8fe87e58830cb.css"></head>
 
 <body>
   <app-root></app-root>
-<script type="text/javascript" src="runtime.26209474bfa8dc87a77c.js"></script><script type="text/javascript" src="es2015-polyfills.bda95d5896422d031328.js" nomodule></script><script type="text/javascript" src="polyfills.8bbb231b43165d65d357.js"></script><script type="text/javascript" src="scripts.ea9a7b51b5073e2a08c5.js"></script><script type="text/javascript" src="main.0b5e1a2c7197497b41aa.js"></script></body>
+<script type="text/javascript" src="runtime.26209474bfa8dc87a77c.js"></script><script type="text/javascript" src="es2015-polyfills.0ceb0abb4eda76a24a3d.js" nomodule></script><script type="text/javascript" src="polyfills.8bbb231b43165d65d357.js"></script><script type="text/javascript" src="scripts.5c26e4e3624996a4fa51.js"></script><script type="text/javascript" src="main.99d02548b835c54f0ef5.js"></script></body>
 
 </html>
 
@@ -35,39 +29,20 @@
 <!-- Dashboard Core -->
 <!-- <script src="assets/admin-menu/js/vendors/jquery-3.2.1.min.js"></script> -->
 <!-- <script src="assets/admin-menu/js/vendors/bootstrap.bundle.min.js"></script> -->
-<script src="assets/admin-menu/js/vendors/jquery.sparkline.min.js"></script>
+<!-- <script src="assets/admin-menu/js/vendors/jquery.sparkline.min.js"></script>
 <script src="assets/admin-menu/js/vendors/selectize.min.js"></script>
 <script src="assets/admin-menu/js/vendors/jquery.tablesorter.min.js"></script>
 <script src="assets/admin-menu/js/vendors/circle-progress.min.js"></script>
-<script src="assets/admin-menu/plugins/rating/jquery.rating-stars.js"></script>
+<script src="assets/admin-menu/plugins/rating/jquery.rating-stars.js"></script> -->
 
 <!-- Side menu js -->
 <script src="assets/admin-menu/plugins/toggle-sidebar/js/sidemenu.js"></script>
 
-<!-- Custom scroll bar Js-->
-<script src="assets/admin-menu/plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
-
-<!-- c3.js Charts Plugin -->
-<script src="assets/admin-menu/plugins/charts-c3/d3.v5.min.js"></script>
-<script src="assets/admin-menu/plugins/charts-c3/c3-chart.js"></script>
-
-<!-- Datepicker js -->
-<script src="assets/admin-menu/plugins/date-picker/spectrum.js"></script>
-<script src="assets/admin-menu/plugins/date-picker/jquery-ui.js"></script>
-<script src="assets/admin-menu/plugins/input-mask/jquery.maskedinput.js"></script>
-
-<!--Select2 js -->
-<script src="assets/admin-menu/plugins/select2/select2.full.min.js"></script>
-
-<!-- Input Mask Plugin -->
-<script src="assets/admin-menu/plugins/input-mask/jquery.mask.min.js"></script>
-
 <!-- Index Scripts -->
-<script src="assets/admin-menu/js/index.js"></script>
-<script src="assets/admin-menu/js/charts.js"></script>
+<!-- <script src="assets/admin-menu/js/index.js"></script> -->
 
 <!-- custom js -->
-<script src="assets/admin-menu/js/custom.js"></script>
+<!-- <script src="assets/admin-menu/js/custom.js"></script> -->
 
 <!-- Inline js -->
 <!-- <script src="assets/admin-menu/js/select2.js"></script> -->
@@ -81,6 +56,16 @@
 
     var menuButtons = Array.from(document.getElementsByClassName('side-menu__item'))
   
+    $('.panel .panel-collapse').on('shown.bs.collapse', function () {
+      $(this).parent().find('.fa-chevron-right').toggleClass('rotate');
+      console.log('shown');
+    });
+
+    $('.panel .panel-collapse').on('hidden.bs.collapse', function () {
+      $(this).parent().find('.fa-chevron-right').toggleClass('rotate');
+      console.log('hidden');
+    });
+
     // for (var index in menuButtons){
     //   menuButtons[index].addEventListener('click', function(x) {
     //     for(var i in menuButtons){
@@ -91,9 +76,9 @@
     // }
 
   })();
-  function rotateRow(element) {
-      var chev = element.getElementsByClassName('fa-chevron-right');
-      chev[0].classList.toggle('rotate');
+  function rotateArow(element) {
+      // var chev = element.getElementsByClassName('fa-chevron-right');
+      // chev[0].classList.toggle('rotate');
     }   
 
     
