@@ -48,7 +48,8 @@ class UserController extends ApiController
         $this->validate($request, $rules);
 
         $campos = $request->all();
-        $campos['password'] = bcrypt($request->password);
+        // $campos['password'] = bcrypt($request->password);
+        $campos['password'] = $request->password; // The encryption for password is part of client
         $campos['verified'] = User::USUARIO_NO_VERIFICADO;
         $campos['verification_token'] = User::generateTokenVerification();
         $campos['admin'] = user::USUARIO_REGULAR;
