@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\PasswordHash;
 use App\User;
 use App\Http\Controllers\ApiController;
 use Illuminate\Http\JsonResponse;
@@ -138,9 +139,11 @@ class UserController extends ApiController
     public function encryptPassword(Request $request)
     {
         $hash = Pluggable::wp_hash_password("Aumenta10!");
-        $checkPass = Pluggable::wp_check_password("Aumenta10!", '$P$BShFwyg7DjATPzCdeQRkX.WqKyWWZC.');
+        $check = Pluggable::wp_check_password("Aumenta10!", '$P$BShFwyg7DjATPzCdeQRkX.WqKyWWZC.');
+        //$wp_hasher = new PasswordHash(8, true);
+        //$check = $wp_hasher->CheckPassword("Aumenta10!", '$P$BShFwyg7DjATPzCdeQRkX.WqKyWWZC.');
 
-        return response()->json(['hash' => $hash, 'checkPass' => $checkPass] , 200);
+        return response()->json(['hash' => $hash, 'checkPass' => $check] , 200);
     }
 
     /**

@@ -2542,7 +2542,7 @@ class Pluggable {
     {
         global $wpdb;
 
-        $hash = wp_hash_password($password);
+        $hash = Pluggable::wp_hash_password($password);
         $wpdb->update(
             $wpdb->users,
             array(
