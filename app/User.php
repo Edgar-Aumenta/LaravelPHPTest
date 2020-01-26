@@ -10,6 +10,7 @@ use Laravel\Passport\HasApiTokens;
 
 /**
  * @method static create(array $campos)
+ * @method where(string $string, $username)
  */
 class User extends Authenticatable
 {
@@ -94,5 +95,16 @@ class User extends Authenticatable
     public static function generateTokenVerification()
     {
         return Str::random(40);
+    }
+
+    /**
+     * Find the user instance for the given username.
+     *
+     * @param  string  $username
+     * @return User
+     */
+    public function findForPassport($username)
+    {
+        return $this->where('username', $username)->first();
     }
 }

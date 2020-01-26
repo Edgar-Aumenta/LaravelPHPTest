@@ -17,9 +17,6 @@ use Illuminate\Http\Request;
     return $request->user();
 });*/
 
-/**
- * Events
- */
 Route::apiResource('users', 'User\UserController');
 Route::get('me', 'User\UserController@userInfo');
 Route::get('encrypt', 'User\UserController@encryptPassword');
