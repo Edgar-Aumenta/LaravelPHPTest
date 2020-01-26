@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\User;
 
 use App\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
+use App\Pluggable;
 
 class UserController extends ApiController
 {
@@ -16,7 +20,7 @@ class UserController extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function index()
     {
@@ -28,8 +32,9 @@ class UserController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return JsonResponse
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
@@ -62,8 +67,8 @@ class UserController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     * @return JsonResponse
      */
     public function show(User $user)
     {
@@ -73,10 +78,10 @@ class UserController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\User $user
-     * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
+     * @param Request $request
+     * @param User $user
+     * @return JsonResponse
+     * @throws ValidationException
      */
     public function update(Request $request, User $user)
     {
@@ -114,8 +119,9 @@ class UserController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     * @return JsonResponse
+     * @throws \Exception
      */
     public function destroy(User $user)
     {
@@ -127,6 +133,14 @@ class UserController extends ApiController
     public function userInfo(Request $request)
     {
         return $this->showOne($request->user());
+    }
+
+    public function encryptPassword(Request $request)
+    {
+        $hash = Pluggable::wp_hash_password("Aumenta10!");
+        $checkPass = Pluggable::wp_check_password("Aumenta10!", '$P$BShFwyg7DjATPzCdeQRkX.WqKyWWZC.');
+
+        return response()->json(['hash' => $hash, 'checkPass' => $checkPass] , 200);
     }
 
     /**

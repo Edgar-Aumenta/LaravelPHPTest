@@ -8,6 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
 
+/**
+ * @method static create(array $campos)
+ */
 class User extends Authenticatable
 {
     use Notifiable, HasApiTokens;
