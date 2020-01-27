@@ -37,3 +37,5 @@ Route::apiResource('webinars', 'Webinar\WebinarController');
 Route::get('public/webinars', 'Webinar\WebinarController@publicIndex');
 
 Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
+
+Route::post('login', 'ApiAccessTokenController@issueToken');

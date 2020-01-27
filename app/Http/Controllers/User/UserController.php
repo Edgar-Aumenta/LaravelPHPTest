@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\User;
 
-use App\PasswordHash;
 use App\User;
+use App\Pluggable;
 use App\Http\Controllers\ApiController;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
-use App\Pluggable;
+
 
 class UserController extends ApiController
 {
