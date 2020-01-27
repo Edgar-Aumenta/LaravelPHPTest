@@ -53,8 +53,7 @@ class UserController extends ApiController
         $this->validate($request, $rules);
 
         $campos = $request->all();
-        // $campos['password'] = bcrypt($request->password);
-        $campos['password'] = $request->password; // The encryption for password is part of client
+        $campos['password'] = Pluggable::wp_hash_password($request->password);
         $campos['verified'] = User::USUARIO_NO_VERIFICADO;
         $campos['verification_token'] = User::generateTokenVerification();
         $campos['admin'] = user::USUARIO_REGULAR;
@@ -139,6 +138,7 @@ class UserController extends ApiController
     {
         $hash = Pluggable::wp_hash_password("Aumenta10!");
         $check = Pluggable::wp_check_password("Aumenta10!", '$P$BShFwyg7DjATPzCdeQRkX.WqKyWWZC.');
+        //$check = Pluggable::wp_check_password("Aumenta10!", '$P$BShFwyg7DjATPzCdeQRkX.WqKyWWZC.');
         //$wp_hasher = new PasswordHash(8, true);
         //$check = $wp_hasher->CheckPassword("Aumenta10!", '$P$BShFwyg7DjATPzCdeQRkX.WqKyWWZC.');
 

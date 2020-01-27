@@ -2,8 +2,9 @@
 
 namespace App;
 
+use App\Pluggable;
+
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticable;
 use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
@@ -106,5 +107,16 @@ class User extends Authenticable
     public function findForPassport($username)
     {
         return $this->where('username', $username)->first();
+    }
+
+    /**
+     * Validate the password of the user for the Passport password grant.
+     *
+     * @param  string $password
+     * @return bool
+     */
+    public function validateForPassportPasswordGrant($password)
+    {
+        return Pluggable::wp_check_password($password, $this->password);
     }
 }
