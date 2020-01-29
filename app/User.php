@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticable;
 use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
+use League\OAuth2\Server\Exception\OAuthServerException;
 
 /**
  * @method static create(array $campos)
@@ -112,11 +113,19 @@ class User extends Authenticable
     /**
      * Validate the password of the user for the Passport password grant.
      *
-     * @param  string $password
+     * @param string $password
      * @return bool
+     * @throws OAuthServerException
      */
     public function validateForPassportPasswordGrant($password)
     {
-        return Pluggable::wp_check_password($password, $this->password);
+        if(Pluggable::wp_check_password($password, $this->password))
+        {
+            if($this->isEnable()){
+                return true;
+            } else {
+                throw new OAuthServerException('User account is not active', 6, 'account_inactive', 401);
+            }
+        }
     }
 }
