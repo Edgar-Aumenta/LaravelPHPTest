@@ -28,12 +28,12 @@ Route::apiResource('lodgings', 'Lodging\LodgingController');
 Route::apiResource('new_versions', 'Version\NewVersionController');
 Route::get('public/new_versions', 'Version\NewVersionController@publicIndex');
 Route::get('public/new_versions/current_version', 'Version\NewVersionController@showCurrentVersion');
-
 Route::apiResource('update_versions', 'Version\UpdateVersionController');
 Route::get('public/update_versions', 'Version\UpdateVersionController@publicIndex');
 Route::get('public/update_versions/current_version', 'Version\UpdateVersionController@showCurrentVersion');
-
 Route::apiResource('webinars', 'Webinar\WebinarController');
 Route::get('public/webinars', 'Webinar\WebinarController@publicIndex');
+Route::get('public/get-guru', 'GetGuru\GetGuruController@GetGetGuru');
+Route::post('public/get-guru', 'GetGuru\GetGuruController@PostGetGuru');
 
 Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
