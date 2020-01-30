@@ -19,7 +19,7 @@ class GetGuruController extends ApiController
     {
         $client = new Client();
         try {
-            $result = $client->get(GetGuruConstants::URL_API . $request->ns_method . '?' . $request->ns_params,
+            $result = $client->get(GetGuruConstants::URL_API . $request->ps_method . '?' . $request->ps_params,
                 [
                     'auth' =>  [GetGuruConstants::Username, GetGuruConstants::Password]
                 ]);
@@ -34,6 +34,20 @@ class GetGuruController extends ApiController
 
     public function PostGetGuru(Request $request)
     {
-        return response()->json($request, 200);
+        $client = new Client();
+        try {
+            $result = $client->post(GetGuruConstants::URL_API . $request->ps_method,
+                [
+                    'auth' =>  [ GetGuruConstants::Username, GetGuruConstants::Password ],
+                    'headers' => ['Content-Type'     => 'application/json'],
+                    'body' => json_encode($request->ps_body)
+                ]);
+        } catch (ClientException $e){
+            $response = $e->getResponse();
+            $responseBodyAsString = $response->getBody()->getContents();
+            return response()->json(json_decode($responseBodyAsString), $response->getStatusCode());
+        }
+
+        return response()->json(json_decode($result->getBody()->getContents()), $result->getStatusCode());
     }
 }
