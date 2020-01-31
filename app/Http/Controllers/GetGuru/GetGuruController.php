@@ -18,9 +18,9 @@ class GetGuruController extends ApiController
     public function RequestGetGuru(Request $request)
     {
         if($request->ps_type == 'POST'){
-            return $this->GetGetGuru($request);
-        } else if ($request->ps_type == 'GET'){
             return $this->PostGetGuru($request);
+        } else if ($request->ps_type == 'GET'){
+            return $this->GetGetGuru($request);
         }
         return response()->json(['message' => 'A request method is not supported for the requested resource'],405);
     }
