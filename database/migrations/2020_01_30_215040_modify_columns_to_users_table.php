@@ -14,6 +14,8 @@ class ModifyColumnsToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->dropUnique('users_email_unique');
+            $table->string('first_name')->nullable()->change();
             $table->string('address_1')->nullable()->change();
             $table->string('city')->nullable()->change();
             $table->string('zip')->nullable()->change();
@@ -31,6 +33,8 @@ class ModifyColumnsToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->unique('email');
+            $table->string('first_name')->change();
             $table->string('address_1')->change();
             $table->string('city')->change();
             $table->string('zip')->change();
