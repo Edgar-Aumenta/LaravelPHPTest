@@ -33,7 +33,6 @@ Route::get('public/update_versions', 'Version\UpdateVersionController@publicInde
 Route::get('public/update_versions/current_version', 'Version\UpdateVersionController@showCurrentVersion');
 Route::apiResource('webinars', 'Webinar\WebinarController');
 Route::get('public/webinars', 'Webinar\WebinarController@publicIndex');
-Route::get('public/get-guru', 'GetGuru\GetGuruController@GetGetGuru');
-Route::post('public/get-guru', 'GetGuru\GetGuruController@PostGetGuru');
+Route::post('public/get-guru', 'GetGuru\GetGuruController@RequestGetGuru');
 
 Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
