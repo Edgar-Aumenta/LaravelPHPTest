@@ -109,3 +109,7 @@ fabric.properties
 !.vscode/extensions.json
 
 # End of https://github.com/github/gitignore/blob/master/Global/VisualStudioCode.gitignore
+
+# Files excluded for mac
+.DS_Store
+# End Files excluded for mac

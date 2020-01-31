@@ -2,13 +2,19 @@
 
 namespace App;
 
+use App\Pluggable;
+
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticable;
 use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
+use League\OAuth2\Server\Exception\OAuthServerException;
 
-class User extends Authenticatable
+/**
+ * @method static create(array $campos)
+ * @method where(string $string, $value)
+ */
+class User extends Authenticable
 {
     use Notifiable, HasApiTokens;
 
@@ -91,5 +97,35 @@ class User extends Authenticatable
     public static function generateTokenVerification()
     {
         return Str::random(40);
+    }
+
+    /**
+     * Find the user instance for the given username.
+     *
+     * @param  string  $username
+     * @return User
+     */
+    public function findForPassport($username)
+    {
+        return $this->where('username', $username)->first();
+    }
+
+    /**
+     * Validate the password of the user for the Passport password grant.
+     *
+     * @param string $password
+     * @return bool
+     * @throws OAuthServerException
+     */
+    public function validateForPassportPasswordGrant($password)
+    {
+        if(Pluggable::wp_check_password($password, $this->password))
+        {
+            if($this->isEnable()){
+                return true;
+            } else {
+                throw new OAuthServerException('User account is not active', 6, 'account_inactive', 401);
+            }
+        }
     }
 }

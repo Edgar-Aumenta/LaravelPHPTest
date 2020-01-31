@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\User;
 
 use App\User;
-use Illuminate\Http\Request;
+use App\Pluggable;
 use App\Http\Controllers\ApiController;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+
 
 class UserController extends ApiController
 {
@@ -16,7 +20,7 @@ class UserController extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function index()
     {
@@ -28,15 +32,16 @@ class UserController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return JsonResponse
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
         $rules = [
             'username' => 'required|unique:users',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required',
             'address_1' => 'required',
             'city' => 'required',
             'zip' => 'required',
@@ -48,7 +53,7 @@ class UserController extends ApiController
         $this->validate($request, $rules);
 
         $campos = $request->all();
-        $campos['password'] = bcrypt($request->password);
+        $campos['password'] = Pluggable::wp_hash_password($request->password);
         $campos['verified'] = User::USUARIO_NO_VERIFICADO;
         $campos['verification_token'] = User::generateTokenVerification();
         $campos['admin'] = user::USUARIO_REGULAR;
@@ -61,8 +66,8 @@ class UserController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     * @return JsonResponse
      */
     public function show(User $user)
     {
@@ -72,10 +77,10 @@ class UserController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\User $user
-     * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
+     * @param Request $request
+     * @param User $user
+     * @return JsonResponse
+     * @throws ValidationException
      */
     public function update(Request $request, User $user)
     {
@@ -94,7 +99,7 @@ class UserController extends ApiController
         $rules = [
             'username' => 'unique:users,username,' . $user->id,
             'email' => 'email|unique:users,email,' . $user->id,
-            'password' => 'min:6|confirmed',
+            'password' => 'min:6',
         ];
 
         $this->validate($request, $rules);
@@ -113,8 +118,9 @@ class UserController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     * @return JsonResponse
+     * @throws \Exception
      */
     public function destroy(User $user)
     {
@@ -126,6 +132,17 @@ class UserController extends ApiController
     public function userInfo(Request $request)
     {
         return $this->showOne($request->user());
+    }
+
+    public function encryptPassword(Request $request)
+    {
+        $hash = Pluggable::wp_hash_password("Aumenta10!");
+        $check = Pluggable::wp_check_password("Aumenta10!", '$P$BShFwyg7DjATPzCdeQRkX.WqKyWWZC.');
+        //$check = Pluggable::wp_check_password("Aumenta10!", '$P$BShFwyg7DjATPzCdeQRkX.WqKyWWZC.');
+        //$wp_hasher = new PasswordHash(8, true);
+        //$check = $wp_hasher->CheckPassword("Aumenta10!", '$P$BShFwyg7DjATPzCdeQRkX.WqKyWWZC.');
+
+        return response()->json(['hash' => $hash, 'checkPass' => $check] , 200);
     }
 
     /**
