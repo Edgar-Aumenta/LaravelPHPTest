@@ -54,9 +54,12 @@ class UserController extends ApiController
 
         $campos = $request->all();
         $campos['password'] = Pluggable::wp_hash_password($request->password);
-        $campos['verified'] = User::USUARIO_NO_VERIFICADO;
+        $campos['verified'] = User::USUARIO_VERIFICADO;
         $campos['verification_token'] = User::generateTokenVerification();
-        $campos['admin'] = user::USUARIO_REGULAR;
+        $campos['admin'] = User::USUARIO_REGULAR;
+        if($campos['tos'] == null) $campos['tos'] = 0;
+        if($campos['enable'] == null) $campos['enable'] = User::ENABLE_USER;
+        if($campos['send_notifications'] == null) $campos['send_notifications'] = 0;
 
         $user = User::create($campos);
 
