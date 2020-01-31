@@ -12,7 +12,7 @@ class GetGuruController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['GetGetGuru', 'PostGetGuru']);
+        $this->middleware('auth:api')->except(['GetGetGuru', 'PostGetGuru', 'RequestGetGuru']);
     }
 
     public function RequestGetGuru(Request $request)
