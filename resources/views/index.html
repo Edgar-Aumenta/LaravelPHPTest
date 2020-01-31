@@ -19,8 +19,7 @@
 
 <body>
   <app-root></app-root>
-
-<script type="text/javascript" src="runtime.26209474bfa8dc87a77c.js"></script><script type="text/javascript" src="es2015-polyfills.0ceb0abb4eda76a24a3d.js" nomodule></script><script type="text/javascript" src="polyfills.8bbb231b43165d65d357.js"></script><script type="text/javascript" src="scripts.5c26e4e3624996a4fa51.js"></script><script type="text/javascript" src="main.99d02548b835c54f0ef5.js"></script></body>
+<script type="text/javascript" src="runtime.26209474bfa8dc87a77c.js"></script><script type="text/javascript" src="es2015-polyfills.b0657154bc33c6ff11ae.js" nomodule></script><script type="text/javascript" src="polyfills.8bbb231b43165d65d357.js"></script><script type="text/javascript" src="scripts.5c26e4e3624996a4fa51.js"></script><script type="text/javascript" src="main.91b7057e3dec876a5295.js"></script></body>
 
 </html>
 
@@ -49,39 +48,25 @@
 <!-- <script src="assets/admin-menu/js/select2.js"></script> -->
 
 <script type="text/javascript">
-  (function() {
-    $('.js-toggle').on('click', function() {
+  $(document).ready(function(){
+
+    $('body').on('click', '.js-toggle', function() {
       console.log('event')
       $('.js-toggle').toggleClass('is-active');
     });
 
     var menuButtons = Array.from(document.getElementsByClassName('side-menu__item'))
   
-    $('.panel .panel-collapse').on('shown.bs.collapse', function () {
+    $('body').on('shown.bs.collapse', '.panel .panel-collapse', function () {
       $(this).parent().find('.fa-chevron-right').toggleClass('rotate');
       console.log('shown');
     });
 
-    $('.panel .panel-collapse').on('hidden.bs.collapse', function () {
+    $('body').on('hidden.bs.collapse', '.panel .panel-collapse', function () {
       $(this).parent().find('.fa-chevron-right').toggleClass('rotate');
       console.log('hidden');
     });
 
-    // for (var index in menuButtons){
-    //   menuButtons[index].addEventListener('click', function(x) {
-    //     for(var i in menuButtons){
-    //       menuButtons[i].classList.remove('active');
-    //     }
-    //     this.classList.toggle('active');
-    //   });
-    // }
-
-  })();
-  function rotateArow(element) {
-      // var chev = element.getElementsByClassName('fa-chevron-right');
-      // chev[0].classList.toggle('rotate');
-    }   
-
-    
+  });    
 
 </script>
