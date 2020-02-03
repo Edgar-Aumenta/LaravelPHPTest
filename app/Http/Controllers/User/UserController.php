@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\User;
 use App\Pluggable;
 use App\Http\Controllers\ApiController;
+use App\UserForum;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -38,17 +39,7 @@ class UserController extends ApiController
      */
     public function store(Request $request)
     {
-        $rules = [
-            'username' => 'required|unique:users',
-            'email' => 'required|email|unique:users',
-            'password' => 'required',
-            'address_1' => 'required',
-            'city' => 'required',
-            'zip' => 'required',
-            'country' => 'required',
-            'day_phone' => 'required',
-            'company' => 'required',
-        ];
+        $rules = User::GetRulesForStore();
 
         $this->validate($request, $rules);
 
@@ -62,6 +53,7 @@ class UserController extends ApiController
         if($campos['send_notifications'] == null) $campos['send_notifications'] = 0;
 
         $user = User::create($campos);
+        $userFromForum = $this->createUserForum($campos);
 
         return $this->showOne($user, 201);
     }
@@ -87,23 +79,7 @@ class UserController extends ApiController
      */
     public function update(Request $request, User $user)
     {
-        /*$rules = [
-            'username' => 'required|unique:users,username,' . $user->id,
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'min:6|confirmed',
-            'address_1' => 'required',
-            'city' => 'required',
-            'zip' => 'required',
-            'country' => 'required',
-            'day_phone' => 'required',
-            'company' => 'required',
-        ];*/
-
-        $rules = [
-            'username' => 'unique:users,username,' . $user->id,
-            'email' => 'email|unique:users,email,' . $user->id,
-            'password' => 'min:6',
-        ];
+        $rules = User::GetRulesForUpdate($user);
 
         $this->validate($request, $rules);
 
@@ -157,6 +133,16 @@ class UserController extends ApiController
         //$check = $wp_hasher->CheckPassword("Aumenta10!", '$P$BShFwyg7DjATPzCdeQRkX.WqKyWWZC.');
 
         return response()->json(['hash' => $hash] , 200);
+    }
+
+    /**
+     * Create user for forum
+     *
+     * @param array $fields
+     * */
+    public function createUserForum($fields)
+    {
+        UserForum::create();
     }
 
     /**
