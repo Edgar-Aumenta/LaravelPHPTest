@@ -14,7 +14,7 @@ class UserController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
+        $this->middleware('auth:api')->except('encryptPassword');
     }
 
     /**
@@ -132,20 +132,31 @@ class UserController extends ApiController
         return $this->showOne($user);
     }
 
+    /**
+     * Get user basic information
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function userInfo(Request $request)
     {
         return $this->showOne($request->user());
     }
 
+    /**
+     * Get encrypt password
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function encryptPassword(Request $request)
     {
-        $hash = Pluggable::wp_hash_password("Aumenta10!");
-        $check = Pluggable::wp_check_password("Aumenta10!", '$P$BShFwyg7DjATPzCdeQRkX.WqKyWWZC.');
+        $hash = Pluggable::wp_hash_password($request->plain_text);
         //$check = Pluggable::wp_check_password("Aumenta10!", '$P$BShFwyg7DjATPzCdeQRkX.WqKyWWZC.');
         //$wp_hasher = new PasswordHash(8, true);
         //$check = $wp_hasher->CheckPassword("Aumenta10!", '$P$BShFwyg7DjATPzCdeQRkX.WqKyWWZC.');
 
-        return response()->json(['hash' => $hash, 'checkPass' => $check] , 200);
+        return response()->json(['hash' => $hash] , 200);
     }
 
     /**
