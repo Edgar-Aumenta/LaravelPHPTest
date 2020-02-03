@@ -11,7 +11,7 @@ use Laravel\Passport\HasApiTokens;
 use League\OAuth2\Server\Exception\OAuthServerException;
 
 /**
- * @method static create(array $campos)
+ * @method static create(array $data)
  * @method where(string $string, $value)
  */
 class User extends Authenticable
@@ -132,23 +132,23 @@ class User extends Authenticable
     public static function GetRulesForStore()
     {
         return [
-            'username' => 'required|unique:users',
-            'email' => 'required|email|unique:users',
-            'password' => 'required',
+            'username'  => 'required|unique:users',
+            'email'     => 'required|email|unique:users',
+            'password'  => 'required',
             'address_1' => 'required',
-            'city' => 'required',
-            'zip' => 'required',
-            'country' => 'required',
+            'city'      => 'required',
+            'zip'       => 'required',
+            'country'   => 'required',
             'day_phone' => 'required',
-            'company' => 'required',
+            'company'   => 'required',
         ];
     }
 
     public static function GetRulesForUpdate(User $user)
     {
         return [
-            'username' => 'unique:users,username,' . $user->id,
-            'email' => 'email|unique:users,email,' . $user->id
+            'username'  => 'unique:users,username,' . $user->id,
+            'email'     => 'email|unique:users,email,' . $user->id
         ];
     }
 }

@@ -14,7 +14,7 @@ class GroupsForum extends Model
     protected $connection = 'mysql_forum';
     protected $table = 'pbb_groups';
 
-    public function findForUserRegistered(){
-        return $this->where('group_name', $this::REGISTERED)->first();
+    public static function GetForUserRegistered(){
+        return (new static)->where('group_name', GroupsForum::REGISTERED)->first();
     }
 }

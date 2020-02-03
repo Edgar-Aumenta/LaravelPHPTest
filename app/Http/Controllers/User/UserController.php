@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\GroupsForum;
 use App\User;
 use App\Pluggable;
 use App\Http\Controllers\ApiController;
@@ -36,6 +37,7 @@ class UserController extends ApiController
      * @param Request $request
      * @return JsonResponse
      * @throws ValidationException
+     * @throws \Exception
      */
     public function store(Request $request)
     {
@@ -43,17 +45,18 @@ class UserController extends ApiController
 
         $this->validate($request, $rules);
 
-        $campos = $request->all();
-        $campos['password'] = Pluggable::wp_hash_password($request->password);
-        $campos['verified'] = User::USUARIO_VERIFICADO;
-        $campos['verification_token'] = User::generateTokenVerification();
-        $campos['admin'] = User::USUARIO_REGULAR;
-        if($campos['tos'] == null) $campos['tos'] = 0;
-        if($campos['enable'] == null) $campos['enable'] = User::ENABLE_USER;
-        if($campos['send_notifications'] == null) $campos['send_notifications'] = 0;
+        $data = $request->all();
+        $data['password'] = Pluggable::wp_hash_password($request->password);
+        $data['verified'] = User::USUARIO_VERIFICADO;
+        $data['verification_token'] = User::generateTokenVerification();
+        $data['admin'] = User::USUARIO_REGULAR;
+        $data['email'] = strtolower($data['email']);
+        if($data['tos'] == null) $data['tos'] = 0;
+        if($data['enable'] == null) $data['enable'] = User::ENABLE_USER;
+        if($data['send_notifications'] == null) $data['send_notifications'] = 0;
 
-        $user = User::create($campos);
-        $userFromForum = $this->createUserForum($campos);
+        $user = User::create($data);
+        $userFromForum = $this->createUserForum($data);
 
         return $this->showOne($user, 201);
     }
@@ -138,11 +141,32 @@ class UserController extends ApiController
     /**
      * Create user for forum
      *
-     * @param array $fields
-     * */
-    public function createUserForum($fields)
+     * @param array $data
+     *
+     * @return UserForum
+     * @throws \Exception
+     */
+    public function createUserForum($data)
     {
-        UserForum::create();
+        $user_row = array(
+            'username'				=> $data['username'],
+            'username_clean'	    => $data['username'], // TODO change for utf8_clean_string($data['username']);
+            'user_password'			=> $data['password'],
+            'user_email'			=> $data['email'],
+            'group_id'				=> (int) GroupsForum::GetForUserRegistered()->group_id,
+            'user_type'				=> UserForum::USER_NORMAL,
+            'user_new'              => 1
+        );
+
+        // These are the additional vars able to be specified
+        $additional_vars = UserForum::GetAdditionalVars();
+        // Now fill the sql array with not required variables
+        foreach ($additional_vars as $key => $default_value)
+        {
+            $user_row[$key] = (isset($user_row[$key])) ? $user_row[$key] : $default_value;
+        }
+
+        return UserForum::create($user_row);
     }
 
     /**
