@@ -42,7 +42,7 @@ class PasswordResetNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $urlToResetForm = "http://newsite.pcsynergy.com/reset-password-form?token=" . $this->token;
+        $urlToResetForm = env('APP_URL') . '/reset-password-form?token=' . $this->token;
 
         return (new MailMessage)
             ->subject(Lang::getFromJson('Reset Password Notification'))
