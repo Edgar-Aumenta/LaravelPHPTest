@@ -50,6 +50,7 @@ class UserController extends ApiController
         $data['verified'] = User::USUARIO_VERIFICADO;
         $data['verification_token'] = User::generateTokenVerification();
         $data['admin'] = User::USUARIO_REGULAR;
+        $data['username'] = strtolower($data['username']);
         $data['email'] = strtolower($data['email']);
         if($data['tos'] == null) $data['tos'] = 0;
         if($data['enable'] == null) $data['enable'] = User::ENABLE_USER;
@@ -176,7 +177,7 @@ class UserController extends ApiController
      */
     private function compareChangesAndAssign(Request $request, User &$user)
     {
-        if($request->has('email')) $user->email = $request->email;
+        if($request->has('email')) $user->email = strtolower($request->email);
         if($request->has('first_name')) $user->first_name = $request->first_name;
         if($request->has('last_name')) $user->last_name = $request->last_name;
         if($request->has('username')) $user->username = $request->username;
