@@ -36,3 +36,6 @@ Route::get('public/webinars', 'Webinar\WebinarController@publicIndex');
 Route::post('public/get-guru', 'GetGuru\GetGuruController@RequestGetGuru');
 
 Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
+
+Route::post('password/email', 'Api\ForgotPasswordController@sendResetLinkEmail');
+Route::post('password/reset', 'Api\ResetPasswordController@reset');

@@ -2,8 +2,10 @@
 
 namespace App;
 
+use App\Notifications\PasswordResetNotification;
 use App\Pluggable;
 
+use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticable;
 use Illuminate\Support\Str;
@@ -151,4 +153,16 @@ class User extends Authenticable
             'email'     => 'email|unique:users,email,' . $user->id
         ];
     }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify( new PasswordResetNotification($token));
+    }
+
 }
