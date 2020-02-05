@@ -33,7 +33,6 @@ class AddColumnsToUsersTable extends Migration
                 'user_activation_key',
                 'display_name'
             ]);
-
         });
     }
 }
