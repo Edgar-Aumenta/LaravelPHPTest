@@ -33,6 +33,7 @@ class Webinar extends Model
         'recorded_url',
         'visible',
         'user_id',
+        'description'
     ];
-
+    
 }
