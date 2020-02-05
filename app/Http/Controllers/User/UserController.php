@@ -146,8 +146,8 @@ class UserController extends ApiController
             'password'  => 'required'
         ];
         $this->validate($request, $rules);
+        $user = User::where('username', $request['username'] )->firstOrFail();
 
-        $user = User::where('username', $request['username'] )->first();
         $user->password = Pluggable::wp_hash_password($request['password']);
         $user->save();
 
