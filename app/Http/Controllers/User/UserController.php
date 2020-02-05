@@ -139,6 +139,21 @@ class UserController extends ApiController
         return response()->json(['hash' => $hash] , 200);
     }
 
+    public function passwordReset(Request $request)
+    {
+        $rules = [
+            'username'  => 'required',
+            'password'  => 'required'
+        ];
+        $this->validate($request, $rules);
+
+        $user = User::where('username', $request['username'] )->first();
+        $user->password = Pluggable::wp_hash_password($request['password']);
+        $user->save();
+
+        return response(['message' => 'Your password has been reset!'] , 200);
+    }
+
     /**
      * Create user for forum
      *
