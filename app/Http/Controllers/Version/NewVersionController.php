@@ -14,6 +14,7 @@ class NewVersionController extends ApiController
     public function __construct()
     {
         $this->middleware('auth:api')->except(['publicIndex', 'showCurrentVersion']);
+        $this->middleware('isAdmin:api')->except(['publicIndex', 'showCurrentVersion']);
     }
 
     /**
@@ -81,12 +82,7 @@ class NewVersionController extends ApiController
     public function update(Request $request, NewVersion $newVersion)
     {
         $rules = [
-            'version_code' => 'required|unique:new_versions,version_code,' . $newVersion->id,
-            'version_name' => 'required',
-            'version_url' => 'required',
-            'current_version' => 'required',
-            'release_date' => 'required',
-            'estimate_size' => 'required',
+            'version_code' => 'unique:new_versions,version_code,' . $newVersion->id,
             'user_id' => 'required'
         ];
 

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\User;
 
+use App\GroupsForum;
 use App\User;
 use App\Pluggable;
 use App\Http\Controllers\ApiController;
+use App\UserForum;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -14,7 +17,8 @@ class UserController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
+        $this->middleware('auth:api')->except(['encryptPassword']);
+        $this->middleware('isAdmin:api')->except(['encryptPassword', 'userInfo']);
     }
 
     /**
@@ -35,30 +39,27 @@ class UserController extends ApiController
      * @param Request $request
      * @return JsonResponse
      * @throws ValidationException
+     * @throws Exception
      */
     public function store(Request $request)
     {
-        $rules = [
-            'username' => 'required|unique:users',
-            'email' => 'required|email|unique:users',
-            'password' => 'required',
-            'address_1' => 'required',
-            'city' => 'required',
-            'zip' => 'required',
-            'country' => 'required',
-            'day_phone' => 'required',
-            'company' => 'required',
-        ];
+        $rules = User::GetRulesForStore();
 
         $this->validate($request, $rules);
 
-        $campos = $request->all();
-        $campos['password'] = Pluggable::wp_hash_password($request->password);
-        $campos['verified'] = User::USUARIO_NO_VERIFICADO;
-        $campos['verification_token'] = User::generateTokenVerification();
-        $campos['admin'] = user::USUARIO_REGULAR;
+        $data = $request->all();
+        $data['password'] = Pluggable::wp_hash_password($request->password);
+        $data['verified'] = User::USUARIO_VERIFICADO;
+        $data['verification_token'] = User::generateTokenVerification();
+        $data['admin'] = User::USUARIO_REGULAR;
+        $data['username'] = strtolower($data['username']);
+        $data['email'] = strtolower($data['email']);
+        if($data['tos'] == null) $data['tos'] = 0;
+        if($data['enable'] == null) $data['enable'] = User::ENABLE_USER;
+        if($data['send_notifications'] == null) $data['send_notifications'] = 0;
 
-        $user = User::create($campos);
+        $user = User::create($data);
+        $userFromForum = $this->createUserForum($data);
 
         return $this->showOne($user, 201);
     }
@@ -66,11 +67,13 @@ class UserController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param User $user
+     * @param $username
      * @return JsonResponse
      */
-    public function show(User $user)
+    public function show($username)
     {
+        $user = $this->findOrFailUserByUsername($username);
+
         return $this->showOne($user);
     }
 
@@ -78,71 +81,117 @@ class UserController extends ApiController
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param User $user
+     * @param $username
      * @return JsonResponse
      * @throws ValidationException
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $username)
     {
-        /*$rules = [
-            'username' => 'required|unique:users,username,' . $user->id,
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'min:6|confirmed',
-            'address_1' => 'required',
-            'city' => 'required',
-            'zip' => 'required',
-            'country' => 'required',
-            'day_phone' => 'required',
-            'company' => 'required',
-        ];*/
+        $user = $this->findOrFailUserByUsername($username);
 
-        $rules = [
-            'username' => 'unique:users,username,' . $user->id,
-            'email' => 'email|unique:users,email,' . $user->id,
-            'password' => 'min:6',
-        ];
+        $rules = User::GetRulesForUpdate($user);
 
         $this->validate($request, $rules);
 
         $this->compareChangesAndAssign($request, $user);
 
         if(!$user->isDirty()){
-            return $this->errorResponse('Se debe especificar al menos un valor diferente para actualizar', 422);
+            return $this->messageResponse('Nothing to update', 200);
         }
 
         $user->save();
 
-        return $this->showOne($user);
+        return $this->messageResponse('Updated!', 200);;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param User $user
+     * @param $username
      * @return JsonResponse
-     * @throws \Exception
+     * @throws Exception
      */
-    public function destroy(User $user)
+    public function destroy($username)
     {
+        $user = $this->findOrFailUserByUsername($username);
+
         $user->delete();
 
-        return $this->showOne($user);
+        return $this->messageResponse("Erased!", 200);
     }
 
+    /**
+     * Get user basic information
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function userInfo(Request $request)
     {
         return $this->showOne($request->user());
     }
 
+    /**
+     * Get encrypt password
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function encryptPassword(Request $request)
     {
-        $hash = Pluggable::wp_hash_password("Aumenta10!");
-        $check = Pluggable::wp_check_password("Aumenta10!", '$P$BShFwyg7DjATPzCdeQRkX.WqKyWWZC.');
+        $hash = Pluggable::wp_hash_password($request->plain_text);
         //$check = Pluggable::wp_check_password("Aumenta10!", '$P$BShFwyg7DjATPzCdeQRkX.WqKyWWZC.');
         //$wp_hasher = new PasswordHash(8, true);
         //$check = $wp_hasher->CheckPassword("Aumenta10!", '$P$BShFwyg7DjATPzCdeQRkX.WqKyWWZC.');
 
-        return response()->json(['hash' => $hash, 'checkPass' => $check] , 200);
+        return response()->json(['hash' => $hash] , 200);
+    }
+
+    public function passwordReset(Request $request)
+    {
+        $rules = [
+            'username'  => 'required',
+            'password'  => 'required'
+        ];
+        $this->validate($request, $rules);
+
+        $user = $this->findOrFailUserByUsername($request['username']);
+
+        $user->password = Pluggable::wp_hash_password($request['password']);
+        $user->save();
+
+        return $this->messageResponse('The password has been reset!');
+    }
+
+    /**
+     * Create user for forum
+     *
+     * @param array $data
+     *
+     * @return UserForum
+     * @throws Exception
+     */
+    private function createUserForum($data)
+    {
+        $user_row = array(
+            'username'				=> $data['username'],
+            'username_clean'	    => $data['username'], // TODO change for utf8_clean_string($data['username']);
+            'user_password'			=> $data['password'],
+            'user_email'			=> $data['email'],
+            'group_id'				=> (int) GroupsForum::GetForUserRegistered()->group_id,
+            'user_type'				=> UserForum::USER_NORMAL,
+            'user_new'              => 1
+        );
+
+        // These are the additional vars able to be specified
+        $additional_vars = UserForum::GetAdditionalVars();
+        // Now fill the sql array with not required variables
+        foreach ($additional_vars as $key => $default_value)
+        {
+            $user_row[$key] = (isset($user_row[$key])) ? $user_row[$key] : $default_value;
+        }
+
+        return UserForum::create($user_row);
     }
 
     /**
@@ -152,7 +201,7 @@ class UserController extends ApiController
      */
     private function compareChangesAndAssign(Request $request, User &$user)
     {
-        if($request->has('email')) $user->email = $request->email;
+        if($request->has('email')) $user->email = strtolower($request->email);
         if($request->has('first_name')) $user->first_name = $request->first_name;
         if($request->has('last_name')) $user->last_name = $request->last_name;
         if($request->has('username')) $user->username = $request->username;
@@ -170,5 +219,10 @@ class UserController extends ApiController
         if($request->has('tos')) $user->tos = $request->tos;
         if($request->has('company')) $user->company = $request->company;
         if($request->has('enable')) $user->enable = $request->enable;
+    }
+
+    private function findOrFailUserByUsername($username)
+    {
+        return User::where('username', $username )->firstOrFail();
     }
 }

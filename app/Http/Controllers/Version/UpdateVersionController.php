@@ -12,6 +12,7 @@ class UpdateVersionController extends ApiController
     public function __construct()
     {
         $this->middleware('auth:api')->except(['publicIndex', 'showCurrentVersion']);
+        $this->middleware('isAdmin:api')->except(['publicIndex', 'showCurrentVersion']);
     }
 
     /**

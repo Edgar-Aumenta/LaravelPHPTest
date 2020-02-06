@@ -22,6 +22,7 @@ class EventScheduleController extends ApiController
     public function __construct()
     {
         $this->middleware('auth:api')->except(['publicIndex']);
+        $this->middleware('isAdmin:api')->except(['publicIndex']);
     }
 
     /**
@@ -86,7 +87,7 @@ class EventScheduleController extends ApiController
         $this->validate($request, $this->rules);
 
         $this->compareChangesAndAssign($request, $eventSchedule);
-        
+
         if(!$eventSchedule->isDirty()){
             return $this->errorResponse('Se debe especificar al menos un valor diferente para actualizar', 422);
         }

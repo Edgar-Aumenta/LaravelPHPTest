@@ -22,6 +22,7 @@ class WebinarController extends ApiController
     public function __construct()
     {
         $this->middleware('auth:api')->except(['publicIndex']);
+        $this->middleware('isAdmin:api')->except(['publicIndex']);
     }
 
     /**

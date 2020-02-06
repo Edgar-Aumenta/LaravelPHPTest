@@ -3,17 +3,13 @@
 namespace App\Http\Controllers\GetGuru;
 
 use App\GetGuruConstants;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Controllers\ApiController;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Client;
 
-class GetGuruController extends ApiController
+class GetGuruController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api')->except(['GetGetGuru', 'PostGetGuru', 'RequestGetGuru']);
-    }
 
     public function RequestGetGuru(Request $request)
     {
@@ -25,7 +21,7 @@ class GetGuruController extends ApiController
         return response()->json(['message' => 'A request method is not supported for the requested resource'],405);
     }
 
-    public function GetGetGuru(Request $request)
+    private function GetGetGuru(Request $request)
     {
         $client = new Client();
         try {
@@ -42,7 +38,7 @@ class GetGuruController extends ApiController
         return response()->json(json_decode($result->getBody()->getContents()), $result->getStatusCode());
     }
 
-    public function PostGetGuru(Request $request)
+    private function PostGetGuru(Request $request)
     {
         $client = new Client();
         try {

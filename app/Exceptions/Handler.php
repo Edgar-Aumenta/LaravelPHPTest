@@ -69,8 +69,8 @@ class Handler extends ExceptionHandler
             return $this->convertValidationExceptionToResponse($exception, $request);
         }
         if ($exception instanceof ModelNotFoundException) {
-            $modelo = strtolower(class_basename($exception->getModel()));
-            return $this->errorResponse("No existe ninguna instancia de {$modelo} con el id especificado", 404);
+            $modelo = class_basename($exception->getModel());
+            return $this->errorResponse("{$modelo} not found", 404, "{$modelo} not found");
         }
         if ($exception instanceof AuthenticationException) {
             return $this->unauthenticated($request, $exception);
