@@ -101,7 +101,7 @@ class UserController extends ApiController
 
         $user->save();
 
-        return $this->messageResponse('Updated!', 200);;
+        return $this->messageResponse('Updated!', 200);
     }
 
     /**
