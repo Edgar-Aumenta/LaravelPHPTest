@@ -7,6 +7,7 @@ use App\User;
 use App\Pluggable;
 use App\Http\Controllers\ApiController;
 use App\UserForum;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -37,7 +38,7 @@ class UserController extends ApiController
      * @param Request $request
      * @return JsonResponse
      * @throws ValidationException
-     * @throws \Exception
+     * @throws Exception
      */
     public function store(Request $request)
     {
@@ -65,11 +66,13 @@ class UserController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param User $user
+     * @param $username
      * @return JsonResponse
      */
-    public function show(User $user)
+    public function show($username)
     {
+        $user = $this->findOrFailUserByUsername($username);
+
         return $this->showOne($user);
     }
 
@@ -77,12 +80,14 @@ class UserController extends ApiController
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param User $user
+     * @param $username
      * @return JsonResponse
      * @throws ValidationException
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $username)
     {
+        $user = $this->findOrFailUserByUsername($username);
+
         $rules = User::GetRulesForUpdate($user);
 
         $this->validate($request, $rules);
@@ -90,26 +95,28 @@ class UserController extends ApiController
         $this->compareChangesAndAssign($request, $user);
 
         if(!$user->isDirty()){
-            return $this->errorResponse('Se debe especificar al menos un valor diferente para actualizar', 422);
+            return $this->messageResponse('Nothing to update', 200);
         }
 
         $user->save();
 
-        return $this->showOne($user);
+        return $this->messageResponse('Updated!', 200);;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param User $user
+     * @param $username
      * @return JsonResponse
-     * @throws \Exception
+     * @throws Exception
      */
-    public function destroy(User $user)
+    public function destroy($username)
     {
+        $user = $this->findOrFailUserByUsername($username);
+
         $user->delete();
 
-        return $this->showOne($user);
+        return $this->messageResponse("Erased!", 200);
     }
 
     /**
@@ -146,12 +153,13 @@ class UserController extends ApiController
             'password'  => 'required'
         ];
         $this->validate($request, $rules);
-        $user = User::where('username', $request['username'] )->firstOrFail();
+
+        $user = $this->findOrFailUserByUsername($request['username']);
 
         $user->password = Pluggable::wp_hash_password($request['password']);
         $user->save();
 
-        return response(['message' => 'Your password has been reset!'] , 200);
+        return response(['message' => 'The password has been reset!'] , 200);
     }
 
     /**
@@ -160,9 +168,9 @@ class UserController extends ApiController
      * @param array $data
      *
      * @return UserForum
-     * @throws \Exception
+     * @throws Exception
      */
-    public function createUserForum($data)
+    private function createUserForum($data)
     {
         $user_row = array(
             'username'				=> $data['username'],
@@ -210,5 +218,10 @@ class UserController extends ApiController
         if($request->has('tos')) $user->tos = $request->tos;
         if($request->has('company')) $user->company = $request->company;
         if($request->has('enable')) $user->enable = $request->enable;
+    }
+
+    private function findOrFailUserByUsername($username)
+    {
+        return User::where('username', $username )->firstOrFail();
     }
 }

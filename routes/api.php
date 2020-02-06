@@ -17,7 +17,14 @@ use Illuminate\Http\Request;
     return $request->user();
 });*/
 
-Route::apiResource('users', 'User\UserController');
+//Route::apiResource('users', 'User\UserController');
+
+Route::post('users', 'User\UserController@store');
+Route::put('users/{username}', 'User\UserController@update');
+Route::get('users', 'User\UserController@index');
+Route::get('users/{username}', 'User\UserController@show');
+Route::delete('users/{username}', 'User\UserController@destroy');
+
 Route::get('me', 'User\UserController@userInfo');
 Route::put('users/password/reset', 'User\UserController@passwordReset');
 Route::get('encrypt', 'User\UserController@encryptPassword');
