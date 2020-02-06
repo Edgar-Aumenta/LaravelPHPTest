@@ -17,7 +17,8 @@ class UserController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except('encryptPassword');
+        $this->middleware('auth:api')->except(['encryptPassword']);
+        $this->middleware('isAdmin:api')->except(['encryptPassword', 'userInfo']);
     }
 
     /**
@@ -159,7 +160,7 @@ class UserController extends ApiController
         $user->password = Pluggable::wp_hash_password($request['password']);
         $user->save();
 
-        return response(['message' => 'The password has been reset!'] , 200);
+        return $this->messageResponse('The password has been reset!');
     }
 
     /**
