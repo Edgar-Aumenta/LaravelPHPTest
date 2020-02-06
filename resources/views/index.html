@@ -19,7 +19,7 @@
 
 <body>
   <app-root></app-root>
-<script type="text/javascript" src="runtime.26209474bfa8dc87a77c.js"></script><script type="text/javascript" src="es2015-polyfills.b0657154bc33c6ff11ae.js" nomodule></script><script type="text/javascript" src="polyfills.8bbb231b43165d65d357.js"></script><script type="text/javascript" src="scripts.5c26e4e3624996a4fa51.js"></script><script type="text/javascript" src="main.91b7057e3dec876a5295.js"></script></body>
+<script type="text/javascript" src="runtime.26209474bfa8dc87a77c.js"></script><script type="text/javascript" src="es2015-polyfills.0ceb0abb4eda76a24a3d.js" nomodule></script><script type="text/javascript" src="polyfills.8bbb231b43165d65d357.js"></script><script type="text/javascript" src="scripts.5c26e4e3624996a4fa51.js"></script><script type="text/javascript" src="main.9266acb89b4ea3ff42b3.js"></script></body>
 
 </html>
 
@@ -65,6 +65,12 @@
     $('body').on('hidden.bs.collapse', '.panel .panel-collapse', function () {
       $(this).parent().find('.fa-chevron-right').toggleClass('rotate');
       console.log('hidden');
+    });
+
+    $('body').on('hidden.bs.modal', '#webinarModal', function () {
+      let $iframeItem = $('#webinarModal').find('iframe');
+      //$iframeItem[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
+      $iframeItem.attr('src', $iframeItem.attr('src'));
     });
 
   });    
