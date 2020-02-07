@@ -46,8 +46,8 @@ class UpdateVersionController extends ApiController
             'current_version' => 'required',
             'release_date' => 'required',
             'estimate_size' => 'required',
-            'readme_url' => 'required',
-            'update_guide_url' => 'required'
+            //'readme_url' => 'required',
+            //'update_guide_url' => 'required'
         ];
 
         $this->validate($request, $rules);
