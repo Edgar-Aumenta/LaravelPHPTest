@@ -109,7 +109,13 @@ class WebinarController extends ApiController
     {
         $eventSchedules = Webinar::all()->where('visible', true);
 
-        return $this->showAll($eventSchedules);
+        $eventSchedulesReadModel = collect();
+
+        foreach ($eventSchedules as $eventSchedule){
+            $eventSchedulesReadModel->push($eventSchedule);
+        }
+
+        return $this->showAll($eventSchedulesReadModel);
     }
 
     /**
@@ -126,6 +132,7 @@ class WebinarController extends ApiController
         if($request->has('register_url')) $webinar->register_url = $request->register_url;
         if($request->has('recoded_url')) $webinar->recoded_url = $request->recoded_url;
         if($request->has('visible')) $webinar->visible = $request->visible;
+        if($request->has('description')) $webinar->description = $request->description;
         if($request->has('user_id')) $webinar->user_id = $request->user_id;
     }
 }
