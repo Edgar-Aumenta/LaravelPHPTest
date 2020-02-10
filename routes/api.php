@@ -19,6 +19,8 @@ use Illuminate\Http\Request;
 
 //Route::apiResource('users', 'User\UserController');
 
+Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
+
 Route::post('users', 'User\UserController@store');
 Route::put('users/{username}', 'User\UserController@update');
 Route::get('users', 'User\UserController@index');
@@ -50,7 +52,7 @@ Route::get('public/webinars', 'Webinar\WebinarController@publicIndex');
 
 Route::post('public/get-guru', 'GetGuru\GetGuruController@RequestGetGuru');
 
-Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
-
 Route::post('password/email', 'Api\ForgotPasswordController@sendResetLinkEmail');
 Route::post('password/reset', 'Api\ResetPasswordController@reset');
+
+Route::get('crm/ticket/issues', 'CRMTicket\CRMTicketController@getIssues');
