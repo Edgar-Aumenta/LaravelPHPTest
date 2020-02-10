@@ -13,27 +13,36 @@ use SoapHeader;
 
 class CRMTicketController extends ApiController
 {
+    private $webTicketRules = [
+        'pmSerial' => 'required',
+        'issue' => 'required',
+        'issueTypeId' => 'required',
+        'contactName' => 'required',
+        'contactPhone' => 'required',
+        'contactEmail' => 'required'
+    ];
+
     public function __construct()
     {
         $this->middleware('auth:api');
     }
 
-    public function sendSupportTicket()
+    private function CRMSoapClient()
     {
-        /*
-         <s:element name="NewWebTicket">
-            <s:complexType>
-                <s:sequence>
-                    <s:element minOccurs="0" maxOccurs="1" name="PMSerial" type="s:string"/>
-                    <s:element minOccurs="0" maxOccurs="1" name="Issue" type="s:string"/>
-                    <s:element minOccurs="0" maxOccurs="1" name="IssueTypeID" type="s:string"/>
-                    <s:element minOccurs="0" maxOccurs="1" name="ContactName" type="s:string"/>
-                    <s:element minOccurs="0" maxOccurs="1" name="ContactPhone" type="s:string"/>
-                    <s:element minOccurs="0" maxOccurs="1" name="ContactEmail" type="s:string"/>
-                </s:sequence>
-            </s:complexType>
-        </s:element>
-         * */
+        $url = env('CRM_URL');
+        try {
+            $arrContextOptions = array("ssl"=>array( "verify_peer"=>false, "verify_peer_name"=>false,'crypto_method' => STREAM_CRYPTO_METHOD_TLS_CLIENT));
+            $options = array(
+                'soap_version'=>SOAP_1_2,
+                'exceptions'=>true,
+                'trace'=>1,
+                'cache_wsdl'=>WSDL_CACHE_NONE,
+                'stream_context' => stream_context_create($arrContextOptions)
+            );
+            return new SoapClient($url, $options);
+        } catch (SoapFault $e) {
+            return null;
+        }
     }
 
     public function getIssues()
@@ -57,26 +66,40 @@ class CRMTicketController extends ApiController
             ), NULL,$header);
         }
         catch (SoapFault $e) {
-            echo $this->errorResponse($e->getMessage(), 503, $e->getMessage());
+            return $this->errorResponse($e->getMessage(), 503, $e->getMessage());
         }
-        return response(XMLHelpers::namespacedXMLToArray($result->GetTypeIncidentsResult), 200);
+        return response()->json(XMLHelpers::namespacedXMLToArray($result->GetTypeIncidentsResult), 200);
     }
 
-    private function CRMSoapClient()
+    public function newWebTicket(Request $request)
     {
-        $url = env('CRM_URL');
-        try {
-            $arrContextOptions = array("ssl"=>array( "verify_peer"=>false, "verify_peer_name"=>false,'crypto_method' => STREAM_CRYPTO_METHOD_TLS_CLIENT));
-            $options = array(
-                'soap_version'=>SOAP_1_2,
-                'exceptions'=>true,
-                'trace'=>1,
-                'cache_wsdl'=>WSDL_CACHE_NONE,
-                'stream_context' => stream_context_create($arrContextOptions)
-            );
-            return new SoapClient($url, $options);
-        } catch (SoapFault $e) {
-            return null;
+        $this->validate($request, $this->webTicketRules);
+
+        $myClient = $this->CRMSoapClient();
+        $TechKey = 'Joe';
+        $password ='';
+        $authTicket         = new CRMAuth($TechKey, $password);
+        $headerTicket    = new SoapHeader("http://www.pcsynergy.com/", "Auth", $authTicket, false);
+
+        $myClient->__setSoapHeaders($headerTicket);
+
+        try
+        {
+            $result = $myClient->__soapCall("NewWebTicket", array(
+                "NewWebTicket" => array(
+                    "PMSerial"      => $request['pmSerial'],
+                    "Issue"         => $request['issue'],
+                    "IssueTypeID"   => $request['issueTypeId'],
+                    "ContactName"   => $request['contactName'],
+                    "ContactPhone"  => $request['contactPhone'],
+                    "ContactEmail"  => $request['contactEmail']
+                )
+            ), NULL, $headerTicket);
+
         }
+        catch (SoapFault $e) {
+            return $this->errorResponse($e->getMessage(), 503, $e->getMessage());
+        }
+        return response()->json($result, 200);
     }
 }

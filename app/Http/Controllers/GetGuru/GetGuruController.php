@@ -10,6 +10,15 @@ use GuzzleHttp\Client;
 
 class GetGuruController extends Controller
 {
+    private $methodGetRules = [
+        'ps_method' => 'required',
+        'ps_params' => 'required',
+    ];
+
+    private $methodPostRules = [
+        'ps_method' => 'required',
+        'ps_body' => 'required',
+    ];
 
     public function RequestGetGuru(Request $request)
     {
@@ -23,6 +32,7 @@ class GetGuruController extends Controller
 
     private function GetGetGuru(Request $request)
     {
+        $this->validate($request, $this->methodGetRules);
         $client = new Client();
         try {
             $result = $client->get(GetGuruConstants::URL_API . $request->ps_method . '?' . $request->ps_params,
@@ -40,6 +50,7 @@ class GetGuruController extends Controller
 
     private function PostGetGuru(Request $request)
     {
+        $this->validate($request, $this->methodPostRules);
         $client = new Client();
         try {
             $result = $client->post(GetGuruConstants::URL_API . $request->ps_method,
