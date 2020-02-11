@@ -153,12 +153,26 @@ class UserController extends ApiController
             'username'  => 'required',
             'password'  => 'required'
         ];
+
         $this->validate($request, $rules);
 
+        // Search user in new site an forum
         $user = $this->findOrFailUserByUsername($request['username']);
+        $userForum = $this->findUserForumByUsername($request['username']);
 
-        $user->password = Pluggable::wp_hash_password($request['password']);
+        // Generate password hash
+        $newPassword = Pluggable::wp_hash_password($request['password']);
+
+        // Save password for new site
+        $user->password = $newPassword;
         $user->save();
+
+        // Save password for forum new site
+        if($userForum != null)
+        {
+            $userForum->user_password  = $newPassword;
+            $userForum->save;
+        }
 
         return $this->messageResponse('The password has been reset!');
     }
@@ -224,5 +238,10 @@ class UserController extends ApiController
     private function findOrFailUserByUsername($username)
     {
         return User::where('username', $username )->firstOrFail();
+    }
+
+    private function findUserForumByUsername($username)
+    {
+        return UserForum::where('username', $username )->first();
     }
 }
