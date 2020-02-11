@@ -171,7 +171,7 @@ class UserController extends ApiController
         if($userForum != null)
         {
             $userForum->user_password  = $newPassword;
-            $userForum->save;
+            $userForum->save();
         }
 
         return $this->messageResponse('The password has been reset!');
