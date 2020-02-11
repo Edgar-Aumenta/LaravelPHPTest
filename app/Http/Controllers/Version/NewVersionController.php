@@ -8,6 +8,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
+use Throwable;
 
 class NewVersionController extends ApiController
 {
@@ -38,6 +39,7 @@ class NewVersionController extends ApiController
      */
     public function store(Request $request)
     {
+        $user = $request->user();
         $rules = [
             'version_code' => 'required|unique:new_versions',
             'version_name' => 'required',
@@ -45,19 +47,25 @@ class NewVersionController extends ApiController
             'current_version' => 'required',
             'release_date' => 'required',
             'estimate_size' => 'required',
-            'user_id' => 'required'
+            //'readme_url' => 'required',
+            //'update_guide_url' => 'required'
         ];
 
         $this->validate($request, $rules);
+        $newVersion = $request->all();
+        $newVersion['user_id'] = $user->id; // Save user to update version
 
         if($request->current_version == true){
             $currentNewVersion = $this->getCurrentVersion();
-            $this->setCurrentVersion($currentNewVersion, false);
+            if($currentNewVersion != null){
+                $currentNewVersion->current_version = false;
+                $currentNewVersion->save();
+            }
         }
 
-        $newVersion = NewVersion::create($request->all());
+        $savedNewVersion = NewVersion::create($newVersion);
 
-        return $this->showOne($newVersion, 201);
+        return $this->showOne($savedNewVersion, 201);
     }
 
     /**
@@ -78,25 +86,29 @@ class NewVersionController extends ApiController
      * @param NewVersion $newVersion
      * @return Response
      * @throws ValidationException
+     * @throws Throwable
      */
     public function update(Request $request, NewVersion $newVersion)
     {
+        $user = $request->user();
         $rules = [
-            'version_code' => 'unique:new_versions,version_code,' . $newVersion->id,
-            'user_id' => 'required'
+            'version_code' => 'unique:new_versions,version_code,' . $newVersion->id
         ];
 
         $this->validate($request, $rules);
         $this->compareChangesAndAssign($request, $newVersion);
 
+        $newVersion->user_id = $user->id; // Save user to update version
+
         if(!$newVersion->isDirty()){
-            return $this->errorResponse('Se debe especificar al menos un valor diferente para actualizar', 422);
+            return $this->messageResponse('Nothing to update', 200);
         }
 
         if($newVersion->current_version == true){
             $currentNewVersion = $this->getCurrentVersion();
             if($currentNewVersion != null && $currentNewVersion->id != $newVersion->id){
-                $this->setCurrentVersion($currentNewVersion, false);
+                $currentNewVersion->current_version = false;
+                $currentNewVersion->save();
             }
         }
 
@@ -118,10 +130,10 @@ class NewVersionController extends ApiController
 
         if($newVersion->current_version == true){
             $lastReleaseVersion = $this->getLastReleaseVersion();
-            $this->setCurrentVersion($lastReleaseVersion, true);
+            $lastReleaseVersion->current_version = false;
+            $lastReleaseVersion->save();
         }
-
-        return $this->showOne($newVersion);
+        return $this->messageResponse("Erased!", 200);
     }
 
     /**
@@ -137,7 +149,8 @@ class NewVersionController extends ApiController
         if ($request->has('current_version')) $newVersion->current_version = $request->current_version;
         if ($request->has('release_date')) $newVersion->release_date = $request->release_date;
         if ($request->has('estimate_size')) $newVersion->estimate_size = $request->estimate_size;
-        if ($request->has('user_id')) $newVersion->user_id = $request->user_id;
+        if ($request->has('readme_url')) $newVersion->readme_url = $request->readme_url;
+        if ($request->has('update_guide_url')) $newVersion->update_guide_url = $request->update_guide_url;
     }
 
     /**
@@ -179,13 +192,6 @@ class NewVersionController extends ApiController
         return $lastReleaseVersion;
     }
 
-    private function setCurrentVersion(NewVersion $newVersion, bool $isCurrent){
-        if($newVersion != null) {
-            $newVersion->current_version = $isCurrent;
-            $newVersion->save();
-        }
-    }
-
     /**
      * @param NewVersion $nv
      * @return NewVersion
@@ -200,6 +206,8 @@ class NewVersionController extends ApiController
         $newVersion->current_version = $nv->current_version;
         $newVersion->release_date = $nv->release_date;
         $newVersion->estimate_size = $nv->estimate_size;
+        $newVersion->readme_url = $nv->readme_url;
+        $newVersion->update_guide_url = $nv->update_guide_url;
 
         return $newVersion;
     }

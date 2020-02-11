@@ -6,6 +6,8 @@ use App\Http\Controllers\ApiController;
 use App\UpdateVersion;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
+use Throwable;
 
 class UpdateVersionController extends ApiController
 {
@@ -30,12 +32,13 @@ class UpdateVersionController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @return Response
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
+        $user = $request->user();
         $rules = [
             'version_code' => 'required|unique:update_versions',
             'version_name' => 'required',
@@ -43,10 +46,13 @@ class UpdateVersionController extends ApiController
             'current_version' => 'required',
             'release_date' => 'required',
             'estimate_size' => 'required',
-            'user_id' => 'required'
+            //'readme_url' => 'required',
+            //'update_guide_url' => 'required'
         ];
 
         $this->validate($request, $rules);
+        $newUpdateVersion = $request->all();
+        $newUpdateVersion['user_id'] = $user->id; // Save user to update version
 
         if($request->current_version == true){
             $currentNewVersion = $this->getCurrentVersion();
@@ -54,7 +60,7 @@ class UpdateVersionController extends ApiController
             $currentNewVersion->save();
         }
 
-        $updateVersion = UpdateVersion::create($request->all());
+        $updateVersion = UpdateVersion::create($newUpdateVersion);
 
         return $this->showOne($updateVersion, 201);
     }
@@ -73,28 +79,26 @@ class UpdateVersionController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param UpdateVersion $updateVersion
      * @return Response
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
+     * @throws Throwable
      */
     public function update(Request $request, UpdateVersion $updateVersion)
     {
+        $user = $request->user();
         $rules = [
-            'version_code' => 'required|unique:update_versions,version_code,' . $updateVersion->id,
-            'version_name' => 'required',
-            'version_url' => 'required',
-            'current_version' => 'required',
-            'release_date' => 'required',
-            'estimate_size' => 'required',
-            'user_id' => 'required'
+            'version_code' => 'unique:update_versions,version_code,' . $updateVersion->id,
         ];
 
         $this->validate($request, $rules);
         $this->compareChangesAndAssign($request, $updateVersion);
 
+        $updateVersion->user_id = $user->id; // Save user to update version
+
         if(!$updateVersion->isDirty()){
-            return $this->errorResponse('Se debe especificar al menos un valor diferente para actualizar', 422);
+            return $this->messageResponse('Nothing to update', 200);
         }
 
         if($updateVersion->current_version == true){
@@ -135,7 +139,8 @@ class UpdateVersionController extends ApiController
         if ($request->has('current_version')) $updateVersion->current_version = $request->current_version;
         if ($request->has('release_date')) $updateVersion->release_date = $request->release_date;
         if ($request->has('estimate_size')) $updateVersion->estimate_size = $request->estimate_size;
-        if ($request->has('user_id')) $updateVersion->user_id = $request->user_id;
+        if ($request->has('readme_url')) $updateVersion->readme_url = $request->readme_url;
+        if ($request->has('update_guide_url')) $updateVersion->update_guide_url = $request->update_guide_url;
     }
 
     /**
@@ -184,6 +189,8 @@ class UpdateVersionController extends ApiController
         $updateVersion->current_version = $nv->current_version;
         $updateVersion->release_date = $nv->release_date;
         $updateVersion->estimate_size = $nv->estimate_size;
+        $updateVersion->readme_url = $nv->readme_url;
+        $updateVersion->update_guide_url = $nv->update_guide_url;
 
         return $updateVersion;
     }

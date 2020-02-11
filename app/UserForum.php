@@ -16,6 +16,7 @@ class UserForum extends Model
     protected $connection = 'mysql_forum';
     protected $table = 'pbb_users';
     public $timestamps  = false;
+    protected $primaryKey = 'user_id';
 
     /**
      * The attributes that are mass assignable.
@@ -70,6 +71,15 @@ class UserForum extends Model
         'user_sig_bbcode_uid',
         'user_sig_bbcode_bitfield',
         'user_form_salt',
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'user_password',
     ];
 
     /**

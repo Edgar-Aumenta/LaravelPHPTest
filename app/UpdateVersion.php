@@ -18,6 +18,8 @@ class UpdateVersion extends Model
         'current_version',
         'release_date',
         'estimate_size',
+        'readme_url',
+        'update_guide_url',
         'user_id'
     ];
 }
