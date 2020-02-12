@@ -13,10 +13,10 @@ class FeatureRequest
     public $contactEmail;
     public $storeName;
 
-    public function __construct($pmSerial, $issue, $contactName, $contactPhone, $contactEmail, $storeName)
+    public function __construct($pmSerial, $requestedFeature, $contactName, $contactPhone, $contactEmail, $storeName)
     {
         $this->pmSerial = $pmSerial;
-        $this->issue = $issue;
+        $this->requestedFeature = $requestedFeature;
         $this->contactName = $contactName;
         $this->contactPhone = $contactPhone;
         $this->contactEmail = $contactEmail;

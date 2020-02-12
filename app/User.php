@@ -15,6 +15,7 @@ use League\OAuth2\Server\Exception\OAuthServerException;
 /**
  * @method static create(array $data)
  * @method where(string $string, $value)
+ * @property mixed email
  */
 class User extends Authenticable
 {
@@ -162,7 +163,7 @@ class User extends Authenticable
      */
     public function sendPasswordResetNotification($token)
     {
-        $this->notify( new PasswordResetNotification($token));
+        $this->notify( new PasswordResetNotification($token, $this->email));
     }
 
 }

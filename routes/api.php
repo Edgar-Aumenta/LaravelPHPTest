@@ -57,3 +57,5 @@ Route::post('password/reset', 'Api\ResetPasswordController@reset');
 
 Route::get('crm/ticket/issues', 'CRMTicket\CRMTicketController@getIssues');
 Route::post('crm/ticket', 'CRMTicket\CRMTicketController@newWebTicket');
+
+Route::post('email/feature_request', 'Email\EmailController@sendEmailFeatureRequest');

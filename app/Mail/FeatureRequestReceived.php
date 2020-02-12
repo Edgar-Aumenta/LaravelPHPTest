@@ -6,7 +6,6 @@ use App\FeatureRequest;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class FeatureRequestReceived extends Mailable
 {
@@ -32,6 +31,6 @@ class FeatureRequestReceived extends Mailable
     public function build()
     {
         return $this->from($this->featureRequest->contactEmail)
-                    ->view('view.name');
+                    ->view('emails.feature_request');
     }
 }
