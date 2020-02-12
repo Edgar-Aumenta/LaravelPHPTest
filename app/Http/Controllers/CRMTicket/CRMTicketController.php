@@ -4,9 +4,9 @@ namespace App\Http\Controllers\CRMTicket;
 
 use App\CRMAuth;
 use App\Http\Controllers\ApiController;
-use App\Http\Controllers\Controller;
 use App\XMLHelpers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use SoapClient;
 use SoapFault;
 use SoapHeader;
@@ -101,5 +101,11 @@ class CRMTicketController extends ApiController
             return $this->errorResponse($e->getMessage(), 503, $e->getMessage());
         }
         return response()->json($result, 200);
+    }
+
+    public function newFeatureRequest(Request $request)
+    {
+        // ['karen@pcsynergy.com', 'larrys@pcsynergy.com']
+        Mail::to('omaralejandrocy@gmail.com')->send();
     }
 }
