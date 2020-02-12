@@ -11,17 +11,18 @@ class PasswordResetNotification extends Notification
 {
     use Queueable;
     public $token;
-    public $email;
+    public $emailFromAddress;
 
     /**
      * Create a new notification instance.
      *
      * @param $token
+     * @param $emailFromAddress
      */
-    public function __construct($token, $email)
+    public function __construct($token, $emailFromAddress)
     {
         $this->token = $token;
-        $this->email = $email;
+        $this->emailFromAddress = $emailFromAddress;
     }
 
     /**
@@ -43,7 +44,7 @@ class PasswordResetNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $urlToResetForm = env('APP_URL') . '/reset-password/'. $this->email .'/' . $this->token;
+        $urlToResetForm = env('APP_URL') . '/reset-password/'. $this->emailFromAddress .'/' . $this->token;
 
         return (new MailMessage)
             ->subject(Lang::getFromJson('Reset Password Notification'))
