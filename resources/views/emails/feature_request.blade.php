@@ -10,6 +10,7 @@
         <ul>
             <li>Name: {{ $featureRequest->contactName }}</li>
             <li>Phone number: {{ $featureRequest->contactPhone }}</li>
+            <li>Email address: {{ $featureRequest->contactEmail }}</li>
             <li>PostalMate serial Number: {{ $featureRequest->pmSerial }}</li>
             <li>Store name: {{ $featureRequest->storeName }}</li>
             <li>Requested feature: {{ $featureRequest->requestedFeature }}</li>
