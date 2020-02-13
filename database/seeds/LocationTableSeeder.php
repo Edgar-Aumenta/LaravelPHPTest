@@ -13,15 +13,10 @@ class LocationTableSeeder extends Seeder
      */
     public function run()
     {
-        Location::create(['name' => 'Ft Lauderdale, FL']);
-        Location::create(['name' => 'Santa Ana, CA']);
-        Location::create(['name' => 'Charlotte, NC']);
-        Location::create(['name' => 'St Louis, MO']);
-        Location::create(['name' => 'Denver, CO']);
-        Location::create(['name' => 'Dallas, TX']);
-        Location::create(['name' => 'New York, NY']);
-        Location::create(['name' => 'Phoenix, AZ']);
-        Location::create(['name' => 'Anaheim, CA']);
-        Location::create(['name' => 'Las Vegas, NV']);
+        Location::create(['name' => 'Orlando, FL']);
+        Location::create(['name' => 'Houston, TX']);
+        Location::create(['name' => 'Hartford, CT']);
+        Location::create(['name' => 'Seattle, WA']);
+        Location::create(['name' => 'San Diego, CA']);
     }
 }

@@ -4,7 +4,6 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Lang;
 
@@ -12,15 +11,18 @@ class PasswordResetNotification extends Notification
 {
     use Queueable;
     public $token;
+    public $emailFromAddress;
 
     /**
      * Create a new notification instance.
      *
      * @param $token
+     * @param $emailFromAddress
      */
-    public function __construct($token)
+    public function __construct($token, $emailFromAddress)
     {
         $this->token = $token;
+        $this->emailFromAddress = $emailFromAddress;
     }
 
     /**
@@ -42,7 +44,7 @@ class PasswordResetNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $urlToResetForm = env('APP_URL') . '/reset-password-form?token=' . $this->token;
+        $urlToResetForm = env('APP_URL') . '/reset-password/'. $this->emailFromAddress .'/' . $this->token;
 
         return (new MailMessage)
             ->subject(Lang::getFromJson('Reset Password Notification'))

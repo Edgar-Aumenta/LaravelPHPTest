@@ -1,5 +1,6 @@
 <?php
 
+use App\Pluggable;
 use App\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -13,27 +14,27 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        // Admin user
+        // crmpostalmate
         User::create([
-            'first_name' => 'Omar Alejandro',
-            'last_name' => 'Cervantes Yepez',
-            'username' => 'omaracy',
-            'website' => 'www.omaracy.com',
-            'email' => 'omar@aumenta.mx',
+            'first_name' => 'CRM PostalMate',
+            'last_name' => null,
+            'username' => 'crmpostalmate',
+            'website' => null,
+            'email' => 'crmpostalmate@pcsynergy.com',
             'email_verified_at' => now(),
-            'password' => bcrypt('secret'),
+            'password' => Pluggable::wp_hash_password('Pmate999'),
             'send_notifications' => true,
-            'url_image' => 'www.image.com',
-            'url_image_thumbnail' => 'www.image-thumbnail.com',
-            'address_1' => 'Mi direccion',
+            'url_image' => null,
+            'url_image_thumbnail' => null,
+            'address_1' => null,
             'address_2' => null,
-            'city' => 'San Luis Potosí',
-            'state' => 'San Luis Potosí',
-            'zip' => '78000',
-            'country' => 'Mexico',
-            'day_phone' => 'day phone',
+            'city' => null,
+            'state' => null,
+            'zip' => null,
+            'country' => null,
+            'day_phone' => null,
             'tos' => false,
-            'company' => 'Mi compañia',
+            'company' => null,
             'enable' => true,
             'remember_token' => Str::random(10),
             'verified' => User::USUARIO_VERIFICADO,
@@ -41,32 +42,32 @@ class UserTableSeeder extends Seeder
             'admin' => User::USUARIO_ADMMINISTRADOR,
         ]);
 
-        // Regular user
+        //
         User::create([
-            'first_name' => 'Josue',
-            'last_name' => 'Don',
-            'username' => 'xozue',
-            'website' => 'www.xozue.com',
-            'email' => 'jdon@aumenta.mx',
+            'first_name' => 'Admin Development',
+            'last_name' => null,
+            'username' => 'admindev',
+            'website' => null,
+            'email' => 'admindev@aumenta.mx',
             'email_verified_at' => now(),
-            'password' => bcrypt('secret'),
+            'password' => Pluggable::wp_hash_password('Pmate999'),
             'send_notifications' => true,
-            'url_image' => 'www.image.com',
-            'url_image_thumbnail' => 'www.image-thumbnail.com',
-            'address_1' => 'Mi direccion',
+            'url_image' => null,
+            'url_image_thumbnail' => null,
+            'address_1' => null,
             'address_2' => null,
-            'city' => 'San Luis Potosí',
-            'state' => 'San Luis Potosí',
-            'zip' => '78000',
-            'country' => 'Mexico',
-            'day_phone' => 'day phone',
+            'city' => null,
+            'state' => null,
+            'zip' => null,
+            'country' => null,
+            'day_phone' => null,
             'tos' => false,
-            'company' => 'Mi compañia',
+            'company' => null,
             'enable' => true,
             'remember_token' => Str::random(10),
             'verified' => User::USUARIO_VERIFICADO,
             'verification_token' => null,
-            'admin' => User::USUARIO_REGULAR,
+            'admin' => User::USUARIO_ADMMINISTRADOR,
         ]);
     }
 }

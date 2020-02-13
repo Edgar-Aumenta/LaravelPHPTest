@@ -4,7 +4,6 @@ namespace App\Http\Controllers\CRMTicket;
 
 use App\CRMAuth;
 use App\Http\Controllers\ApiController;
-use App\Http\Controllers\Controller;
 use App\XMLHelpers;
 use Illuminate\Http\Request;
 use SoapClient;
@@ -25,24 +24,6 @@ class CRMTicketController extends ApiController
     public function __construct()
     {
         $this->middleware('auth:api');
-    }
-
-    private function CRMSoapClient()
-    {
-        $url = env('CRM_URL');
-        try {
-            $arrContextOptions = array("ssl"=>array( "verify_peer"=>false, "verify_peer_name"=>false,'crypto_method' => STREAM_CRYPTO_METHOD_TLS_CLIENT));
-            $options = array(
-                'soap_version'=>SOAP_1_2,
-                'exceptions'=>true,
-                'trace'=>1,
-                'cache_wsdl'=>WSDL_CACHE_NONE,
-                'stream_context' => stream_context_create($arrContextOptions)
-            );
-            return new SoapClient($url, $options);
-        } catch (SoapFault $e) {
-            return null;
-        }
     }
 
     public function getIssues()
@@ -101,5 +82,23 @@ class CRMTicketController extends ApiController
             return $this->errorResponse($e->getMessage(), 503, $e->getMessage());
         }
         return response()->json($result, 200);
+    }
+
+    private function CRMSoapClient()
+    {
+        $url = env('CRM_URL');
+        try {
+            $arrContextOptions = array("ssl"=>array( "verify_peer"=>false, "verify_peer_name"=>false,'crypto_method' => STREAM_CRYPTO_METHOD_TLS_CLIENT));
+            $options = array(
+                'soap_version'=>SOAP_1_2,
+                'exceptions'=>true,
+                'trace'=>1,
+                'cache_wsdl'=>WSDL_CACHE_NONE,
+                'stream_context' => stream_context_create($arrContextOptions)
+            );
+            return new SoapClient($url, $options);
+        } catch (SoapFault $e) {
+            return null;
+        }
     }
 }

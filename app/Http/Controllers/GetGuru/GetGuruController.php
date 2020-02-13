@@ -12,12 +12,10 @@ class GetGuruController extends Controller
 {
     private $methodGetRules = [
         'ps_method' => 'required',
-        'ps_params' => 'required',
     ];
 
     private $methodPostRules = [
         'ps_method' => 'required',
-        'ps_body' => 'required',
     ];
 
     public function RequestGetGuru(Request $request)
