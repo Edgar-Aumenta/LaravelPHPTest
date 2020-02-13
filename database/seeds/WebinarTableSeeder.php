@@ -28,7 +28,7 @@ class WebinarTableSeeder extends Seeder
             'time_zone_desc' => 'Pacific',
             'name' => 'FedEx International in PostalMate®',
             'recorded_url' => 'https://www.youtube.com/embed/_C2_O69dAfU?wmode=transparent&hd=0&autoplay=1&controls=1&fs=1&autohide=2&theme=dark&rel=0&showinfo=1&iv_load_policy=3',
-            'visible' => true,
+            'visible' => false,
             'user_id' => 1
         ]);
 
@@ -53,7 +53,7 @@ class WebinarTableSeeder extends Seeder
         ]);
 
         Webinar::create([
-            'start_date' => '2018-06-20',
+            'start_date' => '2018-06-27',
             'start_time' => '10:00:00',
             'time_zone_desc' => 'Pacific',
             'name' => 'It cost WHAT to ship that???',
@@ -68,7 +68,7 @@ class WebinarTableSeeder extends Seeder
             'time_zone_desc' => 'Pacific',
             'name' => 'New UPS Rate Structure Change',
             'recorded_url' => 'https://www.youtube.com/embed/azVQPl7sxzs?wmode=transparent&hd=0&autoplay=1&controls=1&fs=1&autohide=2&theme=dark&rel=0&showinfo=1&iv_load_policy=3',
-            'visible' => true,
+            'visible' => false,
             'user_id' => 1
         ]);
 
@@ -78,7 +78,7 @@ class WebinarTableSeeder extends Seeder
             'time_zone_desc' => 'Pacific',
             'name' => "Let's Check our UPS Rates",
             'recorded_url' => 'https://www.youtube.com/embed/ZjcJQ8YPPw4?wmode=transparent&hd=0&autoplay=1&controls=1&fs=1&autohide=2&theme=dark&rel=0&showinfo=1&iv_load_policy=3',
-            'visible' => true,
+            'visible' => false,
             'user_id' => 1
         ]);
 
@@ -98,7 +98,7 @@ class WebinarTableSeeder extends Seeder
             'time_zone_desc' => 'Pacific',
             'name' => 'Evaluate Your UPS Rate Settings',
             'recorded_url' => 'https://www.youtube.com/embed/g_cpReeH9Gk?wmode=transparent&hd=0&autoplay=1&controls=1&fs=1&autohide=2&theme=dark&rel=0&showinfo=1&iv_load_policy=3',
-            'visible' => true,
+            'visible' => false,
             'user_id' => 1
         ]);
 
@@ -118,7 +118,7 @@ class WebinarTableSeeder extends Seeder
             'time_zone_desc' => 'Pacific',
             'name' => 'FedEx Rate Structure Change',
             'recorded_url' => 'https://www.youtube.com/embed/yuXDQXBjRMg?wmode=transparent&hd=0&autoplay=1&controls=1&fs=1&autohide=2&theme=dark&rel=0&showinfo=1&iv_load_policy=3',
-            'visible' => true,
+            'visible' => false,
             'user_id' => 1
         ]);
 
@@ -128,7 +128,7 @@ class WebinarTableSeeder extends Seeder
             'time_zone_desc' => 'Pacific',
             'name' => '	Showing FedEx Changes in PostalMate',
             'recorded_url' => 'https://www.youtube.com/embed/ooLen95V6aM?wmode=transparent&hd=0&autoplay=1&controls=1&fs=1&autohide=2&theme=dark&rel=0&showinfo=1&iv_load_policy=3',
-            'visible' => true,
+            'visible' => false,
             'user_id' => 1
         ]);
 
@@ -138,7 +138,7 @@ class WebinarTableSeeder extends Seeder
             'time_zone_desc' => 'Pacific',
             'name' => 'Get Ready for the Holidays Rate Review',
             'recorded_url' => 'https://www.youtube.com/embed/w9CLAeLxPFw?wmode=transparent&hd=0&autoplay=1&controls=1&fs=1&autohide=2&theme=dark&rel=0&showinfo=1&iv_load_policy=3',
-            'visible' => true,
+            'visible' => false,
             'user_id' => 1
         ]);
 
@@ -188,7 +188,7 @@ class WebinarTableSeeder extends Seeder
             'time_zone_desc' => 'Pacific',
             'name' => 'New Owners Quick Start',
             'recorded_url' => 'https://www.youtube.com/embed/kyIPmWoBXBs?wmode=transparent&hd=0&autoplay=1&controls=1&fs=1&autohide=2&theme=dark&rel=0&showinfo=1&iv_load_policy=3',
-            'visible' => true,
+            'visible' => false,
             'user_id' => 1
         ]);
 
@@ -283,7 +283,37 @@ class WebinarTableSeeder extends Seeder
         ]);
 
         Webinar::create([
-            'start_date' => '2019-08-14',
+            'start_date' => '2019-10-09',
+            'start_time' => '10:00:00',
+            'time_zone_desc' => 'Pacific',
+            'name' => 'New Owners Quick Start',
+            'recorded_url' => 'https://www.youtube.com/embed/LpapGqyJP0E?wmode=transparent&hd=0&autoplay=1&controls=1&fs=1&autohide=2&theme=dark&rel=0&showinfo=1&iv_load_policy=3',
+            'visible' => true,
+            'user_id' => 1
+        ]);
+
+        Webinar::create([
+            'start_date' => '2019-11-13',
+            'start_time' => '10:00:00',
+            'time_zone_desc' => 'Pacific',
+            'name' => 'Holiday Rates with Tips and Tricks',
+            'recorded_url' => 'https://register.gotowebinar.com/recording/6543608615637665030',
+            'visible' => true,
+            'user_id' => 1
+        ]);
+
+        Webinar::create([
+            'start_date' => '2020-01-29',
+            'start_time' => '10:00:00',
+            'time_zone_desc' => 'Pacific',
+            'name' => 'Post Office/Endicia Rate Update',
+            'register_url' => '',
+            'visible' => true,
+            'user_id' => 1
+        ]);
+
+        Webinar::create([
+            'start_date' => '2020-02-12',
             'start_time' => '10:00:00',
             'time_zone_desc' => 'Pacific',
             'name' => 'New Owners Quick Start',
