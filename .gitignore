@@ -113,3 +113,7 @@ fabric.properties
 # Files excluded for mac
 .DS_Store
 # End Files excluded for mac
+
+# Files excluded for deploy
+/resources/views/index.html
+# End Files excluded for deploy
