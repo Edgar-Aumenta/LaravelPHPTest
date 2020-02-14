@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\AclUsersForum;
 use App\Forum;
 use App\GroupsForum;
 use App\User;
@@ -60,7 +61,9 @@ class UserController extends ApiController
         if($data['send_notifications'] == null) $data['send_notifications'] = 0;
 
         $user = User::create($data);
-        $userFromForum = $this->createUserForum($data);
+        $userForum = $this->createUserForum($data);
+
+        $this->userRegistrationToForums($userForum);
 
         return $this->showOne($user, 201);
     }
@@ -248,6 +251,19 @@ class UserController extends ApiController
 
     private function userRegistrationToForums(UserForum $userForum)
     {
-        Forum::all();
+        $forums = Forum::all();
+
+        foreach ($forums as $forum)
+        {
+            $aclUserRow = array(
+                'user_id'			=> $userForum->user_id,
+                'forum_id'	        => $forum->forum_id,
+                'auth_option_id'    => 0,
+                'auth_role_id'	    => 15,
+                'auth_setting'		=> 0
+            );
+
+            AclUsersForum::create($aclUserRow);
+        }
     }
 }

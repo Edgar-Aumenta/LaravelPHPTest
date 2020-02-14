@@ -110,7 +110,11 @@ class User extends Authenticable
      */
     public function findForPassport($username)
     {
-        return $this->where('username', $username)->first();
+        if($this->isEmail($username)){
+            return $this->where('email', $username)->first();
+        }else{
+            return $this->where('username', $username)->first();
+        }
     }
 
     /**
@@ -164,6 +168,11 @@ class User extends Authenticable
     public function sendPasswordResetNotification($token)
     {
         $this->notify( new PasswordResetNotification($token, $this->email));
+    }
+
+    private function isEmail($str)
+    {
+        return (false !== filter_var($str, FILTER_VALIDATE_EMAIL));
     }
 
 }

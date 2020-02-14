@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static create(array $fields)
+ * @property mixed user_id
  */
 class UserForum extends Model
 {
@@ -91,14 +92,14 @@ class UserForum extends Model
      */
     public static function GetAdditionalVars(){
         return array(
-                'user_permissions'	=> '00000000000vzik0zi\n\n\n
-                                        m6b8xhqmx0qo\n
-                                        m6b8xhqmx0qo\n
-                                        m6b8xhqmx0qo\n
-                                        m6b8xhqmx0qo\n
-                                        m6b8xhqmx0qo\n
-                                        m6b8xhqmx0qo\n
-                                        m6b8xhqmx0qo\n',
+                'user_permissions'	=> '00000000000vzik0zi' .
+                                        ' m6b8xhqmx0qo' .
+                                        ' m6b8xhqmx0qo' .
+                                        ' m6b8xhqmx0qo' .
+                                        ' m6b8xhqmx0qo' .
+                                        ' m6b8xhqmx0qo' .
+                                        ' m6b8xhqmx0qo' .
+                                        ' m6b8xhqmx0qo',
                 'user_timezone'		=> '',
                 'user_dateformat'	=> 'D M d, Y g:i a',
                 'user_lang'			=> 'en',
