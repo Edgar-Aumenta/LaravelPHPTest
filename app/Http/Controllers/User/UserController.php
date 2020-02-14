@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Forum;
 use App\GroupsForum;
 use App\User;
 use App\Pluggable;
@@ -243,5 +244,10 @@ class UserController extends ApiController
     private function findUserForumByUsername($username)
     {
         return UserForum::where('username', $username )->first();
+    }
+
+    private function userRegistrationToForums(UserForum $userForum)
+    {
+        Forum::all();
     }
 }
