@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Event;
 
-use App\EventSchedule;
+use App\Event;
+use App\EventSchedule;;
+use App\Location;
+use App\Lodging;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
-use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 
 class EventScheduleController extends ApiController
@@ -13,10 +17,10 @@ class EventScheduleController extends ApiController
     private $rules = [
         'start_date' => 'nullable|date',
         'end_date' => 'nullable|date',
-        'location_id' => 'required',
-        'event_id' => 'required',
-        'lodging_id' => 'required',
-        'user_id' => 'required'
+        'location' => 'required',
+        'event' => 'required',
+        'lodging' => 'required',
+        'lodging_url' => 'required'
     ];
 
     public function __construct()
@@ -28,7 +32,7 @@ class EventScheduleController extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return JsonResponse
      */
     public function index()
     {
@@ -49,14 +53,29 @@ class EventScheduleController extends ApiController
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return JsonResponse
      * @throws ValidationException
      */
     public function store(Request $request)
     {
+        $user = $request->user();
         $this->validate($request, $this->rules);
 
-        $eventSchedule = EventSchedule::create($request->all());
+        $eventScheduleRow = array(
+            'start_date'        => $request['start_date'],
+            'end_date'          => $request['end_date'],
+            'location_id'       => $this->getLocationId($request['location']),
+            'event_id'          => $this->getEventId($request['event']),
+            'lodging_id'        => $this->getLodgingId($request['lodging'], $request['lodging_url']),
+            'visible'           => $request->has('visible') ? $request['visible'] : 1,
+            'register_title'    => $request['register_title'],
+            'register_url'      => $request['register_url'],
+            'mi_title'          => $request['mi_title'],
+            'mi_url'            =>$request['mi_url'],
+            'user_id'           => $user['id']
+        );
+
+        $eventSchedule = EventSchedule::create($eventScheduleRow);
 
         return $this->showOne($eventSchedule, 201);
     }
@@ -65,7 +84,7 @@ class EventScheduleController extends ApiController
      * Display the specified resource.
      *
      * @param EventSchedule $eventSchedule
-     * @return Response
+     * @return JsonResponse
      */
     public function show(EventSchedule $eventSchedule)
     {
@@ -79,7 +98,7 @@ class EventScheduleController extends ApiController
      *
      * @param Request $request
      * @param EventSchedule $eventSchedule
-     * @return Response
+     * @return JsonResponse
      * @throws ValidationException
      */
     public function update(Request $request, EventSchedule $eventSchedule)
@@ -101,8 +120,8 @@ class EventScheduleController extends ApiController
      * Remove the specified resource from storage.
      *
      * @param EventSchedule $eventSchedule
-     * @return Response
-     * @throws \Exception
+     * @return JsonResponse
+     * @throws Exception
      */
     public function destroy(EventSchedule $eventSchedule)
     {
@@ -113,7 +132,7 @@ class EventScheduleController extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return JsonResponse
      */
     public function publicIndex()
     {
@@ -139,9 +158,10 @@ class EventScheduleController extends ApiController
     {
         if($request->has('start_date')) $eventSchedule->start_date = $request->start_date;
         if($request->has('end_date')) $eventSchedule->end_date = $request->end_date;
-        if($request->has('location_id')) $eventSchedule->location_id = $request->location_id;
-        if($request->has('event_id')) $eventSchedule->event_id = $request->event_id;
-        if($request->has('lodging_id')) $eventSchedule->lodging_id = $request->lodging_id;
+        if($request->has('location')) $eventSchedule->location_id = $this->getLocationId($request->location);
+        if($request->has('event')) $eventSchedule->event_id = $this->getEventId($request->event);
+        if($request->has('lodging') && $request->has('lodging_url'))
+            $eventSchedule['lodging_id'] = $this->getLodgingId($request['lodging'], $request['lodging_url']);
         if($request->has('register_title')) $eventSchedule->register_title = $request->register_title;
         if($request->has('register_url')) $eventSchedule->register_url = $request->register_url;
         if($request->has('mi_title')) $eventSchedule->mi_title = $request->mi_title;
@@ -171,5 +191,68 @@ class EventScheduleController extends ApiController
         $eventScheduleNew->updated_at = $eventSchedule->updated_at;
 
         return $eventScheduleNew;
+    }
+
+    private function getEventId($eventName)
+    {
+        $events = Event::all();
+        $eventId = 0;
+        // find event in catalog
+        foreach ($events as $event){
+            if(strtolower($event['name']) == strtolower($eventName)) {
+                $eventId = $event->id;
+                break;
+            }
+        }
+        // if doesn't exist event then is create
+        if($eventId == 0){
+            $eventRow = array( 'name' => $eventName);
+            $event = Event::create($eventRow);
+            $eventId = $event->id;
+        }
+        return $eventId;
+    }
+
+    private function getLocationId($locationName)
+    {
+        $locations = Location::all();
+        $locationId = 0;
+        // find location in catalog
+        foreach ($locations as $location){
+            if(strtolower($location['name']) == strtolower($locationName)){
+                $locationId = $location->id;
+                break;
+            }
+        }
+        // if doesn't exist location then is create
+        if($locationId == 0){
+            $locationRow = array( 'name' => $locationName);
+            $location = Location::create($locationRow);
+            $locationId = $location->id;
+        }
+        return $locationId;
+    }
+
+    private function getLodgingId($lodgingName, $lodgingUrl)
+    {
+        $lodgings = Lodging::all();
+        $lodgingId = 0;
+        // find location in catalog
+        foreach ($lodgings as $lodging){
+            if(strtolower($lodging['name']) == strtolower($lodgingName) && $lodging['url'] == $lodgingUrl){
+                $lodgingId = $lodging->id;
+                break;
+            }
+        }
+        // if doesn't exist location then is create
+        if($lodgingId == 0){
+            $lodgingRow = array(
+                'name' => $lodgingName,
+                'url' => $lodgingUrl
+            );
+            $lodging = Lodging::create($lodgingRow);
+            $lodgingId = $lodging->id;
+        }
+        return $lodgingId;
     }
 }
