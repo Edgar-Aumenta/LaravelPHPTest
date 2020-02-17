@@ -58,7 +58,7 @@ class EventScheduleController extends ApiController
      */
     public function store(Request $request)
     {
-        $user = $request->user();
+        $currentUser = $request->user();
         $this->validate($request, $this->rules);
 
         $eventScheduleRow = array(
@@ -71,8 +71,8 @@ class EventScheduleController extends ApiController
             'register_title'    => $request['register_title'],
             'register_url'      => $request['register_url'],
             'mi_title'          => $request['mi_title'],
-            'mi_url'            =>$request['mi_url'],
-            'user_id'           => $user['id']
+            'mi_url'            => $request['mi_url'],
+            'user_id'           => $currentUser['id']
         );
 
         $eventSchedule = EventSchedule::create($eventScheduleRow);
@@ -103,12 +103,14 @@ class EventScheduleController extends ApiController
      */
     public function update(Request $request, EventSchedule $eventSchedule)
     {
+        $currentUser = $request->user();
         $this->validate($request, $this->rules);
 
         $this->compareChangesAndAssign($request, $eventSchedule);
+        $eventSchedule['user_id'] = $currentUser['id'];
 
         if(!$eventSchedule->isDirty()){
-            return $this->errorResponse('Se debe especificar al menos un valor diferente para actualizar', 422);
+            return $this->messageResponse('Nothing to update', 200);
         }
 
         $eventSchedule->save();
@@ -167,7 +169,6 @@ class EventScheduleController extends ApiController
         if($request->has('mi_title')) $eventSchedule->mi_title = $request->mi_title;
         if($request->has('mi_url')) $eventSchedule->mi_url = $request->mi_url;
         if($request->has('visible')) $eventSchedule->visible = $request->visible;
-        if($request->has('user_id')) $eventSchedule->user_id = $request->user_id;
     }
 
     /**

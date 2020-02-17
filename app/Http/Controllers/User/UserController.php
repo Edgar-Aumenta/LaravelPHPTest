@@ -26,11 +26,15 @@ class UserController extends ApiController
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        $currentUser = $request->user();
+        $users = User::where('admin', 'true')
+                        ->where('id', '!=', $currentUser['id'])
+                        ->get();
 
         return $this->showAll($users);
     }
