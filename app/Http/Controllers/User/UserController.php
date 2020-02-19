@@ -9,6 +9,7 @@ use App\User;
 use App\Pluggable;
 use App\Http\Controllers\ApiController;
 use App\UserForum;
+use App\UserGroupForum;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -63,10 +64,12 @@ class UserController extends ApiController
         if($data['tos'] == null) $data['tos'] = 0;
         if($data['enable'] == null) $data['enable'] = User::ENABLE_USER;
         if($data['send_notifications'] == null) $data['send_notifications'] = 0;
-
+        // Register user
         $user = User::create($data);
+        // Register user forum
         $userForum = $this->createUserForum($data);
-
+        // Additional register for user forum
+        $this->userRegistrationToGroup($userForum);
         $this->userRegistrationToForums($userForum);
 
         return $this->showOne($user, 201);
@@ -251,6 +254,18 @@ class UserController extends ApiController
     private function findUserForumByUsername($username)
     {
         return UserForum::where('username', $username )->first();
+    }
+
+    private function userRegistrationToGroup(UserForum $userForum)
+    {
+        $groupId = (int) GroupsForum::GetForUserRegistered()->group_id;
+        $userGroupRow = array(
+            'group_id'      => $groupId,
+            'user_id'       => $userForum->user_id,
+            'group_leader'  => 0, // default value
+            'user_pending' => 0 // default value
+        );
+        UserGroupForum::create($userGroupRow);
     }
 
     private function userRegistrationToForums(UserForum $userForum)

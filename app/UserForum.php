@@ -92,14 +92,7 @@ class UserForum extends Model
      */
     public static function GetAdditionalVars(){
         return array(
-                'user_permissions'	=> '00000000000vzik0zi' .
-                                        ' m6b8xhqmx0qo' .
-                                        ' m6b8xhqmx0qo' .
-                                        ' m6b8xhqmx0qo' .
-                                        ' m6b8xhqmx0qo' .
-                                        ' m6b8xhqmx0qo' .
-                                        ' m6b8xhqmx0qo' .
-                                        ' m6b8xhqmx0qo',
+                'user_permissions'	=> '',
                 'user_timezone'		=> '',
                 'user_dateformat'	=> 'D M d, Y g:i a',
                 'user_lang'			=> 'en',
