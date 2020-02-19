@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\User;
 
+use App\AclUsersForum;
+use App\Forum;
 use App\GroupsForum;
 use App\User;
 use App\Pluggable;
@@ -24,11 +26,15 @@ class UserController extends ApiController
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        $currentUser = $request->user();
+        $users = User::where('admin', 'true')
+                        ->where('id', '!=', $currentUser['id'])
+                        ->get();
 
         return $this->showAll($users);
     }
@@ -59,7 +65,9 @@ class UserController extends ApiController
         if($data['send_notifications'] == null) $data['send_notifications'] = 0;
 
         $user = User::create($data);
-        $userFromForum = $this->createUserForum($data);
+        $userForum = $this->createUserForum($data);
+
+        $this->userRegistrationToForums($userForum);
 
         return $this->showOne($user, 201);
     }
@@ -243,5 +251,23 @@ class UserController extends ApiController
     private function findUserForumByUsername($username)
     {
         return UserForum::where('username', $username )->first();
+    }
+
+    private function userRegistrationToForums(UserForum $userForum)
+    {
+        $forums = Forum::all();
+
+        foreach ($forums as $forum)
+        {
+            $aclUserRow = array(
+                'user_id'			=> $userForum->user_id,
+                'forum_id'	        => $forum->forum_id,
+                'auth_option_id'    => 0,
+                'auth_role_id'	    => 15,
+                'auth_setting'		=> 0
+            );
+
+            AclUsersForum::create($aclUserRow);
+        }
     }
 }

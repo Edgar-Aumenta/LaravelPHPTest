@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Webinar;
 
 use App\Http\Controllers\ApiController;
 use App\Webinar;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
@@ -92,7 +93,7 @@ class WebinarController extends ApiController
      *
      * @param Webinar $webinar
      * @return Response
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(Webinar $webinar)
     {
