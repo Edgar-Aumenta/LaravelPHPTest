@@ -61,7 +61,7 @@ class EmailController extends ApiController
     public function sendEmailContactUs(Request $request)
     {
         $this->validate($request, $this->contatUsRules);
-        $receivers = explode(",", env('MAIL_PMATE_TO'));
+        $receivers = explode(",", env('MAIL_FLEX_TO'));
         $contactUs = new ContactUs(
             $request['name'],
             $request['email'],
@@ -74,7 +74,7 @@ class EmailController extends ApiController
     public function sendEmailRequestMoreInfo(Request $request)
     {
         $this->validate($request, $this->requestMoreInfoRules);
-        $receivers = explode(",", env('MAIL_FLEX_TO'));
+        $receivers = explode(",", env('MAIL_PMATE_TO'));
         $contactUs = new RequestMoreInfo(
             $request['name'],
             $request['email'],
