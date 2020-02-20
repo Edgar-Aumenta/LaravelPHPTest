@@ -65,14 +65,15 @@ class EventScheduleController extends ApiController
             'start_date'        => $request['start_date'],
             'end_date'          => $request['end_date'],
             'location_id'       => $this->getLocationId($request['location']),
-            'event_id'          => $this->getEventId($request['event']),
+            'event_id'          => $this->getEventId($request['event'], $request['event_description']),
             'lodging_id'        => $this->getLodgingId($request['lodging'], $request['lodging_url']),
             'visible'           => $request->has('visible') ? $request['visible'] : 1,
             'register_title'    => $request['register_title'],
             'register_url'      => $request['register_url'],
             'mi_title'          => $request['mi_title'],
             'mi_url'            => $request['mi_url'],
-            'user_id'           => $currentUser['id']
+            'user_id'           => $currentUser['id'],
+            'class_description' => $request['class_description']
         );
 
         $eventSchedule = EventSchedule::create($eventScheduleRow);
@@ -158,17 +159,18 @@ class EventScheduleController extends ApiController
      */
     private function compareChangesAndAssign(Request $request, EventSchedule &$eventSchedule)
     {
-        if($request->has('start_date')) $eventSchedule->start_date = $request->start_date;
-        if($request->has('end_date')) $eventSchedule->end_date = $request->end_date;
-        if($request->has('location')) $eventSchedule->location_id = $this->getLocationId($request->location);
-        if($request->has('event')) $eventSchedule->event_id = $this->getEventId($request->event);
+        if($request->has('start_date')) $eventSchedule['start_date'] = $request['start_date'];
+        if($request->has('end_date')) $eventSchedule['end_date'] = $request['end_date'];
+        if($request->has('location')) $eventSchedule['location_id'] = $this->getLocationId($request['location']);
+        if($request->has('event')) $eventSchedule['event_id'] = $this->getEventId($request['event'], $request['event_description']);
         if($request->has('lodging') && $request->has('lodging_url'))
             $eventSchedule['lodging_id'] = $this->getLodgingId($request['lodging'], $request['lodging_url']);
-        if($request->has('register_title')) $eventSchedule->register_title = $request->register_title;
-        if($request->has('register_url')) $eventSchedule->register_url = $request->register_url;
-        if($request->has('mi_title')) $eventSchedule->mi_title = $request->mi_title;
-        if($request->has('mi_url')) $eventSchedule->mi_url = $request->mi_url;
-        if($request->has('visible')) $eventSchedule->visible = $request->visible;
+        if($request->has('register_title')) $eventSchedule['register_title'] = $request['register_title'];
+        if($request->has('register_url')) $eventSchedule['register_url'] = $request['register_url'];
+        if($request->has('mi_title')) $eventSchedule['mi_title'] = $request['mi_title'];
+        if($request->has('mi_url')) $eventSchedule['mi_url'] = $request['mi_url'];
+        if($request->has('visible')) $eventSchedule['visible'] = $request['visible'];
+        if($request->has('class_description')) $eventSchedule['class_description'] = $request['class_description'];
     }
 
     /**
@@ -179,35 +181,40 @@ class EventScheduleController extends ApiController
 
         $eventScheduleNew = new EventSchedule();
         $eventScheduleNew->id = $eventSchedule->id;
-        $eventScheduleNew->start_date = $eventSchedule->start_date;
-        $eventScheduleNew->end_date = $eventSchedule->end_date;
-        $eventScheduleNew->location = $eventSchedule->location;
-        $eventScheduleNew->event = $eventSchedule->event;
-        $eventScheduleNew->lodging = $eventSchedule->lodging;
-        $eventScheduleNew->register = $eventSchedule->register();
-        $eventScheduleNew->moreInformation = $eventSchedule->moreInformation();
-        $eventScheduleNew->visible = $eventSchedule->visible;
-        $eventScheduleNew->user = $eventSchedule->user;
-        $eventScheduleNew->created_at = $eventSchedule->created_at;
-        $eventScheduleNew->updated_at = $eventSchedule->updated_at;
+        $eventScheduleNew['start_date'] = $eventSchedule['start_date'];
+        $eventScheduleNew['end_date'] = $eventSchedule['end_date'];
+        $eventScheduleNew['location'] = $eventSchedule['location'];
+        $eventScheduleNew['event'] = $eventSchedule['event'];
+        $eventScheduleNew['lodging'] = $eventSchedule['lodging'];
+        $eventScheduleNew['register'] = $eventSchedule->register();
+        $eventScheduleNew['moreInformation'] = $eventSchedule->moreInformation();
+        $eventScheduleNew['visible'] = $eventSchedule['visible'];
+        $eventScheduleNew['user'] = $eventSchedule['user'];
+        $eventScheduleNew['created_at'] = $eventSchedule['created_at'];
+        $eventScheduleNew['updated_at'] = $eventSchedule['updated_at'];
 
         return $eventScheduleNew;
     }
 
-    private function getEventId($eventName)
+    private function getEventId($eventName, $eventDescription)
     {
         $events = Event::all();
         $eventId = 0;
-        // find event in catalog
+        // Find event in catalog if exist the description change
         foreach ($events as $event){
             if(strtolower($event['name']) == strtolower($eventName)) {
                 $eventId = $event->id;
+                $event['description'] = $eventDescription;
+                $event->save();
                 break;
             }
         }
         // if doesn't exist event then is create
         if($eventId == 0){
-            $eventRow = array( 'name' => $eventName);
+            $eventRow = array (
+                'name' => $eventName,
+                'description' => $eventDescription
+                );
             $event = Event::create($eventRow);
             $eventId = $event->id;
         }
