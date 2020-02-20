@@ -14,7 +14,7 @@ class AddColumnsToEventsTable extends Migration
     public function up()
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->text('event_description')->nullable();
+            $table->text('description')->nullable();
         });
     }
 
@@ -27,7 +27,7 @@ class AddColumnsToEventsTable extends Migration
     {
         Schema::table('events', function (Blueprint $table) {
             $table->dropColumn([
-                'event_description'
+                'description'
             ]);
         });
     }
