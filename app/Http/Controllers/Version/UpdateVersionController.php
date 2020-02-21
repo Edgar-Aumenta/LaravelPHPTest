@@ -24,7 +24,7 @@ class UpdateVersionController extends ApiController
      */
     public function index()
     {
-        $updateVersions = UpdateVersion::all();
+        $updateVersions = UpdateVersion::all()->sortByDesc('release_date');
 
         return $this->showAll($updateVersions);
     }
@@ -149,7 +149,7 @@ class UpdateVersionController extends ApiController
      * @return Response
      */
     public function publicIndex(){
-        $updateVersions = UpdateVersion::all();
+        $updateVersions = UpdateVersion::all()->sortByDesc('release_date');
         $updateVersionsReadModel = collect();
 
         foreach ($updateVersions as $updateVersion)
