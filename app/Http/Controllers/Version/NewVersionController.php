@@ -26,8 +26,13 @@ class NewVersionController extends ApiController
     public function index()
     {
         $newVersions = NewVersion::all()->sortByDesc('release_date');
+        $newVersionsReadModel = collect();
 
-        return $this->showAll($newVersions);
+        foreach ($newVersions as $newVersion){
+            $newVersionsReadModel->push($newVersion);
+        }
+
+        return $this->showAll($newVersionsReadModel);
     }
 
     /**

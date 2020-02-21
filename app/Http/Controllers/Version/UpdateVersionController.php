@@ -25,8 +25,14 @@ class UpdateVersionController extends ApiController
     public function index()
     {
         $updateVersions = UpdateVersion::all()->sortByDesc('release_date');
+        $updateVersionsReadModel = collect();
 
-        return $this->showAll($updateVersions);
+        foreach ($updateVersions as $updateVersion)
+        {
+            $updateVersionsReadModel->push($updateVersion);
+        }
+
+        return $this->showAll($updateVersionsReadModel);
     }
 
     /**
