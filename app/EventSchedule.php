@@ -28,6 +28,7 @@ class EventSchedule extends Model
         'mi_url',
         'visible',
         'user_id',
+        'class_description'
     ];
 
     protected $location;
