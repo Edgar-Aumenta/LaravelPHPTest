@@ -63,8 +63,14 @@ class UserController extends ApiController
         $data['email'] = strtolower($data['email']);
 
         if($request->has('tos') && $data['tos'] == null) $data['tos'] = 0;
-        if($request->has('enable') && $data['enable'] == null) $data['enable'] = User::ENABLE_USER;
         if($request->has('send_notifications') && $data['send_notifications'] == null) $data['send_notifications'] = 0;
+        // Default value for enable when user was create
+        // TODO change for default value in true in database
+        if(!$request->has('enable')){
+            $data['enable'] = User::ENABLE_USER;
+        } else if ($data['enable'] == null){
+            $data['enable'] = User::ENABLE_USER;
+        }
         // Register user
         $user = User::create($data);
         // Register user forum
