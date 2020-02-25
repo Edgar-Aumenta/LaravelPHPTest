@@ -8,7 +8,7 @@
 namespace App;
 
 
-class XMLHelpers
+class Helpers
 {
     public static function removeNamespaceFromXML( $xml )
     {
@@ -40,6 +40,11 @@ class XMLHelpers
     public static function namespacedXMLToArray($xml)
     {
         // One function to both clean the XML string and return an array
-        return json_decode(json_encode(simplexml_load_string(XMLHelpers::removeNamespaceFromXML($xml))), true);
+        return json_decode(json_encode(simplexml_load_string(Helpers::removeNamespaceFromXML($xml))), true);
+    }
+
+    public static function isEmail($str)
+    {
+        return (false !== filter_var($str, FILTER_VALIDATE_EMAIL));
     }
 }

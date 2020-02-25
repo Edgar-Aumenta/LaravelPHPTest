@@ -4,7 +4,7 @@ namespace App\Http\Controllers\CRMTicket;
 
 use App\CRMAuth;
 use App\Http\Controllers\ApiController;
-use App\XMLHelpers;
+use App\Helpers;
 use Illuminate\Http\Request;
 use SoapClient;
 use SoapFault;
@@ -49,7 +49,7 @@ class CRMTicketController extends ApiController
         catch (SoapFault $e) {
             return $this->errorResponse($e->getMessage(), 503, $e->getMessage());
         }
-        return response()->json(XMLHelpers::namespacedXMLToArray($result->GetTypeIncidentsResult), 200);
+        return response()->json(Helpers::namespacedXMLToArray($result->GetTypeIncidentsResult), 200);
     }
 
     public function newWebTicket(Request $request)

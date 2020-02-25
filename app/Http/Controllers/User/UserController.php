@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\AclUsersForum;
 use App\Forum;
 use App\GroupsForum;
+use App\Helpers;
 use App\User;
 use App\Pluggable;
 use App\Http\Controllers\ApiController;
@@ -174,25 +175,35 @@ class UserController extends ApiController
 
         $this->validate($request, $rules);
 
-        // Search user in new site an forum
-        $user = $this->findOrFailUserByUsername($request['username']);
-        $userForum = $this->findUserForumByUsername($request['username']);
+        // Obtain user in new site and forum
+        $user = $this->findOrFailUser($request['username']);
+        $userForum = $this->findUserForum($request['username']);
 
-        // Generate password hash
-        $newPassword = Pluggable::wp_hash_password($request['password']);
-
-        // Save password for new site
-        $user->password = $newPassword;
-        $user->save();
-
-        // Save password for forum new site
-        if($userForum != null)
-        {
-            $userForum->user_password  = $newPassword;
-            $userForum->save();
-        }
+        $this->changeUserPassword($user, $userForum, $request['password']);
 
         return $this->messageResponse('The password has been reset!');
+    }
+
+    public function passwordChange(Request $request)
+    {
+        $rules = [
+            'current_password' => 'required',
+            'password'         => 'required|confirmed'
+        ];
+
+        $this->validate($request, $rules);
+
+        // Obtain user in new site and forum
+        $currentUser = $request->user();
+        $userForum = $this->findUserForum($currentUser->username);
+
+        if(!Pluggable::wp_check_password($request['current_password'], $currentUser->password)){
+            return $this->errorResponse('The current password is incorrect!', 401);
+        }
+
+        $this->changeUserPassword($currentUser, $userForum, $request['password']);
+
+        return $this->messageResponse('The password has been changed!');
     }
 
     /**
@@ -253,14 +264,77 @@ class UserController extends ApiController
         if($request->has('enable')) $user->enable = $request->enable;
     }
 
-    private function findOrFailUserByUsername($username)
+    /**
+     * Find or fail user by username or email
+     * @param $value
+     *
+     * @return User
+     */
+    private function findOrFailUser($value)
     {
-        return User::where('username', $username )->firstOrFail();
+        if(Helpers::isEmail($value)){
+            return $this->findOrFailUserByEmail($value);
+        }else{
+            return $this->findOrFailUserByUsername($value);
+        }
     }
 
+    /**
+     * Find user by username
+     * @param $username
+     *
+     * @return User
+     */
+    private function findOrFailUserByUsername($username)
+    {
+        return User::where('username', $username)->firstOrFail();
+    }
+
+    /**
+     * Find user by email
+     * @param $email
+     *
+     * @return User
+     */
+    private function findOrFailUserByEmail($email)
+    {
+        return User::where('email', $email)->firstOrFail();
+    }
+
+    /**
+     * Find user forum by username or email
+     * @param $value
+     *
+     * @return UserForum
+     */
+    private function findUserForum($value)
+    {
+        if(Helpers::isEmail($value)){
+            return $this->findUserForumByEmail($value);
+        }else{
+            return $this->findUserForumByUsername($value);
+        }
+    }
+
+    /**
+     * Find user forum by username
+     * @param $username
+     * @return UserForum
+     */
     private function findUserForumByUsername($username)
     {
         return UserForum::where('username', $username )->first();
+    }
+
+    /**
+     * Find user forum by email
+     * @param $email
+     *
+     * @return UserForum
+     */
+    private function findUserForumByEmail($email)
+    {
+        return UserForum::where('user_email', $email )->first();
     }
 
     private function userRegistrationToGroup(UserForum $userForum)
@@ -290,6 +364,27 @@ class UserController extends ApiController
             );
 
             AclUsersForum::create($aclUserRow);
+        }
+    }
+
+    /**
+     * Change user password in site and forum
+     * @param User $user
+     * @param UserForum $userForum
+     * @param $newPasswordPlainText
+     */
+    private function changeUserPassword(User $user, $userForum, $newPasswordPlainText)
+    {
+        // Generate password hash
+        $newPasswordHash = Pluggable::wp_hash_password($newPasswordPlainText);
+        // Save password for new site
+        $user->password = $newPasswordHash;
+        $user->save();
+        // Save password for forum new site
+        if($userForum != null)
+        {
+            $userForum->user_password  = $newPasswordHash;
+            $userForum->save();
         }
     }
 }
