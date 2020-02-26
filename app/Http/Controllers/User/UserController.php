@@ -33,8 +33,11 @@ class UserController extends ApiController
      */
     public function index(Request $request)
     {
+        $isAdmin = false;
+        if($request->has('admin')) $isAdmin = $request['admin'];
+
         $currentUser = $request->user();
-        $users = User::where('admin', 'true')
+        $users = User::where('admin', $isAdmin)
                         ->where('id', '!=', $currentUser['id'])
                         ->get();
 
