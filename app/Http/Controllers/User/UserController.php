@@ -62,7 +62,14 @@ class UserController extends ApiController
         $data['password'] = Pluggable::wp_hash_password($request->password);
         $data['verified'] = User::USUARIO_VERIFICADO;
         $data['verification_token'] = User::generateTokenVerification();
-        $data['admin'] = User::USUARIO_REGULAR;
+
+        // TODO Verify in lower case
+        if(!$request->has('admin')){
+            $data['admin'] = User::USUARIO_REGULAR;
+        } else if ($data['admin'] == null || ($data['admin'] != 'true' && $data['admin'] != 'false')) {
+            $data['admin'] = User::USUARIO_REGULAR;
+        }
+
         $data['username'] = strtolower($data['username']);
         $data['email'] = strtolower($data['email']);
 
