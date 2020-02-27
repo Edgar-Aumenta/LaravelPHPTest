@@ -29,6 +29,8 @@ Route::delete('users/{username}', 'User\UserController@destroy');
 
 Route::get('me', 'User\UserController@userInfo');
 Route::put('users/password/reset', 'User\UserController@passwordReset');
+Route::put('users/password/change', 'User\UserController@passwordChange');
+
 Route::get('encrypt', 'User\UserController@encryptPassword');
 
 Route::apiResource('events', 'Event\EventController');

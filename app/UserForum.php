@@ -2,11 +2,14 @@
 
 namespace App;
 
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static create(array $fields)
+ * @method static where(string $string, $value)
  * @property mixed user_id
+ * @property string user_password
  */
 class UserForum extends Model
 {
@@ -88,7 +91,7 @@ class UserForum extends Model
      *
      * @return array
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public static function GetAdditionalVars(){
         return array(
@@ -142,7 +145,7 @@ class UserForum extends Model
 
     /**
      * Return unique id
-     * @throws \Exception
+     * @throws Exception
      */
     public static function unique_id()
     {
@@ -156,7 +159,7 @@ class UserForum extends Model
      * This number should be less or equal than 64.
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     private static function gen_rand_string($num_chars = 8)
     {

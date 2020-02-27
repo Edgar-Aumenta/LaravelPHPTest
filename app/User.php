@@ -14,8 +14,9 @@ use League\OAuth2\Server\Exception\OAuthServerException;
 
 /**
  * @method static create(array $data)
- * @method where(string $string, $value)
+ * @method static where(string $string, $value)
  * @property mixed email
+ * @property mixed password
  */
 class User extends Authenticable
 {
@@ -110,7 +111,7 @@ class User extends Authenticable
      */
     public function findForPassport($username)
     {
-        if($this->isEmail($username)){
+        if(Helpers::isEmail($username)){
             return $this->where('email', $username)->first();
         }else{
             return $this->where('username', $username)->first();

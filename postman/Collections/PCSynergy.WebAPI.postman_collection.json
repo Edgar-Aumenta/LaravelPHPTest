@@ -2091,7 +2091,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"grant_type\":\"password\",\n\t\"client_id\":{{client_id}},\n\t\"client_secret\":\"{{client_secret}}\",\n\t\"username\":\"xozue\",\n\t\"password\":\"secret\"\n}"
+							"raw": "{\n\t\"grant_type\":\"password\",\n\t\"client_id\":{{client_id}},\n\t\"client_secret\":\"{{client_secret}}\",\n\t\"username\":\"yairrdz\",\n\t\"password\":\"secret\"\n}"
 						},
 						"url": {
 							"raw": "{{UrlApi}}/oauth/token",
@@ -2806,12 +2806,18 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{UrlApi}}/users",
+							"raw": "{{UrlApi}}/users?admin=true",
 							"host": [
 								"{{UrlApi}}"
 							],
 							"path": [
 								"users"
+							],
+							"query": [
+								{
+									"key": "admin",
+									"value": "true"
+								}
 							]
 						}
 					},
@@ -3014,7 +3020,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 0,\r\n    \"first_name\": null,\r\n    \"email\": \"omaracy4@gmail.com\",\r\n    \"verified\": 0,\r\n    \"admin\": false,\r\n    \"last_name\": null,\r\n    \"username\": \"omaracy4\",\r\n    \"website\": null,\r\n    \"send_notifications\": 0,\r\n    \"url_image\": null,\r\n    \"url_image_thumbnail\": null,\r\n    \"address_1\": \"1234 Main Street\",\r\n    \"address_2\": null,\r\n    \"city\": \"San Marcos\",\r\n    \"state\": null,\r\n    \"zip\": \"92069\",\r\n    \"country\": \"USA\",\r\n    \"day_phone\": \"5552234567\",\r\n    \"tos\": null,\r\n    \"company\": \"AcCompany\",\r\n    \"enable\": null,\r\n    \"password\": \"Aumenta10!\"\r\n}",
+							"raw": "{\r\n    \r\n    \"email\": \"yairrdz2@aumenta.mx\",\r\n    \"username\": \"yairrdz2\",\r\n    \"password\": \"Aumenta10!\",\r\n    \"first_name\": \"Enrique\",\r\n    \"last_name\": \"Mendoza\",\r\n    \"address_1\": \"1234 Main Street\",\r\n    \"city\": \"San Marcos\",\r\n    \"state\": \"San Luis Potosi\",\r\n    \"country\": \"San Marcos\",\r\n    \"zip\": \"78218\",\r\n    \"day_phone\": \"4448456749\",\r\n    \"company\": \"Aumenta\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3273,7 +3279,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"omaracy\",\r\n    \"password\": \"12345678\"\r\n}",
+							"raw": "{\r\n    \"username\": \"yairrdz\",\r\n    \"password\": \"12345\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3400,6 +3406,51 @@
 							"path": [
 								"users",
 								"default13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"current_password\": \"12345\",\r\n    \"password\": \"secret\",\r\n    \"password_confirmation\": \"secret\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{UrlApi}}/users/password/change",
+							"host": [
+								"{{UrlApi}}"
+							],
+							"path": [
+								"users",
+								"password",
+								"change"
 							]
 						}
 					},
@@ -4818,17 +4869,21 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"pmSerial\":\"100233\",\n\t\"issue\": \"Test Feature Request\",\n\t\"issueTypeId\": \"5\",\n\t\"contactName\": \"Test development\",\n\t\"contactPhone\": \"1234567890\",\n\t\"contactEmail\": \"testdev@pcsynergy.com\"\n}"
+							"raw": "{\n\t\"pmSerial\":\"108185\",\n\t\"issue\": \"Test Support Ticket from https://lsk.fkg.mybluehost.me/api\",\n\t\"issueTypeId\": \"1\",\n\t\"contactName\": \"Test development\",\n\t\"contactPhone\": \"1234567890\",\n\t\"contactEmail\": \"testdev@pcsynergy.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
-							"raw": "{{UrlApi}}/crm/ticket/",
+							"raw": "{{UrlApi}}/crm/ticket",
 							"host": [
 								"{{UrlApi}}"
 							],
 							"path": [
 								"crm",
-								"ticket",
-								""
+								"ticket"
 							]
 						}
 					},
