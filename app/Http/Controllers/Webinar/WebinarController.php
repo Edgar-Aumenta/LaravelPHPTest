@@ -131,7 +131,7 @@ class WebinarController extends ApiController
         if($request->has('time_zone_desc')) $webinar->time_zone_desc = $request->time_zone_desc;
         if($request->has('name')) $webinar->name = $request->name;
         if($request->has('register_url')) $webinar->register_url = $request->register_url;
-        if($request->has('recoded_url')) $webinar->recoded_url = $request->recoded_url;
+        if($request->has('recorded_url')) $webinar->recorded_url = $request->recorded_url;
         if($request->has('visible')) $webinar->visible = $request->visible;
         if($request->has('description')) $webinar->description = $request->description;
         if($request->has('user_id')) $webinar->user_id = $request->user_id;

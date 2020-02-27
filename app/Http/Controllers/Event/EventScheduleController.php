@@ -192,6 +192,7 @@ class EventScheduleController extends ApiController
         $eventScheduleNew['user'] = $eventSchedule['user'];
         $eventScheduleNew['created_at'] = $eventSchedule['created_at'];
         $eventScheduleNew['updated_at'] = $eventSchedule['updated_at'];
+        $eventScheduleNew['class_description'] = $eventSchedule['class_description'];
 
         return $eventScheduleNew;
     }
