@@ -62,8 +62,10 @@ class UpdateVersionController extends ApiController
 
         if($request->current_version == true){
             $currentNewVersion = $this->getCurrentVersion();
-            $currentNewVersion->current_version = false;
-            $currentNewVersion->save();
+            if($currentNewVersion != null) {
+                $currentNewVersion->current_version = false;
+                $currentNewVersion->save();
+            }
         }
 
         $updateVersion = UpdateVersion::create($newUpdateVersion);
@@ -99,18 +101,21 @@ class UpdateVersionController extends ApiController
         ];
 
         $this->validate($request, $rules);
+
+        if($updateVersion->current_version == true){
+            $currentNewVersion = $this->getCurrentVersion();
+            if($currentNewVersion != null  && $currentNewVersion->id != $updateVersion->id){
+                $currentNewVersion->current_version = false;
+                $currentNewVersion->save();
+            }
+        }
+
         $this->compareChangesAndAssign($request, $updateVersion);
 
         $updateVersion->user_id = $user->id; // Save user to update version
 
         if(!$updateVersion->isDirty()){
             return $this->messageResponse('Nothing to update', 200);
-        }
-
-        if($updateVersion->current_version == true){
-            $currentNewVersion = $this->getCurrentVersion();
-            $currentNewVersion->current_version = false;
-            $currentNewVersion->save();
         }
 
         $updateVersion->save();

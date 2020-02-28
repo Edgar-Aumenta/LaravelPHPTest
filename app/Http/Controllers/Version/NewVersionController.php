@@ -101,13 +101,6 @@ class NewVersionController extends ApiController
         ];
 
         $this->validate($request, $rules);
-        $this->compareChangesAndAssign($request, $newVersion);
-
-        $newVersion->user_id = $user->id; // Save user to update version
-
-        if(!$newVersion->isDirty()){
-            return $this->messageResponse('Nothing to update', 200);
-        }
 
         if($newVersion->current_version == true){
             $currentNewVersion = $this->getCurrentVersion();
@@ -115,6 +108,14 @@ class NewVersionController extends ApiController
                 $currentNewVersion->current_version = false;
                 $currentNewVersion->save();
             }
+        }
+
+        $this->compareChangesAndAssign($request, $newVersion);
+
+        $newVersion->user_id = $user->id; // Save user to update version
+
+        if(!$newVersion->isDirty()){
+            return $this->messageResponse('Nothing to update', 200);
         }
 
         $newVersion->save();
