@@ -138,7 +138,7 @@ class NewVersionController extends ApiController
 
         if($newVersion->current_version == true){
             $lastReleaseVersion = $this->getLastReleaseVersion();
-            $lastReleaseVersion->current_version = false;
+            $lastReleaseVersion->current_version = true;
             $lastReleaseVersion->save();
         }
         return $this->messageResponse("Erased!", 200);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Version;
 
 use App\Http\Controllers\ApiController;
 use App\UpdateVersion;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
@@ -130,11 +131,17 @@ class UpdateVersionController extends ApiController
      *
      * @param UpdateVersion $updateVersion
      * @return Response
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(UpdateVersion $updateVersion)
     {
         $updateVersion->delete();
+
+        if($updateVersion->current_version == true){
+            $lastReleaseVersion = $this->getLastReleaseVersion();
+            $lastReleaseVersion->current_version = true;
+            $lastReleaseVersion->save();
+        }
 
         return $this->showOne($updateVersion);
     }
@@ -186,6 +193,12 @@ class UpdateVersionController extends ApiController
     private function getCurrentVersion(){
         $currentNewVersion = UpdateVersion::all()->where('current_version', true)->first();
         return $currentNewVersion;
+    }
+
+    private function getLastReleaseVersion()
+    {
+        $lastReleaseVersion = UpdateVersion::all()->sortByDesc('release_date')->first();
+        return $lastReleaseVersion;
     }
 
     /**
