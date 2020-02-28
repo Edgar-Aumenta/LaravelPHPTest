@@ -110,12 +110,14 @@ class UpdateVersionController extends ApiController
             return $this->messageResponse('Nothing to update', 200);
         }
 
-        if($updateVersion->current_version == true){
-            $currentNewVersion = $this->getCurrentVersion();
-            if($currentNewVersion != null  && $currentNewVersion->id != $updateVersion->id){
+        $currentNewVersion = $this->getCurrentVersion();
+        if($currentNewVersion != null && $currentNewVersion->id != $updateVersion->id){
+            if($updateVersion->current_version == true) {
                 $currentNewVersion->current_version = false;
                 $currentNewVersion->save();
             }
+        }else {
+            $updateVersion->current_version = true;
         }
 
         $updateVersion->save();
