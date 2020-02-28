@@ -33,9 +33,14 @@ class WebinarController extends ApiController
      */
     public function index()
     {
-        $webinars = Webinar::all();
+        $webinars = Webinar::all()->sortByDesc('start_date');
+        $webinarsReadModel = collect();
 
-        return $this->showAll($webinars);
+        foreach ($webinars as $webinar){
+            $webinarsReadModel->push($webinar);
+        }
+
+        return $this->showAll($webinarsReadModel);
     }
 
     /**
@@ -108,7 +113,7 @@ class WebinarController extends ApiController
      */
     public function publicIndex()
     {
-        $eventSchedules = Webinar::all()->where('visible', true);
+        $eventSchedules = Webinar::all()->where('visible', true)->sortByDesc('start_date');
 
         $eventSchedulesReadModel = collect();
 
