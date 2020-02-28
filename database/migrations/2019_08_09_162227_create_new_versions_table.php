@@ -19,7 +19,7 @@ class CreateNewVersionsTable extends Migration
             $table->string('version_name');
             $table->string('version_url', 255)->nullable();
             $table->boolean('current_version')->default(false);
-            $table->timestamp('release_date');
+            $table->timestamp('release_date')->nullable();
             $table->integer('estimate_size');
             $table->bigInteger('user_id')->unsigned();
             $table->timestamps();
