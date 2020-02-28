@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Version;
 
 use App\Http\Controllers\ApiController;
 use App\UpdateVersion;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
@@ -62,8 +63,10 @@ class UpdateVersionController extends ApiController
 
         if($request->current_version == true){
             $currentNewVersion = $this->getCurrentVersion();
-            $currentNewVersion->current_version = false;
-            $currentNewVersion->save();
+            if($currentNewVersion != null) {
+                $currentNewVersion->current_version = false;
+                $currentNewVersion->save();
+            }
         }
 
         $updateVersion = UpdateVersion::create($newUpdateVersion);
@@ -99,6 +102,7 @@ class UpdateVersionController extends ApiController
         ];
 
         $this->validate($request, $rules);
+
         $this->compareChangesAndAssign($request, $updateVersion);
 
         $updateVersion->user_id = $user->id; // Save user to update version
@@ -107,10 +111,14 @@ class UpdateVersionController extends ApiController
             return $this->messageResponse('Nothing to update', 200);
         }
 
-        if($updateVersion->current_version == true){
-            $currentNewVersion = $this->getCurrentVersion();
-            $currentNewVersion->current_version = false;
-            $currentNewVersion->save();
+        $currentNewVersion = $this->getCurrentVersion();
+        if($currentNewVersion != null && $currentNewVersion->id != $updateVersion->id){
+            if($updateVersion->current_version == true) {
+                $currentNewVersion->current_version = false;
+                $currentNewVersion->save();
+            }
+        }else {
+            $updateVersion->current_version = true;
         }
 
         $updateVersion->save();
@@ -123,11 +131,17 @@ class UpdateVersionController extends ApiController
      *
      * @param UpdateVersion $updateVersion
      * @return Response
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(UpdateVersion $updateVersion)
     {
         $updateVersion->delete();
+
+        if($updateVersion->current_version == true){
+            $lastReleaseVersion = $this->getLastReleaseVersion();
+            $lastReleaseVersion->current_version = true;
+            $lastReleaseVersion->save();
+        }
 
         return $this->showOne($updateVersion);
     }
@@ -179,6 +193,12 @@ class UpdateVersionController extends ApiController
     private function getCurrentVersion(){
         $currentNewVersion = UpdateVersion::all()->where('current_version', true)->first();
         return $currentNewVersion;
+    }
+
+    private function getLastReleaseVersion()
+    {
+        $lastReleaseVersion = UpdateVersion::all()->sortByDesc('release_date')->first();
+        return $lastReleaseVersion;
     }
 
     /**
