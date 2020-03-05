@@ -19,6 +19,7 @@ class AddColumnToUsersTable extends Migration
     }
 
     /**
+     *
      * Reverse the migrations.
      *
      * @return void
