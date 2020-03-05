@@ -17,6 +17,7 @@ use League\OAuth2\Server\Exception\OAuthServerException;
  * @method static where(string $string, $value)
  * @property mixed email
  * @property mixed password
+ * @property bool password_change_required
  */
 class User extends Authenticable
 {
@@ -60,7 +61,8 @@ class User extends Authenticable
         'day_phone',
         'tos',
         'company',
-        'enable'
+        'enable',
+        'password_change_required'
     ];
 
     /**

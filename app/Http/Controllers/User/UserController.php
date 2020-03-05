@@ -22,7 +22,7 @@ class UserController extends ApiController
     public function __construct()
     {
         $this->middleware('auth:api')->except(['encryptPassword']);
-        $this->middleware('isAdmin:api')->except(['encryptPassword', 'userInfo']);
+        $this->middleware('isAdmin:api')->except(['encryptPassword', 'userInfo', 'passwordChange']);
     }
 
     /**
@@ -272,6 +272,7 @@ class UserController extends ApiController
         if($request->has('tos')) $user->tos = $request->tos;
         if($request->has('company')) $user->company = $request->company;
         if($request->has('enable')) $user->enable = $request->enable;
+        if($request->has('password_change_required')) $user['password_change_required'] = $request['password_change_required'];
     }
 
     /**
@@ -389,6 +390,7 @@ class UserController extends ApiController
         $newPasswordHash = Pluggable::wp_hash_password($newPasswordPlainText);
         // Save password for new site
         $user->password = $newPasswordHash;
+        $user->password_change_required = false;
         $user->save();
         // Save password for forum new site
         if($userForum != null)
