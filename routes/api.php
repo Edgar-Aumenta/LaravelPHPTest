@@ -32,6 +32,7 @@ Route::put('users/password/reset', 'User\UserController@passwordReset');
 Route::put('users/password/change', 'User\UserController@passwordChange');
 
 Route::get('encrypt', 'User\UserController@encryptPassword');
+Route::get('decrypt', 'User\UserController@decrypt');
 
 Route::apiResource('events', 'Event\EventController');
 
