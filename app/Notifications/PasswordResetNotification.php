@@ -12,17 +12,20 @@ class PasswordResetNotification extends Notification
     use Queueable;
     public $token;
     public $emailFromAddress;
+    public $firstName;
 
     /**
      * Create a new notification instance.
      *
      * @param $token
      * @param $emailFromAddress
+     * @param $firstName
      */
-    public function __construct($token, $emailFromAddress)
+    public function __construct($token, $emailFromAddress, $firstName)
     {
         $this->token = $token;
         $this->emailFromAddress = $emailFromAddress;
+        $this->firstName = $firstName;
     }
 
     /**
@@ -46,12 +49,16 @@ class PasswordResetNotification extends Notification
     {
         $urlToResetForm = env('APP_URL') . '/reset-password/'. $this->emailFromAddress .'/' . $this->token;
 
-        return (new MailMessage)
-            ->subject(Lang::getFromJson('Reset Password Notification'))
+        return (new MailMessage)->view('emails.reset_password_email',
+            [
+                'urlToResetForm' => $urlToResetForm,
+                'firstName' => $this->firstName,
+            ]);
+            /*->subject(Lang::getFromJson('Reset Password Notification'))
             ->line(Lang::getFromJson('You are receiving this email because we received a password reset request for your account.'))
             ->action(Lang::getFromJson('Reset Password'), $urlToResetForm)
             ->line(Lang::getFromJson('This password reset link will expire in :count minutes.', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
-            ->line(Lang::getFromJson('If you did not request a password reset, no further action is required.'));
+            ->line(Lang::getFromJson('If you did not request a password reset, no further action is required.'));*/
     }
 
     /**
