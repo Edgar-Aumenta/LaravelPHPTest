@@ -173,9 +173,4 @@ class User extends Authenticable
         $this->notify( new PasswordResetNotification($token, $this->email));
     }
 
-    private function isEmail($str)
-    {
-        return (false !== filter_var($str, FILTER_VALIDATE_EMAIL));
-    }
-
 }

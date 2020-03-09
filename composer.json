@@ -19,7 +19,8 @@
         "ext-json": "*",
       "ext-soap": "*",
         "ext-openssl": "*",
-        "ext-simplexml": "*"
+        "ext-simplexml": "*",
+        "ext-mcrypt": "*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
