@@ -18,6 +18,7 @@ use League\OAuth2\Server\Exception\OAuthServerException;
  * @property mixed email
  * @property mixed password
  * @property bool password_change_required
+ * @property mixed first_name
  */
 class User extends Authenticable
 {
@@ -170,7 +171,7 @@ class User extends Authenticable
      */
     public function sendPasswordResetNotification($token)
     {
-        $this->notify( new PasswordResetNotification($token, $this->email));
+        $this->notify( new PasswordResetNotification($token, $this->email, $this->first_name));
     }
 
 }
