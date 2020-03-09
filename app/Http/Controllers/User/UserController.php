@@ -14,6 +14,7 @@ use App\UserGroupForum;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 
 
@@ -21,8 +22,8 @@ class UserController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['encryptPassword', 'decrypt']);
-        $this->middleware('isAdmin:api')->except(['encryptPassword', 'userInfo', 'passwordChange', 'decrypt']);
+        $this->middleware('auth:api')->except(['encryptPassword', 'decrypt', 'userExist']);
+        $this->middleware('isAdmin:api')->except(['encryptPassword', 'userInfo', 'passwordChange', 'decrypt', 'userExist']);
     }
 
     /**
@@ -161,21 +162,12 @@ class UserController extends ApiController
     }
 
     /**
-     * Get encrypt password
+     * Password reset (this method only use for administrators)
      *
      * @param Request $request
      * @return JsonResponse
+     * @throws ValidationException
      */
-    public function encryptPassword(Request $request)
-    {
-        $hash = Pluggable::wp_hash_password($request->plain_text);
-        //$check = Pluggable::wp_check_password("Aumenta10!", '$P$BShFwyg7DjATPzCdeQRkX.WqKyWWZC.');
-        //$wp_hasher = new PasswordHash(8, true);
-        //$check = $wp_hasher->CheckPassword("Aumenta10!", '$P$BShFwyg7DjATPzCdeQRkX.WqKyWWZC.');
-
-        return response()->json(['hash' => $hash] , 200);
-    }
-
     public function passwordReset(Request $request)
     {
         $rules = [
@@ -194,6 +186,13 @@ class UserController extends ApiController
         return $this->messageResponse('The password has been reset!');
     }
 
+    /**
+     * Password change for users
+     *
+     * @param Request $request
+     * @return JsonResponse
+     * @throws ValidationException
+     */
     public function passwordChange(Request $request)
     {
         $rules = [
@@ -214,6 +213,37 @@ class UserController extends ApiController
         $this->changeUserPassword($currentUser, $userForum, $request['password']);
 
         return $this->messageResponse('The password has been changed!');
+    }
+
+    /**
+     * Decrypt text encrypted
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    function decrypt(Request $request)
+    {
+        $plainText = $this->decryptSo($request['encrypted_text'], 'PCSWebLogin');
+
+        return response()->json(['decrypt' => $plainText] , 200);
+    }
+
+    /**
+     * Verify if user currently exist
+     *
+     * @param Request $request
+     * @return Response Represent a scalar value
+     */
+    function userExist(Request $request)
+    {
+        $username = $request['username'];
+        $user = null;
+        if(Helpers::isEmail($username)){
+            $user = User::where('email', $username)->first();
+        }else{
+            $user = User::where('username', $username)->first();
+        }
+        return response(($user == null) ? 0 : 1);
     }
 
     /**
@@ -400,14 +430,7 @@ class UserController extends ApiController
         }
     }
 
-    function decrypt(Request $request)
-    {
-        $plainText = $this->decryptSo($request['encrypted_text'], 'PCSWebLogin');
-
-        return response()->json(['decrypt' => $plainText] , 200);
-    }
-
-    function decryptSo($str, $key)
+    private function decryptSo($str, $key)
     {
         //get the size of the key that the encryption mode needs
         $keysize = mcrypt_get_key_size(MCRYPT_3DES, MCRYPT_MODE_CFB);
