@@ -47,4 +47,14 @@ class Helpers
     {
         return (false !== filter_var($str, FILTER_VALIDATE_EMAIL));
     }
+    
+    public function decryptSo($str, $key)
+    {
+        $method = 'aes-256-cbc';
+        $data = urldecode($str);        
+        $vector = 'PCSWebLogin98765';
+        $crypt = openssl_decrypt($data, $method, $key, 0, $vector);                               
+        return $crypt;
+    }
+
 }
