@@ -19,7 +19,7 @@ use Illuminate\Http\Request;
 
 //Route::apiResource('users', 'User\UserController');
 
-Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
+Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken')->middleware('decrypt');
 
 Route::post('users', 'User\UserController@store');
 Route::put('users/{username}', 'User\UserController@update');
