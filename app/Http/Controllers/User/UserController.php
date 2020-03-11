@@ -188,7 +188,7 @@ class UserController extends ApiController
         }
 
         // Obtain user in new site and forum
-        
+
         $user = $this->findOrFailUser($request['username']);
         $userForum = $this->findUserForum($request['username']);        
 
@@ -221,7 +221,7 @@ class UserController extends ApiController
             return $this->errorResponse('The current password is incorrect!', 401);
         }
 
-        $this->changeUserPassword($currentUser, $userForum, $request['password']);
+        $this->changeUserPassword($currentUser, $userForum, $request['password'],false);
 
         return $this->messageResponse('The password has been changed!');
     }
