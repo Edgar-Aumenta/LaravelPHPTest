@@ -172,16 +172,27 @@ class UserController extends ApiController
     {
         $rules = [
             'username'  => 'required',
-            'password'  => 'required'
+            'password'  => 'required',
+            'password_change_required' => 'nullable'
         ];
 
         $this->validate($request, $rules);
 
+        if (!isset($request['password_change_required']))
+        {
+            $passwordChangeRequired = false;
+        }
+        else
+        {
+            $passwordChangeRequired = $request['password_change_required'];
+        }
+
         // Obtain user in new site and forum
         $user = $this->findOrFailUser($request['username']);
-        $userForum = $this->findUserForum($request['username']);
+        //$userForum = $this->findUserForum($request['username']);
+        $userForum = null;
 
-        $this->changeUserPassword($user, $userForum, $request['password']);
+        $this->changeUserPassword($user, $userForum, $request['password'], $passwordChangeRequired);
 
         return $this->messageResponse('The password has been reset!');
     }
@@ -414,13 +425,13 @@ class UserController extends ApiController
      * @param UserForum $userForum
      * @param $newPasswordPlainText
      */
-    private function changeUserPassword(User $user, $userForum, $newPasswordPlainText)
+    private function changeUserPassword(User $user, $userForum, $newPasswordPlainText, $passwordChangeRequired)
     {
         // Generate password hash
         $newPasswordHash = Pluggable::wp_hash_password($newPasswordPlainText);
         // Save password for new site
         $user->password = $newPasswordHash;
-        $user->password_change_required = false;
+        $user->password_change_required = $passwordChangeRequired;
         $user->save();
         // Save password for forum new site
         if($userForum != null)
