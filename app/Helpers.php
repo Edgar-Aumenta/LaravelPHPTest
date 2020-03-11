@@ -51,7 +51,7 @@ class Helpers
     public function decryptSo($str, $key)
     {
         $method = 'aes-256-cbc';
-        $data = urldecode($str);        
+        $data = $str;        
         $vector = 'PCSWebLogin98765';
         $crypt = openssl_decrypt($data, $method, $key, 0, $vector);                               
         return $crypt;
