@@ -188,6 +188,7 @@ class UserController extends ApiController
         }
 
         // Obtain user in new site and forum
+        
         $user = $this->findOrFailUser($request['username']);
         $userForum = $this->findUserForum($request['username']);        
 
