@@ -117,7 +117,7 @@ class UserController extends ApiController
      */
     public function update(Request $request, $username)
     {
-        $user = $this->findOrFailUserByUsername($username);
+        $user = $this->findOrFailUserByUsername($username);        
 
         $rules = User::GetRulesForUpdate($user);
 

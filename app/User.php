@@ -63,7 +63,8 @@ class User extends Authenticable
         'tos',
         'company',
         'enable',
-        'password_change_required'
+        'password_change_required',
+        'last_login_date'
     ];
 
     /**
@@ -84,6 +85,7 @@ class User extends Authenticable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'last_login_date' => 'datetime',
     ];
 
     public function isVerified()
@@ -129,10 +131,13 @@ class User extends Authenticable
      * @throws OAuthServerException
      */
     public function validateForPassportPasswordGrant($password)
-    {
+    {       
         if(Pluggable::wp_check_password($password, $this->password))
         {
             if($this->isEnable()){
+                $user =  $this->findForPassport($this->username);
+                $user -> last_login_date = now();
+                $user->save();
                 return true;
             } else {
                 throw new OAuthServerException('User account is not active', 6, 'account_inactive', 401);
