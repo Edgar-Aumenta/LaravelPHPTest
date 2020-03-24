@@ -96,7 +96,7 @@ class UserForum extends Model
     public static function GetAdditionalVars(){
         return array(
                 'user_permissions'	=> '',
-                'user_timezone'		=> '',
+                'user_timezone'		=> 'America/Los_Angeles',
                 'user_dateformat'	=> 'D M d, Y g:i a',
                 'user_lang'			=> 'en',
                 'user_style'		=> 1, // TODO Change for method search default in data base (pbb_styles)
