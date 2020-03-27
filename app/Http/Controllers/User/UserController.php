@@ -424,7 +424,7 @@ class UserController extends ApiController
         }
     }
 
-    private function userSerialRegistration(UserForum $userforum, $serial_number)
+    private function userSerialRegistration(UserForum $userForum, $serial_number)
     {
         $fieldDataRow = array(
             'user_id'			=> $userForum->user_id,
