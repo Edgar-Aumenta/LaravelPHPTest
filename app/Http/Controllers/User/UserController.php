@@ -16,6 +16,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
+use App\FieldsDataForum;
 
 
 class UserController extends ApiController
@@ -90,6 +91,10 @@ class UserController extends ApiController
         // Additional register for user forum
         $this->userRegistrationToGroup($userForum);
         $this->userRegistrationToForums($userForum);
+        if($request->has('serial_number'))
+        {
+            $this->userSerialRegistration($userForum, $data['serial_number']);
+        }
 
         return $this->showOne($user, 201);
     }
@@ -417,6 +422,16 @@ class UserController extends ApiController
 
             AclUsersForum::create($aclUserRow);
         }
+    }
+
+    private function userSerialRegistration(UserForum $userforum, $serial_number)
+    {
+        $fieldDataRow = array(
+            'user_id'			=> $userForum->user_id,
+            'pf_serial_number'	=> $serial_number,
+        );
+
+        FieldsDataForum::create($fieldDataRow);
     }
 
     /**

@@ -64,7 +64,7 @@ class User extends Authenticable
         'company',
         'enable',
         'password_change_required',
-        'last_login_date'
+        'last_login_date'        
     ];
 
     /**
