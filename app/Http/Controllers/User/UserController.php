@@ -319,6 +319,7 @@ class UserController extends ApiController
         if($request->has('company')) $user->company = $request->company;
         if($request->has('enable')) $user->enable = $request->enable;
         if($request->has('password_change_required')) $user['password_change_required'] = $request['password_change_required'];
+        if($request->has('serial_number')) $user->serial_number = $request->serial_number;
     }
 
     /**
