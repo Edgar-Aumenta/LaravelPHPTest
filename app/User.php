@@ -149,15 +149,11 @@ class User extends Authenticable
     public static function GetRulesForStore()
     {
         return [
-            'username'  => 'required|unique:users',
-            'email'     => 'required|email|unique:users',
-            'password'  => 'required',
-            'address_1' => 'required',
-            'city'      => 'required',
-            'zip'       => 'required',
-            'country'   => 'required',
-            'day_phone' => 'required',
-            'company'   => 'required',
+            'username'   => 'required|unique:users',
+            'email'      => 'required|email|unique:users',
+            'password'   => 'required',
+            'first_name' => 'required',
+            'last_name'  => 'required'            
         ];
     }
 
