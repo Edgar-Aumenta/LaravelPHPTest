@@ -47,7 +47,7 @@ class UpdateVersionController extends ApiController
     {
         $user = $request->user();
         $rules = [
-            'version_code' => 'required|unique:update_versions',
+            'version_code' => 'unique:update_versions',
             'version_name' => 'required',
             'version_url' => 'required',
             'current_version' => 'required',
