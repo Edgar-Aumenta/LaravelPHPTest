@@ -243,23 +243,26 @@ class EventScheduleController extends ApiController
     private function getLodgingId($lodgingName, $lodgingUrl)
     {
         $lodgings = Lodging::all();
-        $lodgingId = 0;
+        $lodgingId = null;
+        if($lodgingName != null && $lodgingUrl != null)
+    {
         // find location in catalog
         foreach ($lodgings as $lodging){
             if(strtolower($lodging['name']) == strtolower($lodgingName) && $lodging['url'] == $lodgingUrl){
                 $lodgingId = $lodging->id;
                 break;
+                }
             }
-        }
         // if doesn't exist location then is create
-        if($lodgingId == 0){
+        if($lodgingId == null){
             $lodgingRow = array(
                 'name' => $lodgingName,
                 'url' => $lodgingUrl
             );
             $lodging = Lodging::create($lodgingRow);
             $lodgingId = $lodging->id;
-        }
+            }
+    }
         return $lodgingId;
     }
 }
