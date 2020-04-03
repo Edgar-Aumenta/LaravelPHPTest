@@ -68,8 +68,11 @@ class UserController extends ApiController
         // TODO Verify in lower case
         if(!$request->has('admin')){
             $data['admin'] = User::USUARIO_REGULAR;
-        } else if ($data['admin'] == null || ($data['admin'] != 'true' && $data['admin'] != 'false')) {
+        } else if ($request['admin'] == null || ($request['admin'] != true && $request['admin'] == false)) {
             $data['admin'] = User::USUARIO_REGULAR;
+        }
+        else if ($request['admin'] == true && $request['admin'] != false) {
+            $data['admin'] = User::USUARIO_ADMMINISTRADOR;
         }
 
         $data['username'] = strtolower($data['username']);
@@ -87,14 +90,14 @@ class UserController extends ApiController
         // Register user
         $user = User::create($data);
         // Register user forum
-        $userForum = $this->createUserForum($data);
+        /*$userForum = $this->createUserForum($data);
         // Additional register for user forum
         $this->userRegistrationToGroup($userForum);
         $this->userRegistrationToForums($userForum);
         if($request->has('serial_number'))
         {
             $this->userSerialRegistration($userForum, $data['serial_number']);
-        }
+        }*/
 
         return $this->showOne($user, 201);
     }
