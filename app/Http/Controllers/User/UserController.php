@@ -90,14 +90,14 @@ class UserController extends ApiController
         // Register user
         $user = User::create($data);
         // Register user forum
-        /*$userForum = $this->createUserForum($data);
+        $userForum = $this->createUserForum($data);
         // Additional register for user forum
         $this->userRegistrationToGroup($userForum);
         $this->userRegistrationToForums($userForum);
         if($request->has('serial_number'))
         {
             $this->userSerialRegistration($userForum, $data['serial_number']);
-        }*/
+        }
 
         return $this->showOne($user, 201);
     }
