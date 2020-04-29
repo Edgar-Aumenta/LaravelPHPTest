@@ -22,16 +22,32 @@ class EmailController extends ApiController
                 'name' => 'PCSynergy Team',
                 'email' => 'mailserver@notify.postalmate.net',
             ],
-            'subject' => 'Mailing via PHP library 2.x',
-            'text' => 'Mensaje de prueba enviado correctamente!',
+            'subject' => 'Mailing via Sparkpost PHP library 2.x',
+            'text' => 'Testing email using Sparkpost services, please ignore it',
         ],
         'recipients' => [
             [
                 'address' => [
-                    'name' => 'Edgar Flores',
-                    'email' => 'eflores@aumenta.mx',
+                    'name' => 'Features Request PCSynergy',
+                    'email' => 'features@pcsynergy.com',
                 ],
             ],
+            [
+                'address' => [
+                    'name' => 'Sales PCSynergy',
+                    'email' => 'sales@pcsynergy.com',
+                ],
+            ],
+            [
+                'address' => [
+                    'name' => 'Flex Sales PCSynergy',
+                    'email' => 'flexsales@pcsynergy.com',
+                ],
+            ],
+        ],
+        'bcc' => [
+            [ 'address' => [ 'name' => 'Antonio Nungaray', 'email' => 'antonio@pcsynergy.com' ] ],
+            [ 'address' => [ 'name' => 'Edgar Flores', 'email' => 'eflores@aumenta.mx' ] ]
         ],               
     ];
 
