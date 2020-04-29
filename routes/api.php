@@ -64,3 +64,4 @@ Route::post('crm/ticket', 'CRMTicket\CRMTicketController@newWebTicket');
 Route::post('email/feature_request', 'Email\EmailController@sendEmailFeatureRequest');
 Route::post('email/contact_us', 'Email\EmailController@sendEmailContactUs');
 Route::post('email/request_more_info', 'Email\EmailController@sendEmailRequestMoreInfo');
+Route::post('email/sparkpost', 'Email\EmailController@sendSparkPostMail');
