@@ -28,8 +28,8 @@ class EmailController extends ApiController
         'recipients' => [
             [
                 'address' => [
-                    'name' => 'Antonio Nungaray',
-                    'email' => 'antonio@pcsynergy.com',
+                    'name' => 'Edgar Flores',
+                    'email' => 'eflores@aumenta.mx',
                 ],
             ],
         ],               
