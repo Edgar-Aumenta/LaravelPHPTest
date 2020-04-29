@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers\Email;
 use App\ContactUs;
 use App\FeatureRequest;
@@ -11,9 +10,33 @@ use App\Mail\RequestMoreInfoReceived;
 use App\RequestMoreInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use SparkPost\SparkPost;
+use GuzzleHttp\Client;
+use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
 
 class EmailController extends ApiController
 {
+    private $transmissionData = [
+        'content' => [
+            'from' => [
+                'name' => 'PCSynergy Team',
+                'email' => 'mailserver@notify.postalmate.net',
+            ],
+            'subject' => 'Mailing via PHP library 2.x',
+            'text' => 'Mensaje de prueba enviado correctamente!',
+        ],
+        'recipients' => [
+            [
+                'address' => [
+                    'name' => 'Edgar Flores',
+                    'email' => 'eflores@aumenta.mx',
+                ],
+            ],
+        ],               
+    ];
+
+
+
     private $featureRequestRules = [
         'pmSerial' => 'required',
         'requestedFeature' => 'required',
@@ -38,7 +61,7 @@ class EmailController extends ApiController
 
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['sendEmailContactUs', 'sendEmailRequestMoreInfo']);
+        $this->middleware('auth:api')->except(['sendEmailContactUs', 'sendEmailRequestMoreInfo', 'sendSparkPostMail']);
     }
 
     public function sendEmailFeatureRequest(Request $request)
@@ -91,5 +114,21 @@ class EmailController extends ApiController
         );
         Mail::to($receivers)->send(new RequestMoreInfoReceived($contactUs));
         return $this->messageResponse("Request more information sent");
+    }
+
+    public function sendSparkPostMail()
+    {
+        $httpClient = new GuzzleAdapter(new Client());
+        $sparky = new SparkPost($httpClient, ['key'=>'74551f5a617261df6f3a9fd12f7278eaac8a6c4c', 'async' => 
+        false]);
+
+        try {
+            $response = $sparky->transmissions->post($this->transmissionData);
+            return $response->getStatusCode()."\n";            
+        }
+        catch (\Exception $e) {
+            echo $e->getCode()."\n";
+            echo $e->getMessage()."\n";
+        }
     }
 }
