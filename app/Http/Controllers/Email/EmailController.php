@@ -15,43 +15,7 @@ use GuzzleHttp\Client;
 use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
 
 class EmailController extends ApiController
-{
-    private $transmissionData = [
-        'content' => [
-            'from' => [
-                'name' => 'PCSynergy Team',
-                'email' => 'mailserver@notify.postalmate.net',
-            ],
-            'subject' => 'Mailing via Sparkpost PHP library 2.x',
-            'text' => 'Testing email using Sparkpost services, please ignore it',
-        ],
-        'recipients' => [
-            [
-                'address' => [
-                    'name' => 'Features Request PCSynergy',
-                    'email' => 'features@pcsynergy.com',
-                ],
-            ],
-            [
-                'address' => [
-                    'name' => 'Sales PCSynergy',
-                    'email' => 'sales@pcsynergy.com',
-                ],
-            ],
-            [
-                'address' => [
-                    'name' => 'Flex Sales PCSynergy',
-                    'email' => 'flexsales@pcsynergy.com',
-                ],
-            ],
-        ],
-        'bcc' => [
-            [ 'address' => [ 'name' => 'Antonio Nungaray', 'email' => 'antonio@pcsynergy.com' ] ],
-            [ 'address' => [ 'name' => 'Edgar Flores', 'email' => 'eflores@aumenta.mx' ] ]
-        ],               
-    ];
-
-
+{   
 
     private $featureRequestRules = [
         'pmSerial' => 'required',
@@ -77,14 +41,15 @@ class EmailController extends ApiController
 
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['sendEmailContactUs', 'sendEmailRequestMoreInfo', 'sendSparkPostMail']);
+        $this->middleware('auth:api')->except(['sendEmailContactUs', 'sendEmailRequestMoreInfo']);
     }
 
     public function sendEmailFeatureRequest(Request $request)
     {
         $this->validate($request, $this->featureRequestRules);
-        // ['karen@pcsynergy.com', 'larrys@pcsynergy.com']
-        $receivers = explode(",", env('MAIL_FEATURE_REQUEST'));
+        $httpClient = new GuzzleAdapter(new Client());        
+        $sparky = new SparkPost($httpClient, ["key" => env('SPARKPOST_API_KEY')]);        
+        
         $featureRequest = new FeatureRequest(
             $request['pmSerial'],
             $request['requestedFeature'],
@@ -93,27 +58,87 @@ class EmailController extends ApiController
             $request['contactEmail'],
             $request['storeName']
         );
-        Mail::to($receivers)->send(new FeatureRequestReceived($featureRequest));
-        return $this->messageResponse("Feature Request sent");
+
+        $promise = $sparky->transmissions->post([
+            'content' => [
+                'from' => [
+                    'name' => 'PC Synergy Website',
+                    'email' => 'mailserver@notify.postalmate.net',
+                ],
+                'subject' => 'Feature Request Received',
+                'html' => '<html><body><h2>PostalMate Feature Request</h2><p>Name: {{contactName}} <br> Phone Number: {{contactPhone}} <br/> E-mail Address: {{contactEmail}} <br/> PostalMate Serial Number : {{pmSerial}} <br/> Store Name: {{storeName}} <br/> Requested Feature: {{requestedFeature}}</p></body></html>',
+                'text' => 'PostalMate Feature Request. Name: {{contactName}}, Phone Number: {{contactPhone}}, E-mail Address: {{contactEmail}}, PostalMate Serial Number : {{pmSerial}}, Store Name: {{storeName}}, Requested Feature: {{requestedFeature}}',
+            ],
+            'substitution_data' => ['pmSerial' => $featureRequest->pmSerial, 'requestedFeature' => $featureRequest->requestedFeature, 'contactName' => $featureRequest->contactName, 'contactPhone' => $featureRequest->contactPhone, 'contactEmail' => $featureRequest->contactEmail, 'storeName' => $featureRequest->storeName],
+            'recipients' => [
+                [
+                    'address' => [
+                        'name' => 'Flex Sales',
+                        'email' => env('MAIL_FEATURE_REQUEST'),
+                    ],
+                ],
+            ],            
+        ]);
+
+        try {
+            $response = $promise->wait();
+            return $this->messageResponse("Feature Request sent");            
+        }
+        catch (\Exception $e) {
+            echo $e->getCode()."\n";
+            echo $e->getMessage()."\n";
+        }        
     }
 
     public function sendEmailContactUs(Request $request)
     {
         $this->validate($request, $this->contatUsRules);
-        $receivers = explode(",", env('MAIL_SALES_FLEX'));
+        $httpClient = new GuzzleAdapter(new Client());        
+        $sparky = new SparkPost($httpClient, ["key" => env('SPARKPOST_API_KEY')]);
+        
         $contactUs = new ContactUs(
             $request['name'],
             $request['email'],
             $request['message']
         );
-        Mail::to($receivers)->send(new ContactUsReceived($contactUs));
-        return $this->messageResponse("sent");
+        
+        $promise = $sparky->transmissions->post([
+            'content' => [
+                'from' => [
+                    'name' => 'PC Synergy Website',
+                    'email' => 'mailserver@notify.postalmate.net',
+                ],
+                'subject' => 'Contact Us Received',
+                'html' => '<html><body><h2>PostalMate Contact Us</h2><p>Name: {{name}} <br> E-mail Address: {{contactEmail}} <br/> Message : {{message}}</p></body></html>',
+                'text' => 'PostalMate Contact Us. Name: {{name}}, E-mail Address: {{contactEmail}}, Message: {{message}}',
+            ],
+            'substitution_data' => ['name' => $contactUs->name, 'contactEmail' => $contactUs->email, 'message' => $contactUs->message],
+            'recipients' => [
+                [
+                    'address' => [
+                        'name' => 'Flex Sales',
+                        'email' => env('MAIL_SALES_FLEX'),
+                    ],
+                ],
+            ],            
+        ]);
+
+        try {
+            $response = $promise->wait();
+            return $this->messageResponse("Contact us mail sent");            
+        }
+        catch (\Exception $e) {
+            echo $e->getCode()."\n";
+            echo $e->getMessage()."\n";
+        }        
     }
 
     public function sendEmailRequestMoreInfo(Request $request)
     {
-        $this->validate($request, $this->requestMoreInfoRules);
-        $receivers = explode(",", env('MAIL_SALES_CLASSIC'));
+        $this->validate($request, $this->requestMoreInfoRules);        
+        $httpClient = new GuzzleAdapter(new Client());        
+        $sparky = new SparkPost($httpClient, ["key" => env('SPARKPOST_API_KEY')]);
+
         $contactUs = new RequestMoreInfo(
             $request['name'],
             $request['email'],
@@ -128,23 +153,35 @@ class EmailController extends ApiController
             $request['storeStatus'],
             $request['comments']
         );
-        Mail::to($receivers)->send(new RequestMoreInfoReceived($contactUs));
-        return $this->messageResponse("Request more information sent");
-    }
 
-    public function sendSparkPostMail()
-    {
-        $httpClient = new GuzzleAdapter(new Client());
-        $sparky = new SparkPost($httpClient, ['key'=>'74551f5a617261df6f3a9fd12f7278eaac8a6c4c', 'async' => 
-        false]);
+        $promise = $sparky->transmissions->post([
+            'content' => [
+                'from' => [
+                    'name' => 'PC Synergy Website',
+                    'email' => 'mailserver@notify.postalmate.net',
+                ],
+                'subject' => 'Request More Information Received',
+                'html' => '<html><body><h2>PostalMate Request More Information</h2><p>Name: {{name}} <br> E-mail Address: {{contactEmail}} <br/> Phone Number : {{phoneNumber}}<br/> Store Name: {{storeName}}</br> Address: {{contactAddress}}<br/> City: {{city}}<br/> State: {{state}}<br> Zip Code: {{zipCode}}<br/> Current Software: {{currentSoftware}}<br/> Request PM Trial: {{requestPMTrial}}<br/> Store Status: {{storeStatus}}<br/> Comments: {{comments}}</p></body></html>',
+                'text' => 'PostalMate Request More Information. Name: {{name}}, E-mail Address: {{contactEmail}}, Phone Number : {{phoneNumber}}, Store Name: {{storeName}}, Address: {{contactAddress}}, City: {{city}}, State: {{state}}, Zip Code: {{zipCode}}, Current Software: {{currentSoftware}}, Request PM Trial: {{requestPMTrial}}, Store Status: {{storeStatus}}, Comments: {{comments}}.',
+            ],
+            'substitution_data' => ['name' => $contactUs->name, 'contactEmail' => $contactUs->email, 'phoneNumber' => $contactUs->phoneNumber, 'storeName' => $contactUs->storeName, 'contactAddress' => $contactUs->address, 'city' => $contactUs->city, 'state' => $contactUs->state, 'zipCode' => $contactUs->zipCode, 'currentSoftware' => $contactUs->currentSoftware, 'requestPMTrial' => $contactUs->requestPMTrial, 'storeStatus' => $contactUs->storeStatus, 'comments' => $contactUs->comments],
+            'recipients' => [
+                [
+                    'address' => [
+                        'name' => 'Flex Sales',
+                        'email' => env('MAIL_SALES_CLASSIC'),
+                    ],
+                ],
+            ],            
+        ]);
 
         try {
-            $response = $sparky->transmissions->post($this->transmissionData);
-            return $response->getStatusCode()."\n";            
+            $response = $promise->wait();
+            return $this->messageResponse("Request more information sent");            
         }
         catch (\Exception $e) {
             echo $e->getCode()."\n";
             echo $e->getMessage()."\n";
-        }
-    }
+        }        
+    }    
 }
