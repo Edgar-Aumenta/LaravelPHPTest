@@ -63,7 +63,9 @@ class User extends Authenticable
         'tos',
         'company',
         'enable',
-        'password_change_required'
+        'password_change_required',
+        'last_login_date',
+        'serial_number'        
     ];
 
     /**
@@ -84,6 +86,7 @@ class User extends Authenticable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'last_login_date' => 'datetime',
     ];
 
     public function isVerified()
@@ -129,10 +132,13 @@ class User extends Authenticable
      * @throws OAuthServerException
      */
     public function validateForPassportPasswordGrant($password)
-    {
+    {       
         if(Pluggable::wp_check_password($password, $this->password))
         {
             if($this->isEnable()){
+                $user =  $this->findForPassport($this->username);
+                $user -> last_login_date = now();
+                $user->save();
                 return true;
             } else {
                 throw new OAuthServerException('User account is not active', 6, 'account_inactive', 401);
@@ -143,15 +149,11 @@ class User extends Authenticable
     public static function GetRulesForStore()
     {
         return [
-            'username'  => 'required|unique:users',
-            'email'     => 'required|email|unique:users',
-            'password'  => 'required',
-            'address_1' => 'required',
-            'city'      => 'required',
-            'zip'       => 'required',
-            'country'   => 'required',
-            'day_phone' => 'required',
-            'company'   => 'required',
+            'username'   => 'required|unique:users',
+            'email'      => 'required|email|unique:users',
+            'password'   => 'required',
+            'first_name' => 'required',
+            'last_name'  => 'required'            
         ];
     }
 

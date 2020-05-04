@@ -46,7 +46,7 @@ class NewVersionController extends ApiController
     {
         $user = $request->user();
         $rules = [
-            'version_code' => 'required|unique:new_versions',
+            'version_code' => 'unique:new_versions',
             'version_name' => 'required',
             'version_url' => 'required',
             'current_version' => 'required',

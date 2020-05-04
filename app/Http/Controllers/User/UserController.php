@@ -16,6 +16,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
+use App\FieldsDataForum;
 
 
 class UserController extends ApiController
@@ -67,8 +68,11 @@ class UserController extends ApiController
         // TODO Verify in lower case
         if(!$request->has('admin')){
             $data['admin'] = User::USUARIO_REGULAR;
-        } else if ($data['admin'] == null || ($data['admin'] != 'true' && $data['admin'] != 'false')) {
+        } else if ($request['admin'] == null || ($request['admin'] != true && $request['admin'] == false)) {
             $data['admin'] = User::USUARIO_REGULAR;
+        }
+        else if ($request['admin'] == true && $request['admin'] != false) {
+            $data['admin'] = User::USUARIO_ADMMINISTRADOR;
         }
 
         $data['username'] = strtolower($data['username']);
@@ -90,6 +94,10 @@ class UserController extends ApiController
         // Additional register for user forum
         $this->userRegistrationToGroup($userForum);
         $this->userRegistrationToForums($userForum);
+        if($request->has('serial_number'))
+        {
+            $this->userSerialRegistration($userForum, $data['serial_number']);
+        }
 
         return $this->showOne($user, 201);
     }
@@ -117,7 +125,7 @@ class UserController extends ApiController
      */
     public function update(Request $request, $username)
     {
-        $user = $this->findOrFailUserByUsername($username);
+        $user = $this->findOrFailUserByUsername($username);        
 
         $rules = User::GetRulesForUpdate($user);
 
@@ -314,6 +322,7 @@ class UserController extends ApiController
         if($request->has('company')) $user->company = $request->company;
         if($request->has('enable')) $user->enable = $request->enable;
         if($request->has('password_change_required')) $user['password_change_required'] = $request['password_change_required'];
+        if($request->has('serial_number')) $user->serial_number = $request->serial_number;
     }
 
     /**
@@ -417,6 +426,16 @@ class UserController extends ApiController
 
             AclUsersForum::create($aclUserRow);
         }
+    }
+
+    private function userSerialRegistration(UserForum $userForum, $serial_number)
+    {
+        $fieldDataRow = array(
+            'user_id'			=> $userForum->user_id,
+            'pf_serial_number'	=> $serial_number,
+        );
+
+        FieldsDataForum::create($fieldDataRow);
     }
 
     /**
