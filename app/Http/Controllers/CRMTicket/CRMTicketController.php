@@ -21,13 +21,19 @@ class CRMTicketController extends ApiController
         'contactEmail' => 'required'
     ];
 
+    private $getIssuesRules = [
+        'application' => 'required'
+    ];
+
     public function __construct()
     {
         $this->middleware('auth:api');
     }
 
-    public function getIssues()
+    public function getIssues(Request $request)
     {
+        $this->validate($request, $this->getIssuesRules);
+
         $TechKey = 'Joe';
         $password ='';
         $myClient = $this->CRMSoapClient();
@@ -42,7 +48,8 @@ class CRMTicketController extends ApiController
         {
             $result = $myClient->__soapCall("GetTypeIncidents", array(
                 "GetTypeIncidents" => array(
-                    "PMSerial"        => '12345'
+                    "PMSerial"        => '12345',
+                    "Application"     => $request['application'],
                 )
             ), NULL,$header);
         }
