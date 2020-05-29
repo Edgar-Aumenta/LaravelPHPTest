@@ -99,7 +99,10 @@ class EmailController extends ApiController
         $contactUs = new ContactUs(
             $request['name'],
             $request['email'],
-            $request['message']
+            $request['message'],
+            $request['city'],
+            $request['state'],
+            $request['phoneNumber']
         );
         
         $promise = $sparky->transmissions->post([
@@ -109,10 +112,10 @@ class EmailController extends ApiController
                     'email' => 'mailserver@notify.postalmate.net',
                 ],
                 'subject' => 'Contact Us Received',
-                'html' => '<html><body><h2>PostalMate Contact Us</h2><p>Name: {{name}} <br> E-mail Address: {{contactEmail}} <br/> Message : {{message}}</p></body></html>',
-                'text' => 'PostalMate Contact Us. Name: {{name}}, E-mail Address: {{contactEmail}}, Message: {{message}}',
+                'html' => '<html><body><h2>PostalMate Contact Us</h2><p>Name: {{name}} <br> E-mail Address: {{contactEmail}} <br/> Phone Number: {{phoneNumber}} </br> City: {{city}} </br> State/Country: {{state}} </br> Message : {{message}}</p></body></html>',
+                'text' => 'PostalMate Contact Us. Name: {{name}}, E-mail Address: {{contactEmail}}, Phone Number: {{phoneNumber}}, City: {{city}}, State/Country: {{state}}, Message: {{message}}',
             ],
-            'substitution_data' => ['name' => $contactUs->name, 'contactEmail' => $contactUs->email, 'message' => $contactUs->message],
+            'substitution_data' => ['name' => $contactUs->name, 'contactEmail' => $contactUs->email, 'phoneNumber' => $contactUs->phoneNumber, 'city' => $contactUs->city, 'state' => $contactUs->state, 'message' => $contactUs->message],
             'recipients' => [
                 [
                     'address' => [
