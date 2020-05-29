@@ -48,6 +48,26 @@ class UserController extends ApiController
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function search(Request $request)
+    {
+        $isAdmin = false;
+        $rows = $request['rows'];
+        if($request->has('admin')) $isAdmin = $request['admin'];
+
+        $currentUser = $request->user();
+        $users = User::where('admin', $isAdmin)
+                        ->where('username', 'LIKE', '%'.$request['username'].'%')
+                        ->paginate($rows);
+
+        return $users;
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
