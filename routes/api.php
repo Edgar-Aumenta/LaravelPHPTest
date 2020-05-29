@@ -24,6 +24,7 @@ Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenContro
 Route::post('users', 'User\UserController@store');
 Route::put('users/{username}', 'User\UserController@update');
 Route::get('users', 'User\UserController@index');
+Route::get('search_users', 'User\UserController@search');
 Route::get('users/{username}', 'User\UserController@show');
 Route::delete('users/{username}', 'User\UserController@destroy');
 
