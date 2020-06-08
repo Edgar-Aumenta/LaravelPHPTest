@@ -62,6 +62,7 @@ class UserController extends ApiController
         $currentUser = $request->user();
         $users = User::where('admin', $isAdmin)
                         ->where('username', 'LIKE', '%'.$request['username'].'%')
+                        ->orWhere('email', 'LIKE', '%'.$request['email'].'%')
                         ->paginate($rows);
 
         return $users;
