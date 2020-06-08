@@ -112,8 +112,8 @@ class EmailController extends ApiController
                     'email' => 'mailserver@notify.postalmate.net',
                 ],
                 'subject' => 'Contact Us Received',
-                'html' => '<html><body><h2>PostalMate Contact Us</h2><p>Name: {{name}} <br> E-mail Address: {{contactEmail}} <br/> Phone Number: {{phoneNumber}} </br> City: {{city}} </br> State/Country: {{state}} </br> Message : {{message}}</p></body></html>',
-                'text' => 'PostalMate Contact Us. Name: {{name}}, E-mail Address: {{contactEmail}}, Phone Number: {{phoneNumber}}, City: {{city}}, State/Country: {{state}}, Message: {{message}}',
+                'html' => '<html><body><h2>PostalMate Contact Us</h2><p>Name: {{name}} <br> E-mail Address: {{contactEmail}} <br/> Phone Number: {{phoneNumber}} </br> City: {{state}} </br> State/Country: {{city}} </br> Message : {{message}}</p></body></html>',
+                'text' => 'PostalMate Contact Us. Name: {{name}}, E-mail Address: {{contactEmail}}, Phone Number: {{phoneNumber}}, City: {{state}}, State/Country: {{city}}, Message: {{message}}',
             ],
             'substitution_data' => ['name' => $contactUs->name, 'contactEmail' => $contactUs->email, 'phoneNumber' => $contactUs->phoneNumber, 'city' => $contactUs->city, 'state' => $contactUs->state, 'message' => $contactUs->message],
             'recipients' => [

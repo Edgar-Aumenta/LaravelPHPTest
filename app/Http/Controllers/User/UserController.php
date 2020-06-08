@@ -219,7 +219,8 @@ class UserController extends ApiController
         // Obtain user in new site and forum
 
         $user = $this->findOrFailUser($request['username']);
-        $userForum = $this->findUserForum($request['username']);        
+        //$userForum = $this->findUserForum($request['username']);        
+        $userForum = "";
 
         $this->changeUserPassword($user, $userForum, $request['password'], $passwordChangeRequired);
 
@@ -244,7 +245,7 @@ class UserController extends ApiController
 
         // Obtain user in new site and forum
         $currentUser = $request->user();
-        $userForum = $this->findUserForum($currentUser->username);
+        //$userForum = $this->findUserForum($currentUser->username);
 
         if(!Pluggable::wp_check_password($request['current_password'], $currentUser->password)){
             return $this->errorResponse('The current password is incorrect!', 401);
@@ -476,8 +477,8 @@ class UserController extends ApiController
         // Save password for forum new site
         if($userForum != null)
         {
-            $userForum->user_password  = $newPasswordHash;
-            $userForum->save();
+            //$userForum->user_password  = $newPasswordHash;
+            //$userForum->save();
         }
     }
 
