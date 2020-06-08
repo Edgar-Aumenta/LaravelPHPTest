@@ -12,7 +12,7 @@ class ContactUs
     public $city;
     public $phoneNumber;
 
-    public function __construct($name, $email, $message, $state, $city, $phoneNumber)
+    public function __construct($name, $email, $message, $city, $state, $phoneNumber)
     {
         $this->name = $name;
         $this->email = $email;
