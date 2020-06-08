@@ -36,14 +36,35 @@ class UserController extends ApiController
     public function index(Request $request)
     {
         $isAdmin = false;
+        $rows = $request['rows'];
         if($request->has('admin')) $isAdmin = $request['admin'];
 
         $currentUser = $request->user();
         $users = User::where('admin', $isAdmin)
                         ->where('id', '!=', $currentUser['id'])
-                        ->get();
+                        ->paginate($rows);
 
-        return $this->showAll($users);
+        return $users;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function search(Request $request)
+    {
+        $isAdmin = false;
+        $rows = $request['rows'];
+        if($request->has('admin')) $isAdmin = $request['admin'];
+
+        $currentUser = $request->user();
+        $users = User::where('admin', $isAdmin)
+                        ->where('username', 'LIKE', '%'.$request['username'].'%')
+                        ->paginate($rows);
+
+        return $users;
     }
 
     /**
@@ -198,7 +219,7 @@ class UserController extends ApiController
         // Obtain user in new site and forum
 
         $user = $this->findOrFailUser($request['username']);
-        $userForum = $this->findUserForum($request['username']);        
+        $userForum = $this->findUserForum($request['username']);                
 
         $this->changeUserPassword($user, $userForum, $request['password'], $passwordChangeRequired);
 
