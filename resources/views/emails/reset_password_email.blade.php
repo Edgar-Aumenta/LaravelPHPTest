@@ -112,7 +112,7 @@
 <tr>
     <td align="center" valign="top" style="padding-bottom:20px;" class="description">
         <!-- Description Text// -->
-        <p class="text" style="color:#666666; font-family:'Open Sans', Helvetica, Arial, sans-serif; font-size:14px; font-weight:400; font-style:normal; letter-spacing:normal; line-height:22px; text-transform:none; text-align:start; padding:0; margin-left:40px">You requested a password reset for your PostalMate website log in. Click the button below and follow the onscreen instructions to reset your password.</p></td>
+        <p class="text" style="color:#666666; font-family:'Open Sans', Helvetica, Arial, sans-serif; font-size:14px; font-weight:400; font-style:normal; letter-spacing:normal; line-height:22px; text-transform:none; text-align:start; padding:0; margin-left:40px">You requested a password reset for your Postalmate website log in. Click the button below and follow the onscreen instructions to reset your password.</p></td>
 </tr>
 
 <tr>
@@ -166,7 +166,7 @@
 <tr>
     <td align="left" valign="top" style="padding-bottom:20px;" class="description">
         <!-- Description Text// -->
-        <p class="text" style="color: #000000; font-family: 'Open Sans', Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 600; font-style: normal; letter-spacing: normal; line-height: 20px; text-resize: 100%; text-transform:none; text-align:start; padding:0; margin-left:40px" align="left">PostalMate Support</p></td>
+        <p class="text" style="color: #000000; font-family: 'Open Sans', Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 600; font-style: normal; letter-spacing: normal; line-height: 20px; text-resize: 100%; text-transform:none; text-align:start; padding:0; margin-left:40px" align="left">Postalmate Support</p></td>
 </tr>
 
 <tr>
