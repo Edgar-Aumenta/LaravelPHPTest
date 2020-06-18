@@ -66,8 +66,8 @@ class EmailController extends ApiController
                     'email' => 'mailserver@notify.postalmate.net',
                 ],
                 'subject' => 'Feature Request Received',
-                'html' => '<html><body><h2>Postalmate Feature Request</h2><p>Name: {{contactName}} <br> Phone Number: {{contactPhone}} <br/> E-mail Address: {{contactEmail}} <br/> Postalmate Serial Number : {{pmSerial}} <br/> Store Name: {{storeName}} <br/> Requested Feature: {{requestedFeature}}</p></body></html>',
-                'text' => 'Postalmate Feature Request. Name: {{contactName}}, Phone Number: {{contactPhone}}, E-mail Address: {{contactEmail}}, Postalmate Serial Number : {{pmSerial}}, Store Name: {{storeName}}, Requested Feature: {{requestedFeature}}',
+                'html' => '<html><body><h2>PostalMate Feature Request</h2><p>Name: {{contactName}} <br> Phone Number: {{contactPhone}} <br/> E-mail Address: {{contactEmail}} <br/> PostalMate Serial Number : {{pmSerial}} <br/> Store Name: {{storeName}} <br/> Requested Feature: {{requestedFeature}}</p></body></html>',
+                'text' => 'PostalMate Feature Request. Name: {{contactName}}, Phone Number: {{contactPhone}}, E-mail Address: {{contactEmail}}, PostalMate Serial Number : {{pmSerial}}, Store Name: {{storeName}}, Requested Feature: {{requestedFeature}}',
             ],
             'substitution_data' => ['pmSerial' => $featureRequest->pmSerial, 'requestedFeature' => $featureRequest->requestedFeature, 'contactName' => $featureRequest->contactName, 'contactPhone' => $featureRequest->contactPhone, 'contactEmail' => $featureRequest->contactEmail, 'storeName' => $featureRequest->storeName],
             'recipients' => [
@@ -112,8 +112,8 @@ class EmailController extends ApiController
                     'email' => 'mailserver@notify.postalmate.net',
                 ],
                 'subject' => 'Contact Us Received',
-                'html' => '<html><body><h2>Postalmate Contact Us</h2><p>Name: {{name}} <br> E-mail Address: {{contactEmail}} <br/> Phone Number: {{phoneNumber}} </br> City: {{city}} </br> State/Country: {{state}} </br> Message : {{message}}</p></body></html>',
-                'text' => 'Postalmate Contact Us. Name: {{name}}, E-mail Address: {{contactEmail}}, Phone Number: {{phoneNumber}}, City: {{city}}, State/Country: {{state}}, Message: {{message}}',
+                'html' => '<html><body><h2>PostalMate Contact Us</h2><p>Name: {{name}} <br> E-mail Address: {{contactEmail}} <br/> Phone Number: {{phoneNumber}} </br> City: {{city}} </br> State/Country: {{state}} </br> Message : {{message}}</p></body></html>',
+                'text' => 'PostalMate Contact Us. Name: {{name}}, E-mail Address: {{contactEmail}}, Phone Number: {{phoneNumber}}, City: {{city}}, State/Country: {{state}}, Message: {{message}}',
             ],
             'substitution_data' => ['name' => $contactUs->name, 'contactEmail' => $contactUs->email, 'phoneNumber' => $contactUs->phoneNumber, 'city' => $contactUs->city, 'state' => $contactUs->state, 'message' => $contactUs->message],
             'recipients' => [
@@ -164,8 +164,8 @@ class EmailController extends ApiController
                     'email' => 'mailserver@notify.postalmate.net',
                 ],
                 'subject' => 'Request More Information Received',
-                'html' => '<html><body><h2>Postalmate Request More Information</h2><p>Name: {{name}} <br> E-mail Address: {{contactEmail}} <br/> Phone Number : {{phoneNumber}}<br/> Store Name: {{storeName}}</br> Address: {{contactAddress}}<br/> City: {{city}}<br/> State: {{state}}<br> Zip Code: {{zipCode}}<br/> Current Software: {{currentSoftware}}<br/> Request PM Trial: {{requestPMTrial}}<br/> Store Status: {{storeStatus}}<br/> Comments: {{comments}}</p></body></html>',
-                'text' => 'Postalmate Request More Information. Name: {{name}}, E-mail Address: {{contactEmail}}, Phone Number : {{phoneNumber}}, Store Name: {{storeName}}, Address: {{contactAddress}}, City: {{city}}, State: {{state}}, Zip Code: {{zipCode}}, Current Software: {{currentSoftware}}, Request PM Trial: {{requestPMTrial}}, Store Status: {{storeStatus}}, Comments: {{comments}}.',
+                'html' => '<html><body><h2>PostalMate Request More Information</h2><p>Name: {{name}} <br> E-mail Address: {{contactEmail}} <br/> Phone Number : {{phoneNumber}}<br/> Store Name: {{storeName}}</br> Address: {{contactAddress}}<br/> City: {{city}}<br/> State: {{state}}<br> Zip Code: {{zipCode}}<br/> Current Software: {{currentSoftware}}<br/> Request PM Trial: {{requestPMTrial}}<br/> Store Status: {{storeStatus}}<br/> Comments: {{comments}}</p></body></html>',
+                'text' => 'PostalMate Request More Information. Name: {{name}}, E-mail Address: {{contactEmail}}, Phone Number : {{phoneNumber}}, Store Name: {{storeName}}, Address: {{contactAddress}}, City: {{city}}, State: {{state}}, Zip Code: {{zipCode}}, Current Software: {{currentSoftware}}, Request PM Trial: {{requestPMTrial}}, Store Status: {{storeStatus}}, Comments: {{comments}}.',
             ],
             'substitution_data' => ['name' => $contactUs->name, 'contactEmail' => $contactUs->email, 'phoneNumber' => $contactUs->phoneNumber, 'storeName' => $contactUs->storeName, 'contactAddress' => $contactUs->address, 'city' => $contactUs->city, 'state' => $contactUs->state, 'zipCode' => $contactUs->zipCode, 'currentSoftware' => $contactUs->currentSoftware, 'requestPMTrial' => $contactUs->requestPMTrial, 'storeStatus' => $contactUs->storeStatus, 'comments' => $contactUs->comments],
             'recipients' => [
