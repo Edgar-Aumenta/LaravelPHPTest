@@ -39,7 +39,7 @@ class CRMTicketController extends ApiController
         $myClient = $this->CRMSoapClient();
         if($myClient == null) {
             return $this->errorResponse("Site support data unavailable", 503,
-                "Site support data unavailable postalmate, Check with your administrator.");
+                "Site support data unavailable PostalMate, Check with your administrator.");
         }
         $auth = new CRMAuth($TechKey, $password);
         $header = new SoapHeader("http://www.pcsynergy.com/","Auth", $auth, false);
